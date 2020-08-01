@@ -2,6 +2,7 @@ var PORT = process.env.PORT || 5000;
 var express = require('express');
 var path = require('path');
 var app = express();
+var server = http.Server(app);
 
 
 
@@ -13,4 +14,6 @@ app.get('/', function(req, res) {
     res.sendFile(path.join('/index.html'));
 });
 
-app.listen(PORT);
+server.listen(PORT, function() {
+    console.log('Chat server running');
+  });
