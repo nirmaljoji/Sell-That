@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/sharonjoji99/Sell-That/issues"
   },
-  "homepage": "https://github.com/sharonjoji99/Sell-That#readme"
+  "homepage": "https://github.com/sharonjoji99/Sell-That#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
 }
