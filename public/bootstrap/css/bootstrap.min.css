@@ -504,7 +504,7 @@ pre code {
 
 .container {
     width: 100%;
-    padding-right: 15px;
+    padding-right: 0px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto
@@ -5977,6 +5977,8 @@ a.close.disabled {
     margin-right: .5rem
 }
 
+
+
 .bs-popover-auto[x-placement^=left]>.arrow, .bs-popover-left>.arrow {
     right: calc(-.5rem - 1px);
     width: .5rem;
@@ -6259,6 +6261,27 @@ a.close.disabled {
     }
 }
 
+.bg-image-home{
+    position: relative;
+}
+.over-main-img{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right :50px;
+    padding-right: 50px;
+    height: 100%; width: 100%; object-fit: contain;
+    
+}
+.over-main-img2{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 100%; width: 100%; object-fit: contain;
+    
+
+}
+
 .spinner-grow {
     display: inline-block;
     width: 2rem;
@@ -6275,6 +6298,8 @@ a.close.disabled {
     width: 1rem;
     height: 1rem
 }
+
+
 
 .align-baseline {
     vertical-align: baseline!important
