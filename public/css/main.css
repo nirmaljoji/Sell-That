@@ -115,6 +115,11 @@
     padding-top: 62px
 }
 
+.portfolio-block.block-intro p {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
 
 .bg-image-home{
     position: relative;
