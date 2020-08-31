@@ -1,0 +1,250 @@
+.navbar {
+    position: relative;
+    padding: .5rem 1rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    
+}
+.navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap
+}
+.portfolio-navbar .navbar-nav .nav-item {
+    padding-right: 2rem;
+}
+.gradient {
+    background: linear-gradient(120deg, #7f70f5, #0ea0ff);
+    color: #fff
+}
+.fixed-top {
+    top: 0
+}
+
+.portfolio-navbar .logo {
+    font-size: 1.5rem;
+}
+.portfolio-navbar .navbar-nav .nav-link {
+    font-weight: 700
+}
+.portfolio-navbar.navbar {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .1)
+}.nav-link {
+    display: block;
+    padding: .5rem 1rem
+}
+.bg-white {
+    background-color: #fff!important
+}
+.portfolio-navbar .logo {
+    font-size: 1.5rem
+}
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff
+}
+
+.nav-item {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: center
+}
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none
+}
+
+.gradient a:hover {
+    opacity: .75!important
+}
+
+.portfolio-block {
+    padding-bottom: 60px;
+    padding-top: 60px
+}
+
+.portfolio-block .heading {
+    margin-bottom: 50px;
+    text-align: center
+}
+.portfolio-block.block-intro .avatar {
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 100px;
+    margin-bottom: 30px
+}
+.portfolio-block .heading h2 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase
+}
+
+.portfolio-block .heading p {
+    text-align: center;
+    max-width: 520px;
+    margin: 0px;
+    opacity: .7
+}
+
+.portfolio-block.block-intro {
+    text-align: center
+}
+.portfolio-navbar.fixed-top+.page {
+    padding-top: 62px
+}
+
+.portfolio-block.block-intro p {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.bg-image-home{
+    position: relative;
+}
+.over-main-img{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right :0px;
+    padding-right: 50px;
+    height: 100%; width: 100%;
+     object-fit: contain;
+    
+}
+.over-main-img2{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 300px; width: 300px; 
+    
+
+}
+
+.special-skill-item {
+    margin-bottom: 30px;
+    text-align: center
+}
+
+.special-skill-item .icon {
+    text-align: center;
+    font-size: 50px;
+    background-color: #0ea0ff;
+    color: #fff;
+    height: 70px;
+    width: 70px;
+    line-height: 69px;
+    display: inline-block;
+    border-radius: 50%
+}
+.bg-transparent {
+    background-color: transparent!important
+}
+
+.border-0 {
+    border: 0!important
+}
+
+.special-skill-item h3 {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 10px
+}
+
+.special-skill-item p {
+    color: #8e8e8e
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #ffff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem
+}
+
+.card-title {
+    margin-bottom: .75rem
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, .03);
+    border-bottom: 1px solid rgba(0, 0, 0, .125)
+}
+
+
+.page-footer {
+    padding-top: 35px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    padding-bottom: 20px
+}
+
+.page-footer a {
+    margin: 0 10px;
+    color: #282b2d;
+    font-size: 18px
+}
+
+.page-footer .links, .page-footer a {
+    display: inline-block
+}
+
+.page-footer .social-icons {
+    margin-top: 20px;
+    margin-bottom: 16px
+}
+
+.page-footer .social-icons a {
+    font-size: 18px;
+    margin: 0 3px;
+    color: #fff;
+    border: 1px solid;
+    opacity: .75;
+    border-radius: 50%;
+    width: 36px;
+    display: inline-block;
+    height: 36px;
+    text-align: center;
+    background-color: #c5c9d2;
+    line-height: 34px
+}
+
+.page-footer .social-icons a:hover {
+    opacity: 1
+}
