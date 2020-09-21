@@ -97,3 +97,35 @@ body {
 .product-price-btn button:hover {
   background-color: #79b0a1;
 }
+
+/*hacchi added*/
+.h3 {
+	font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    color:white;
+    margin-bottom: 30px;
+    
+}
+.h1 {
+    font: 400 60px/1.2 'Leckerli One', Helvetica, sans-serif;
+    color:white;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2), 4px 4px 8px rgba(0,0,0,0.2);
+    text-transform: none!important;
+  text-align: center;
+}
+a:hover {
+    color: rgb(217, 197, 255);
+  }
+
+
+  .container{
+    display: flex;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    box-sizing: border-box;
+    transition: all 5s ease;
+    flex-wrap: wrap;
+    
+  }
