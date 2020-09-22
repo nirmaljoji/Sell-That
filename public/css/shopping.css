@@ -1,0 +1,152 @@
+/*Product  cards*/
+body {
+    background-color:lavender;
+  }
+  
+  .wrapper {
+    height: 420px;
+    width: 654px;
+    margin: 50px auto;
+    border-radius: 7px 7px 7px 7px;
+    
+    -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+  }
+  /*img and text come side by side*/
+  .product-img {
+    float: left;
+    height: 420px;
+    width: 327px;
+  }
+  /*img and text come side by side*/
+  .product-info {
+    float: left;
+    height: 420px;
+    width: 327px;
+    
+    background-color: #ffffff;
+  }
+  /*text position*/
+  .product-text {
+    height: 300px;
+    width: 328px;
+  }
+  
+  .product-text h1 {
+    margin: 0 0 0 38px;
+    padding-top: 52px;
+    font-size: 34px;
+    color: #474747;
+  }
+  
+  .product-text h1,
+  .product-price-btn p {
+    font-family: 'Bentham', serif;
+  }
+  
+  .product-text h2 {
+    margin: 0 0 47px 38px;
+    font-size: 13px;
+    font-family: 'Bentham', sans-serif;
+    font-weight: 800;
+    text-transform: title;
+    color:grey;
+    letter-spacing: 0.2em;
+  }
+  
+  .product-text p {
+    height: 125px;
+    margin: 0 0 0 38px;
+    font-family: 'Playfair Display', serif;
+    color: #8d8d8d;
+    line-height: 1.7em;
+    font-size: 18px;
+    font-weight: 100;
+  
+  }
+  
+  
+  
+  
+  .product-price-btn button {
+    float: right;
+    display: inline-block;
+    height: 50px;
+    width: 176px;
+    /*margin: 20px 0 30px 1px;*/
+    margin-top: 10px;
+    margin-bottom: 100px;
+    margin-right: 90px;
+    margin-left: 1000px;
+    box-sizing: border-box;
+    border: transparent;
+    border-radius: 60px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #ffffff;
+    background-color: #9cebd5;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .product-price-btn button:hover {
+    background-color: #79b0a1;
+  }
+  
+  
+  .h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 20px;
+      color:white;
+      margin-bottom: 30px;
+      
+  }
+  .h1 {
+      font: 400 60px/1.2 'Leckerli One', Helvetica, sans-serif;
+     
+      background: -webkit-linear-gradient(120deg, #7f70f5, #0ea0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0.01px 0px 0px rgba(0,0,0,0.2), 4px 4px 8px rgba(0,0,0,0.2);
+      text-transform: none!important;
+    text-align: center;
+  }
+  a:hover {
+      color: rgb(217, 197, 255);
+    }
+  
+/*index stuff*/
+    .gradient{
+      display: flex;
+      flex: 1;
+      height: 100%;
+      width: 100%;
+      flex-direction: row;
+      box-sizing: border-box;
+      transition: all 5s ease;
+      flex-wrap: wrap;
+      
+    }
+  
+    /*A media query to adapt to the screen size*/
+  @media screen and (min-width: 450px){
+    .container{
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  
+    .teamMemberWrapper{
+      display:flex;
+      flex-direction: column;
+      margin: 5px 5px 5px 5px;
+      
+    }
+    .bg {
+      background: linear-gradient(120deg, #7f70f5, #0ea0ff);
+      color: #fff
+  }
