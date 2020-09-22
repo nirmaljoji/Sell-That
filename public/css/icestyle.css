@@ -1,0 +1,43 @@
+.container .heading h2 {
+  font-weight: 700;
+  font-size: 1.4rem; /*isha*/
+  text-transform: uppercase;
+  text-align: center !important;
+  
+}
+
+.centerHeading{
+  text-align: center;
+  margin: auto;
+}
+.heading p {
+  text-align: center;
+  max-width: 520px;
+  margin: 0px;
+  opacity: .7
+}
+
+.special-skill-item h3 {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 10px
+}
+
+.special-skill-item p {
+  color: #8e8e8e
+}
+.special-skill-item {
+  margin-bottom: 30px;
+  text-align: center
+}
+.special-skill-item .icon {
+  text-align: center;
+  font-size: 50px;
+  background-color: #0ea0ff;
+  color: #fff;
+  height: 70px;
+  width: 70px;
+  line-height: 69px;
+  display: inline-block;
+  border-radius: 50%
+}
