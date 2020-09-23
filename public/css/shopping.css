@@ -1,100 +1,43 @@
-/*Product  cards*/
-body {
-    background-color:lavender;
-  }
+
+
   
-  .wrapper {
-    height: 420px;
-    width: 654px;
-    margin: 50px auto;
-    border-radius: 7px 7px 7px 7px;
-    
-    -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-  }
-  /*img and text come side by side*/
-  .product-img {
-    float: left;
-    height: 420px;
-    width: 327px;
-  }
-  /*img and text come side by side*/
-  .product-info {
-    float: left;
-    height: 420px;
-    width: 327px;
-    
-    background-color: #ffffff;
-  }
-  /*text position*/
-  .product-text {
-    height: 300px;
-    width: 328px;
-  }
+ 
+
   
-  .product-text h1 {
-    margin: 0 0 0 38px;
-    padding-top: 52px;
-    font-size: 34px;
-    color: #474747;
+ 
+  
+  html { font-size: 22px; }
+
+  body{
+    background-image: linear-gradient(120deg,#7f70f5 , #0ea0ff);
+    padding: 1rem;
   }
-  
-  .product-text h1,
-  .product-price-btn p {
-    font-family: 'Bentham', serif;
-  }
-  
-  .product-text h2 {
-    margin: 0 0 47px 38px;
-    font-size: 13px;
-    font-family: 'Bentham', sans-serif;
-    font-weight: 800;
-    text-transform: title;
-    color:grey;
-    letter-spacing: 0.2em;
-  }
-  
-  .product-text p {
-    height: 125px;
-    margin: 0 0 0 38px;
-    font-family: 'Playfair Display', serif;
-    color: #8d8d8d;
-    line-height: 1.7em;
-    font-size: 18px;
-    font-weight: 100;
-  
-  }
-  
-  
-  
   
   .product-price-btn button {
     float: right;
-    display: inline-block;
     height: 50px;
-    width: 176px;
-    /*margin: 20px 0 30px 1px;*/
+    width: 80%;
     margin-top: 10px;
     margin-bottom: 100px;
-    margin-right: 90px;
-    margin-left: 1000px;
-    box-sizing: border-box;
+    margin-right: 50px;
+    margin-left: 100px;
     border: transparent;
-    border-radius: 60px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
+    border-radius: 20px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 18px;
+    font-weight: 550;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    color: #ffffff;
-    background-color: #9cebd5;
-    cursor: pointer;
-    outline: none;
+    color:white;
+    background-image: linear-gradient(90deg,#7f70f5 , #0ea0ff);
+    opacity: 50;
+    
+    
+   
   }
-  
-  .product-price-btn button:hover {
-    background-color: #79b0a1;
+  /*incoorect change that below thing*/
+  .product-price-btn:hover {
+    background-color: grey;
   }
   
   
@@ -109,12 +52,31 @@ body {
       font: 400 60px/1.2 'Leckerli One', Helvetica, sans-serif;
      
       background: -webkit-linear-gradient(120deg, #7f70f5, #0ea0ff);
-      -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0.01px 0px 0px rgba(0,0,0,0.2), 4px 4px 8px rgba(0,0,0,0.2);
       text-transform: none!important;
     text-align: center;
   }
+  .h3 {
+    font: 100 30px/1.2 'Leckerli One', Helvetica, sans-serif;
+     background: -webkit-linear-gradient(120deg, #7f70f5, #0ea0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0.01px 0px 0px rgba(0,0,0,0.2), 4px 4px 8px rgba(0,0,0,0.2);
+    text-transform: none!important;
+  text-align: left;
+}
+.h4 {
+    font: 100 12px/1.2 'Leckerli One', Helvetica, sans-serif;
+   
+    background: -webkit-linear-gradient(120deg, #7f70f5, #0ea0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+   
+    text-transform: none!important;
+  text-align: left;
+}
   a:hover {
       color: rgb(217, 197, 255);
     }
@@ -132,21 +94,70 @@ body {
       
     }
   
-    /*A media query to adapt to the screen size*/
-  @media screen and (min-width: 450px){
-    .container{
-      flex-direction: row;
-      align-items: center;
-    }
-  }
+
   
-    .teamMemberWrapper{
-      display:flex;
-      flex-direction: column;
-      margin: 5px 5px 5px 5px;
-      
-    }
     .bg {
       background: linear-gradient(120deg, #7f70f5, #0ea0ff);
       color: #fff
+  }
+  /*Shooping cart stuff for cards from here*/
+  * {
+    box-sizing: border-box;
+  }
+  
+
+  
+  /* Float four columns side by side */
+  .column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+  
+  /* Remove extra left and right margins, due to padding in columns */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Style the counter cards */
+  .card {
+    
+    width: 160%;
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 0.5rem;
+     
+    text-align: center;
+    background-color: #f1f1f1;
+    display: flex;
+    flex: 1 2 auto;
+    margin: 1%;
+    position: relative;
+    
+  }
+  
+  /* Responsive columns - one column layout (vertical) on small screens */
+ 
+  .card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+.button {
+    display: block;
+    width: 100%;
+}
+
+.cards{
+    max-width: 40px;
+  margin: 0 0 auto;
+  display: grid;
+  grid-gap: 2rem;
+}
+@media (min-width: 900px) {
+    .cards { grid-template-columns: repeat(3, 100fr); }
   }
