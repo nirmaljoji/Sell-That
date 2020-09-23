@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Calibri:400,300,700);
 
-body {
+.every {
     background: linear-gradient(to bottom, rgba(46, 46, 172, 0.63), rgba(151, 44, 201, 0.589));
     height: 100vh;
     vertical-align: middle;
@@ -36,17 +36,28 @@ body {
     
     
 }
+.cardPop {
+  border-radius: 3vh;
+  margin: auto;
+  max-width: 80% !important;
+  padding: 5% 5%;
+  align-items: flex-start;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 50%;
+  
+  top: 10%;
+}
 
 .card {
     border-radius: 3vh;
     margin: auto;
-    max-width: 380px;
-    padding: 7vh 6vh;
+    max-width: 100%;
+    padding: 5% 5%;
     align-items: flex-start;
     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 450px;
+    width: 90%;
     
-    top: 40px;
+    top: 10%;
 }
 .cards {
   align-items: center;
@@ -57,11 +68,14 @@ body {
   
 }
 @media (min-width: 600px) {
-  .cards { grid-template-columns: repeat(2, 1fr); }
+  .cards { grid-template-columns: repeat(2, 1fr);
+    width: 100vw; }
 }
 @media (min-width: 1300px) {
-  .cards { grid-template-columns: repeat(3, 1fr); }
+  .cards { grid-template-columns: repeat(4, 1fr); 
+    width: 100vw;}
 }
+
 @media (max-width:200px){
   .modal-button{display: grid;}
 }
@@ -93,6 +107,11 @@ body {
     margin-bottom: unset
 }
 
+.card-text textarea{
+  width:110%;
+  
+}
+
 .card-text p {
     color: grey;
     font-size: 25px;
@@ -117,11 +136,13 @@ body {
     color: white;
     font-size: 16px;
    border-radius: 6px; 
+   margin-bottom: 2%;
 }
 textarea  
 {  
    font-family: Arial, Helvetica, sans-serif;  
-   font-size: 12px;   
+   font-size: 12px;
+   border: 1px solid #ff0000;   
 }
 
 .btn:focus {

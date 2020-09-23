@@ -2,10 +2,16 @@
 
 <head>
   <link rel="stylesheet" href="/css/forum.css">
+  <link rel="stylesheet" href="/css/ans.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="hhttps://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -23,37 +29,24 @@
   </script>
 </head>
 
-<body>
-<<<<<<< HEAD
-  <div class="container d-flex justify-content-center mt-100">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="mid"><button type="button" class="modal-button" data-toggle="modal" data-target="#myModal">Ask a
-            Question</button></div>
-      </div>
-    </div>
-  </div>
-=======
+<body class="every">
 
   <div class="row">
-       <div class="content">
-        <button type="button" class="modal-button content" data-toggle="modal" data-target="#myModal">Ask a
-          Question
-        </button>
-       </div>
-       
-      
+    <div class="content">
+      <button type="button" class="modal-button" data-toggle="modal" data-target="#myModal">ASK A QUESTION!</button>
     </div>
->>>>>>> 734eb015f2083c8467bf230ad180225b52cf4d51
+
+
+  </div>
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
       <div class="card">
         <div class="card-img"> <img class="img-fluid" src="./img/avatars/ask.png"> </div>
         <div class="card-title">
-          <p>Ask away!</p>
+          <p style="align-items: center;">Ask away!</p>
         </div>
         <div class="card-text">
-          <textarea id="textarea1" style="background-color: antiquewhite;" cols="50" rows="6"
+          <textarea id="textarea1" style="background-color: antiquewhite;" cols="57" rows="6"
             placeholder="Type Here..."></textarea>
         </div>
         <input type="button" style="background-color:  rgb(29, 226, 226); position: relative;
@@ -61,24 +54,39 @@
       </div>
     </div>
   </div>
-<<<<<<< HEAD
+
+
+
   <div class="cards">
-=======
 
-
- 
-  <div class="cards content">
-   
->>>>>>> 734eb015f2083c8467bf230ad180225b52cf4d51
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Isha Saikumar</h4>
         <h6 class="card-subtitle mb-2 text-muted">BL.EN.U4CSE17048</h6>
         <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
         <hr>
-        <input type="button" class="btn1" value="Answer">
+        <button type="button" class="btn1"  data-toggle="modal" data-target="#form">Answer </button>
+        <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="text-right cross">  </div>
+              <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
+                <div class="comment-box text-center">
+                  <h4>Add a comment</h4>
+                  
+                  <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"
+                      rows="4"></textarea> </div>
+                  <div class="text-center mt-4"> <button class="btn btn-success send px-5">POST <i
+                        class="fa fa-long-arrow-right ml-1"></i></button> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="button" class="btn1" value="Show Answers">
         <hr>
-        <a href="#" class="card-link">Share this</a>
+       
+        <label>Share this</label>
         <br>
         <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
         <a href="#" class="fa fa-linkedin"></a>
@@ -93,8 +101,9 @@
         <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
         <hr>
         <input type="button" class="btn1" value="Answer">
+        <input type="button" class="btn1" value="Show Answers">
         <hr>
-        <a href="#" class="card-link">Share this</a>
+        <label>Share this</label>
         <br>
         <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
         <a href="#" class="fa fa-linkedin"></a>
@@ -109,6 +118,41 @@
         <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
         <hr>
         <input type="button" class="btn1" value="Answer">
+        <input type="button" class="btn1" value="Show Answers">
+        <hr>
+        <label>Share this</label>
+        <br>
+        <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-linkedin"></a>
+        <a href="#" class="fa fa-google"></a>
+
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Isha Saikumar</h4>
+        <h6 class="card-subtitle mb-2 text-muted">BL.EN.U4CSE17048</h6>
+        <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
+        <hr>
+        <input type="button" class="btn1" value="Answer">
+        <input type="button" class="btn1" value="Show Answers">
+        <hr>
+        <label>Share this</label>
+        <br>
+        <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-linkedin"></a>
+        <a href="#" class="fa fa-google"></a>
+
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Isha Saikumar</h4>
+        <h6 class="card-subtitle mb-2 text-muted">BL.EN.U4CSE17048</h6>
+        <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
+        <hr>
+        <input type="button" class="btn1" value="Answer">
+        <input type="button" class="btn1" value="Show Answers">
         <hr>
         <a href="#" class="card-link">Share this</a>
         <br>
