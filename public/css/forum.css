@@ -11,6 +11,9 @@ body {
 .mt-100 {
     margin-top: 100px
 }
+.mid{
+  text-align: center;
+}
 
 .modal-button {
     background-color: rgb(29, 226, 226);
@@ -18,10 +21,13 @@ body {
     border-radius: 6px;
     color: white;
     font-size: 17px;
-    padding-right: 76px;
-    padding-left: 76px;
-    position: absolute;
-    right: 50px;
+    padding-right: 90px;
+    padding-left: 90px;
+    margin: 0;
+    position:absolute;
+    top: -75px;
+    left: 400px;
+    
 }
 
 .card {
@@ -29,8 +35,29 @@ body {
     margin: auto;
     max-width: 380px;
     padding: 7vh 6vh;
-    align-items: center;
-    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    align-items: flex-start;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 450px;
+    margin-right: 120px;
+    top: 40px;
+}
+.cards {
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+  margin-top: 10%;
+  margin-right: 77px;
+}
+@media (min-width: 600px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1300px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width:200px){
+  .modal-button{display: grid;}
 }
 
 @media(max-width:767px) {
@@ -75,6 +102,15 @@ body {
     border-radius: 25px;
     color: white;
     font-size: 20px
+}
+.btn1{
+  width: 100%;
+    background-color: rgb(29, 226, 226);
+    border-color: rgb(29, 226, 226);
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+   border-radius: 6px; 
 }
 textarea  
 {  
