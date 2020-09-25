@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
+@import url('https://fonts.googleapis.com/css?family=Raleway:200');
 
   body{
     font-family: 'Open Sans', sans-serif;
@@ -151,14 +152,19 @@
     /* navbar css for mobile end */
   }
 
+  .bg {
+    background: linear-gradient(120deg, #7f70f5, #0ea0ff);
+    color: #fff
+}
+
 .welcome-text{
     
     margin-top: 2%;
    
 }
 .welcome-text .welcome-h1{
-  font-family: Lato, Arial;
-  font-weight: normal;
+  font-family: 'Raleway';
+  font-weight: bold;
   font-size: 30px;
   font-weight:lighter;
   text-transform: uppercase;
@@ -167,3 +173,257 @@
   margin-left: auto !important;
   margin-right: auto !important;
 }
+
+#box {
+  
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+  color: white;
+  font-family: 'Raleway';
+  font-size: 2.5rem;
+  margin-top: 2%;
+  padding:2%;
+  margin-bottom: 5%;
+   
+  
+}
+.gradient-border {
+  --borderWidth: 2px;
+  background:white;
+  position: relative;
+  border-radius: var(--borderWidth);
+}
+.gradient-border:after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(60deg, #2fb3b8, #0ae4d269, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  border-radius: calc(2 * var(--borderWidth));
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+.card{
+  
+ 
+  color: white;
+  padding: 1rem;
+  height: 15rem;
+}
+
+
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+.container2 {
+  
+  font-family: "Poppins", Arial, san-serif;
+  line-height: 1.4;
+  display: flex;
+  
+  align-items: center;
+  height: 100%;
+}
+.card2 {
+  background: #fff url("https://storage.googleapis.com/chydlx/codepen/minimalist-profile-card/card-bg.jpg") top -10% center no-repeat;
+  background-size: contain;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px -5px rgba(60, 60, 60, 0.2);
+  text-align: center;
+  padding: 30px 60px;
+}
+.card2 img {
+  background-color: #dddfe6;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  margin: auto auto 15px;
+  display: block;
+}
+.card2 h1 {
+  font-size: 22px;
+  margin: 10px auto 0;
+  letter-spacing: 1px;
+}
+.card2 h2 {
+  margin: auto;
+  color: #b1b6c6;
+  font-weight: 300;
+  font-size: 14px;
+}
+.card2 .button {
+  display: block;
+  text-decoration: none;
+  background: #3b70fc;
+  color: #f9f9f9;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  min-width: 200px;
+  transition: 0.2s;
+}
+.card2 .button span {
+  font-size: 20px;
+  line-height: 1;
+  vertical-align: top;
+}
+.card2 .button:hover {
+  background: #1856fb;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,700');
+ body {
+	 margin: 21px;
+	 font-family: 'Ubuntu', sans-serif;
+}
+ .card-holder {
+	 display: inline-block;
+	 position: relative;
+	 
+}
+/* card styles */
+ .card3 {
+	 width: 100%;
+	 padding: 32px;
+	 border-radius: 5px;
+	 backface-visibility: hidden;
+	 transition: transform 0.2s linear;
+}
+ .card3:hover {
+	 transform: perspective(1300px) rotateX(-10deg);
+}
+ .card3:hover + .card-shadow {
+	 filter: blur(18px);
+	 transform: perspective(900px) rotateY(10deg);
+}
+ .card--01 {
+	 background-color: #f4d03f;
+	 background-image: linear-gradient(31deg, #f4d03f 0%, #16a085 100%);
+}
+ .card--02 {
+	 background-color: #ff3cac;
+	 background-image: linear-gradient(225deg, #ff3cac 0%, #784ba0 50%, #2b86c5 100%);
+}
+ .card__heading {
+	 font-size: 13px;
+	 font-weight: bold;
+	 color: #fff;
+	 text-transform: uppercase;
+	 margin-bottom: 16px;
+}
+ .card__text {
+	 font-size: 22px;
+	 font-weight: 100;
+	 line-height: 1.5em;
+	 color: rgba(255, 255, 255, .85);
+}
+ .card-shadow {
+	 width: 90%;
+	 height: 30%;
+	 position: absolute;
+	 z-index: -1;
+	 filter: blur(25px);
+	 top: 80%;
+	 left: 5%;
+	 transition: all 0.2s linear;
+}
+ .card-shadow--01 {
+	 background-color: #f4d03f;
+	 background-image: linear-gradient(31deg, #f4d03f 0%, #16a085 100%);
+}
+ .card-shadow--02 {
+	 background-color: #ff3cac;
+	 background-image: linear-gradient(225deg, #ff3cac 0%, #784ba0 50%, #2b86c5 100%);
+}
+ 
+
+@import "compass/css3";
+ @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
+ .rwd-table {
+	 margin: 1em 0;
+	 min-width: 100%;
+}
+ .rwd-table tr {
+	 border-top: 1px solid #ddd;
+	 border-bottom: 1px solid #ddd;
+}
+ .rwd-table th {
+	 display: none;
+}
+ .rwd-table td {
+	 display: block;
+}
+ .rwd-table td:first-child {
+	 padding-top: 0.5em;
+}
+ .rwd-table td:last-child {
+	 padding-bottom: 0.5em;
+}
+ .rwd-table td:before {
+	 content: attr(data-th) ": ";
+	 font-weight: bold;
+	 width: 6.5em;
+	 display: inline-block;
+}
+ @media (min-width: 480px) {
+	 .rwd-table td:before {
+		 display: none;
+	}
+}
+ .rwd-table th, .rwd-table td {
+	 text-align: left;
+}
+ @media (min-width: 480px) {
+	 .rwd-table th, .rwd-table td {
+		 display: table-cell;
+		 padding: 0.25em 0.5em;
+	}
+	 .rwd-table th:first-child, .rwd-table td:first-child {
+		 padding-left: 0;
+	}
+	 .rwd-table th:last-child, .rwd-table td:last-child {
+		 padding-right: 0;
+	}
+}
+ .rwd-table {
+	 background: #34495e;
+	 color: #fff;
+	 border-radius: 0.4em;
+	 overflow: hidden;
+}
+ .rwd-table tr {
+	 border-color: #46637f;
+}
+ .rwd-table th, .rwd-table td {
+	 margin: 0.5em 1em;
+}
+ @media (min-width: 480px) {
+	 .rwd-table th, .rwd-table td {
+		 padding: 1em !important;
+	}
+}
+ .rwd-table th, .rwd-table td:before {
+	 color: #dd5;
+}
+ 
