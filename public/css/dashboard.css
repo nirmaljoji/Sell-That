@@ -234,11 +234,11 @@
 }
 
 .container2 {
-  margin: auto;
+  
   font-family: "Poppins", Arial, san-serif;
   line-height: 1.4;
   display: flex;
-  justify-content: center;
+  
   align-items: center;
   height: 100%;
 }
@@ -362,7 +362,7 @@
  @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
  .rwd-table {
 	 margin: 1em 0;
-	 min-width: 300px;
+	 min-width: 100%;
 }
  .rwd-table tr {
 	 border-top: 1px solid #ddd;
