@@ -54,18 +54,27 @@ a:hover {
     color: #fff
 }
 
+.col-md-2{
+  margin: auto;
+}
 
+.pp{
+  width: 150%;
+  height: 150%;
+  border-radius: 50%;
+  border: 5px solid transparent; 
+  border-color:  #0ea0ff;
+}
 
-
-
-
+#this{
+  background-color: #dde7ee;
+}
 
 .container .heading h2 {
   font-weight: 700;
   font-size: 1.4rem; /*isha*/
   text-transform: uppercase;
   text-align: center !important;
-  
 }
 
 .centerHeading{
