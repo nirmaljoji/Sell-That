@@ -15,13 +15,29 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
 
 	// ejs render automatically looks in the views folder
+	res.render('index');
+});
+
+app.get('/dashboard', function(req, res) {
+
+	// ejs render automatically looks in the views folder
+	res.render('index');
+});
+app.get('/shopping', function(req, res) {
+
+	// ejs render automatically looks in the views folder
+	res.render('trial');
+});
+app.get('/forum', function(req, res) {
+
+	// ejs render automatically looks in the views folder
 	res.render('forum');
 });
 
-app.get('/forumans', function(req, res) {
+app.get('/lostAndFound', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('showans');
+	res.render('lostAndFoundPage');
 });
 
 app.listen(port, function() {

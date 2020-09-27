@@ -1,101 +1,4 @@
-*Product  cards*/
-body {
-  background-color:lavender;
-}
 
-.wrapper {
-  height: 420px;
-  width: 654px;
-  margin: 50px auto;
-  border-radius: 7px 7px 7px 7px;
-  
-  -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-}
-/*img and text come side by side*/
-.product-img {
-  float: left;
-  height: 420px;
-  width: 327px;
-}
-/*img and text come side by side*/
-.product-info {
-  float: left;
-  height: 420px;
-  width: 327px;
-  
-  background-color: #ffffff;
-}
-/*text position*/
-.product-text {
-  height: 300px;
-  width: 328px;
-}
-
-.product-text h1 {
-  margin: 0 0 0 38px;
-  padding-top: 52px;
-  font-size: 34px;
-  color: #474747;
-}
-
-.product-text h1,
-.product-price-btn p {
-  font-family: 'Bentham', serif;
-}
-
-.product-text h2 {
-  margin: 0 0 47px 38px;
-  font-size: 13px;
-  font-family: 'Bentham', sans-serif;
-  font-weight: 800;
-  text-transform: title;
-  color:grey;
-  letter-spacing: 0.2em;
-}
-
-.product-text p {
-  height: 125px;
-  margin: 0 0 0 38px;
-  font-family: 'Playfair Display', serif;
-  color: #8d8d8d;
-  line-height: 1.7em;
-  font-size: 18px;
-  font-weight: 100;
-
-}
-
-
-
-
-.product-price-btn button {
-  float: right;
-  display: inline-block;
-  height: 50px;
-  width: 176px;
-  /*margin: 20px 0 30px 1px;*/
-  margin-top: 10px;
-  margin-bottom: 100px;
-  margin-right: 90px;
-  margin-left: 1000px;
-  box-sizing: border-box;
-  border: transparent;
-  border-radius: 60px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #ffffff;
-  background-color: #9cebd5;
-  cursor: pointer;
-  outline: none;
-}
-
-.product-price-btn button:hover {
-  background-color: #79b0a1;
-}
 
 /*hacchi added*/
 .h3 {
@@ -202,10 +105,7 @@ a:hover {
 }
 
 
-.navbar-area {
-  background: rgba(0,0,0,.6);
-  border-bottom: 1px solid #000;
-}
+
 .site-navbar {
   display: flex;
   justify-content: space-between;
@@ -292,6 +192,45 @@ transform: translateY(-3px) rotate(-45deg);
 }
 /* intro-area css end */
 
+.headingEdit{
+  position: relative;
+  height: 720px;
+}
+
+.headingEdit .overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: #5533ff;
+  background: linear-gradient(95deg, #5533ff 40%, #25ddf5 100%);
+    -webkit-transform: skewY(-12deg);
+    transform: skewY(-12deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    z-index: -12;
+}
+
+.textArea{
+  margin-top: 10%;
+  margin-left: 5%;
+}
+
+.textArea h2{
+    color: #fff;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 60px;
+      margin-bottom: 20px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.textArea p{
+    color: #fff;
+      font-size: 18px;
+      line-height: 26px;
+}
 
 /* mobile breakpoint start */
 @media screen and (max-width: 767px) {
