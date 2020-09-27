@@ -1,4 +1,4 @@
-var modal = document.getElementById("postItemModel");
+var modal = document.getElementById("postItemModal");
 
 // Get the button that opens the modal
 var btn = document.getElementById("postbtn");

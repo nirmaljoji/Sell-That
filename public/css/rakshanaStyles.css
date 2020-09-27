@@ -91,15 +91,20 @@ div.card {
 }
 
 .headLine{
-  height: 10px;
+  height: 3px;
   background: linear-gradient(80deg,  #5533ff,transparent);
   border: 0;
   border-radius: 10px;
  
 }
 
-.postbtn{
-  background-color: #4f585e;
+.postBtn {
+  transition-duration: 0.4s;
+}
+
+.postBtn:hover {
+  background-color: #008CBA;
+    color: white;
 }
 
 #found{
@@ -144,4 +149,8 @@ modalpopup starts from here
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#postItemModal{
+  
 }
