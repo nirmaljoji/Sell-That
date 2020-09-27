@@ -6,11 +6,15 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
   <link rel="stylesheet" href="/fonts/ionicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
-  <link rel="stylesheet" type="text/css" href="/bootstrap/css/style.css">
+
   <link rel="stylesheet" href="/css/trial.css">
   <link rel="stylesheet" href="/css/index.css">
   <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
 </head>
 
 <body>
@@ -76,7 +80,7 @@
 
 
 
-
+    <!-- Product cards - buy -->
     <div class="product">
       <p class="product-title">CASIO FX_991EX</p>
       <img src="/img/material/calci.jpeg" height="267" width="530" alt="Calci" />
@@ -85,7 +89,7 @@
         <h4>Amrita School of Engineering</h4>
         2 years Old<br> Perfect Working Condition<br> Contact: Harshita (987654321)
         </p>
-        <button class="fa fa-shopping-bag"> Buy Product</button>
+        
       </div>
     </div>
 
@@ -98,7 +102,7 @@
         <h4>Amrita School of Engineering</h4>
         2 years Old<br> Perfect Working Condition<br> Contact: Harshita (987654321)
         </p>
-        <button class="fa fa-shopping-bag"> Buy Product</button>
+        
       </div>
     </div>
 
@@ -111,7 +115,7 @@
         <h4>Amrita School of Engineering</h4>
         2 years Old<br> Perfect Working Condition<br> Contact: Harshita (987654321)
         </p>
-        <button class="fa fa-shopping-bag"> Buy Product</button>
+        
       </div>
     </div>
 
@@ -124,7 +128,7 @@
         <h4>Amrita School of Engineering</h4>
         2 years Old<br> Perfect Working Condition<br> Contact: Harshita (987654321)
         </p>
-        <button class="fa fa-shopping-bag"> Buy Product</button>
+        
       </div>
     </div>
   </div>
@@ -138,7 +142,7 @@
         <hr size="1" width="80%" color="grey">
   </div>
 
-
+<!-- Product cards -Sell -->
   <div class="flex-container">
     <div class="product">
       <p class="product-title">CASIO FX_991EX</p>
@@ -186,11 +190,54 @@
 
       </div>
     </div>
-    <button class="fa fa-plus add"> Add Product</button>
+
   </div>
   </div>
 
-  
+  <!-- Modal Start-->
+
+  <div align="center" >
+    
+    <br>
+    <button onclick="document.getElementById('id01').style.display='block'" class="button" >Add Product</button>
+
+    <div id="id01" class="w3-modal" align="right">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('id01').style.display='none'"
+            class=" w3-display-topright" >&times;</span>
+          <div class="box">
+            <form>
+              <label for="name">Product Name</label>
+              <input type="text" id="name" name="name" placeholder="Product Name" required> <br>
+
+              <label for="Description">Description</label>
+              <input type="text" id="Description" name="Description" placeholder="Description" required><br>
+
+              <label for="college">College Name</label>
+              <input type="text" id="college" name="college" placeholder="College Name" required><br>
+
+
+              <label for="contact">Contact Details</label>
+              <input type="text" id="contact" name="contact" placeholder="Contact Details" required><br>
+
+              <label for="photo">Add Photo <input type="file" value="Upload Resume" required></label><br>
+
+
+
+
+              <div align="center">
+              <input class="button1 buttoninput" type="submit" value="Submit">
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal ENd-->
+
 
 
   <footer>
