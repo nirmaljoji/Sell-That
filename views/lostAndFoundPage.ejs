@@ -54,7 +54,37 @@
         <div id="postItemModal" class=modal>
           <div class="modal-content">
             <span class="close">x</span>
-             <p>Some text in the Modal..</p>
+            <h3>Fill in the details</h3>
+            <h5>Please add the information for other students to view before submitting the item to the Admin Department.</h5>
+
+            <div>
+              <form action="/action_page.php">
+                <label for="fname">Item name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+            
+                <label for="lname">Found in</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+            
+                <label for="details">Note</label>
+                <input type="text" id="details" name="details" placeholder="Add any relevant details..">
+            
+                <div class="container">
+                  <label for="upload" class="uploadButton">Upload image</label>
+                  <input type="file" name="upload" id="upload">
+                </div>
+<!--
+  
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                  <option value="australia">Australia</option>
+                  <option value="canada">Canada</option>
+                  <option value="usa">USA</option>
+                </select>
+
+-->           
+                <input type="submit" value="Submit">
+              </form>
+            </div>
           </div>
         </div>
         <hr class="headLine">  
