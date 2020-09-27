@@ -1,0 +1,116 @@
+body { 
+	font-family: 'Open Sans';
+	font-size: 14px;
+	overflow-x: hidden
+   
+   
+}
+
+.flex-container {
+	background-color: #eee;
+	width: 100%;	
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-flow: row wrap;
+	flex-direction: flex-start;
+}
+
+.product {
+	position: relative;
+	max-width: 340px;
+	margin: 20px;
+	padding: 2;
+	background-image: linear-gradient(180deg,#7f70f5 , #0ea0ff);
+	
+}
+
+.product:hover {
+    transform: scale(1.1);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); 
+}
+
+.product-title {
+	padding: 1em;
+	margin: 0;
+    font-size: 20px;
+    font-family: 'Itim', cursive;
+    color: #eee;
+    text-transform: uppercase;
+}
+
+.product-text {
+    padding: 0 1em;
+    font-family: 'Itim', cursive;
+    color: #eee;
+    text-transform: capitalize;
+    
+}
+
+img {
+    margin: 0;
+    padding-left: 30;
+    padding-right: 30;
+    max-width: 100%;
+    
+   
+}
+
+button {
+	position: relative;
+	width: 80%;
+	margin: 1em 10%;
+	padding: 12px 24px;
+	background-color: #eee;
+	color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 20px;
+    font-family: 'Itim', cursive;
+    color:black;
+    text-transform: uppercase;
+   
+}
+
+.button1 {
+	position: relative;
+	width: 50%;
+	margin: 1em 10%;
+	padding: 12px 24px;
+	background-color: #eee;
+	color: rgb(255, 255, 255);
+    border: none;
+    border-radius:20;
+    font-family: 'Itim', cursive;
+    color:black;
+    text-transform: uppercase;
+    
+   
+}
+
+button:hover {
+    background-color: blueviolet;
+    color: #eee;
+	
+}
+
+
+.button1:hover {
+    background-color: red;
+    color: #eee;
+	
+}
+
+.head{
+    padding: 0 1em;
+    font-family: 'Itim', cursive;
+    color:purple;
+    text-transform: capitalize;
+    font-size:40;
+    
+    
+}
+
+
+
+
