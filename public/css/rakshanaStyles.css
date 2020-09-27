@@ -4,7 +4,8 @@
 body {
   background: #dce1df;
   color: #4f585e;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-size: medium;
+	font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   text-rendering: optimizeLegibility;
 }
 div.cards {
