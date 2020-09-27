@@ -50,13 +50,17 @@
       <div class="headpart">
         
         <h2 id="found">Found items near you</h2>
-        <button class=" btn float-right postBtn" id="postbtn">Post a Lost item</button>
+        <button class=" btn float-right postBtn" id="postbtn">Your items</button>
         <div id="postItemModal" class=modal>
           <div class="modal-content">
             <span class="close">x</span>
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event,'tab1')">Post an item you found</button>
+              <button class="tablinks" onclick="openTab(event,'tab2')">Previous items</button>
+              </div>
+            <div id="tab1" class="tabcontent">
             <h3>Fill in the details</h3>
             <h5>Please add the information for other students to view before submitting the item to the Admin Department.</h5>
-
             <div>
               <form action="/action_page.php">
                 <label for="fname">Item name</label>
@@ -73,18 +77,21 @@
                   <input type="file" name="upload" id="upload">
                 </div>
 <!--
-  
                 <label for="country">Country</label>
                 <select id="country" name="country">
                   <option value="australia">Australia</option>
                   <option value="canada">Canada</option>
                   <option value="usa">USA</option>
                 </select>
-
 -->           
                 <input type="submit" value="Submit">
               </form>
             </div>
+          </div>
+          <div id="tab2" class="tabcontent">
+            <p>prev</p>
+
+          </div>
           </div>
         </div>
         <hr class="headLine">  

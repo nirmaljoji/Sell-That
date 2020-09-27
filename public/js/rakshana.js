@@ -23,4 +23,22 @@ window.onclick = function(event) {
   }
 }
 
+//tabs for your items
+function openTab(evt, tab){
+  var i, tabc, tabl;
+
+  tabc=document.getElementsByClassName("tabcontent");
+  for(i=0; i<tabc.length;i++){
+    tabc[i].style.display="none";
+  }
+
+  tabl=document.getElementsByClassName("tablinks");
+  for(i=0;i<tabl.length;i++){
+    tabl[i].className = tabl[i].className.replace(" active","");
+  }
+
+  document.getElementById(tab).style.display="block";
+  evt.currentTarget.className+=" active";
+}
+
 //upload button
