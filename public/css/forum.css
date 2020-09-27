@@ -1,0 +1,420 @@
+@import url(https://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+
+
+.centerScreen{
+  margin:auto !important;
+}
+
+
+.every {
+    background: whitesmoke;
+    height: 100vh;
+    vertical-align: middle;
+    
+    font-family: 'Calibri', sans-serif !important
+}
+
+.mt-100 {
+    margin-top: 100px
+}
+
+.content{
+  margin-top: 5%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.mid{
+  margin: auto;
+}
+
+.modal-button {
+    background-color: rgb(29, 226, 226);
+    border-color: rgb(29, 226, 226);
+    border-radius: 6px;
+    color: white;
+    font-size: 17px;
+    padding-right: 10%;
+    padding-left: 10%;
+    
+    position:absolute;
+    
+    
+    
+}
+.cardPop {
+  border-radius: 3vh;
+  margin: auto;
+  max-width: 80% !important;
+  padding: 5% 5%;
+  align-items: flex-start;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 50%;
+  
+  top: 10%;
+}
+
+.card {
+    border-radius: 3vh;
+    margin: auto;
+    max-width: 100%;
+    padding: 5% 5%;
+    align-items: flex-start;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 90%;
+    
+    top: 10%;
+}
+.card2 {
+  border-radius: 3vh;
+  margin: auto;
+  max-width: 100%;
+  padding: 5% 0%;
+  align-items: flex-start;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 90%;
+  
+  top: 10%;
+}
+.cards {
+  align-items: center;
+  margin:  auto;
+  display: grid;
+  grid-gap: 1rem;
+  margin-top: 10%;
+  
+}
+@media (min-width: 600px) {
+  .cards { grid-template-columns: repeat(2, 1fr);
+    width: 100vw; }
+}
+@media (min-width: 900px) {
+  .cards { grid-template-columns: repeat(3, 1fr); 
+    width: 100vw;}
+}
+@media (min-width: 1300px) {
+  .cards { grid-template-columns: repeat(4, 1fr); 
+    width: 100vw;}
+}
+
+@media (max-width:200px){
+  .modal-button{display: grid;}
+}
+
+@media(max-width:767px) {
+    .card {
+        width: 100vw
+    }
+}
+
+.card-img {
+    padding: 20px 0;
+    width: 60%
+}
+
+.card-img img {
+    opacity: 0.7;
+    margin: auto;
+}
+
+.card-title {
+    margin-bottom: unset
+}
+
+.card-title p {
+    color: rgb(29, 226, 226);
+    font-weight: 900;
+    font-size: 30px;
+    margin-bottom: unset
+}
+
+.card-text textarea{
+  width:110%;
+  
+}
+
+.card-text p {
+    color: grey;
+    font-size: 25px;
+    text-align: center;
+    padding: 3vh 0;
+    font-weight: lighter
+}
+
+.btn{
+    width: 100%;
+    background-color: rgb(29, 226, 226);
+    border-color: rgb(29, 226, 226);
+    border-radius: 25px;
+    color: white;
+    font-size: 20px
+}
+.btn1{
+  width: 100%;
+    background-color: rgb(29, 226, 226);
+    border-color: rgb(29, 226, 226);
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+   border-radius: 6px; 
+   margin-bottom: 2%;
+}
+textarea  
+{  
+   font-family: Arial, Helvetica, sans-serif;  
+   font-size: 12px;
+   border: 1px solid #ff0000;   
+}
+
+.btn:focus {
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    color: white;
+    -webkit-box-shadow: none;
+    -webkit-user-select: none;
+    transition: none
+}
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+.fa:hover {
+  opacity: 0.7;
+}
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa {
+  padding: 20px;
+  font-size: 60px;
+  width: 30px;
+  height: 10px;
+  text-align: justify;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+
+.btn:hover {
+    color: white
+}
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+/* show ans*/
+@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+.bb {
+    background-color: #D32F2F;
+    font-family: 'Calibri', sans-serif !important
+}
+
+.mt-100 {
+    margin-top: 100px
+}
+
+.mb-100 {
+    margin-bottom: 100px
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0px solid transparent;
+    border-radius: 0px
+}
+
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.card .card-title {
+    position: relative;
+    font-weight: 600;
+    margin-bottom: 10px
+}
+
+.comment-widgets {
+    position: relative;
+    margin-bottom: 10px
+}
+
+.comment-widgets .comment-row {
+    border-bottom: 1px solid transparent;
+    padding: 14px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 10px 0
+}
+
+.p-2 {
+    padding: 0.5rem !important
+}
+
+.comment-text {
+    padding-left: 15px
+}
+
+.w-100 {
+    width: 100% !important
+}
+
+.m-b-15 {
+    margin-bottom: 15px
+}
+@media (min-width: 992px) {
+    .modal-lg {
+      width: 900px;
+    }
+  }
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.76563rem;
+    line-height: 1.5;
+    border-radius: 1px;
+    margin: 5px;
+}
+
+.btn-cyan {
+    color: #fff;
+    background-color: #27a9e3;
+    border-color: #27a9e3
+}
+
+.btn-cyan:hover {
+    color: #fff;
+    background-color: #1a93ca;
+    border-color: #198bbe
+}
+
+.comment-widgets .comment-row:hover {
+    background: rgba(0, 0, 0, 0.05)
+}
+/* ans*/
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    display: grid;
+    place-items: center;
+    font-family: 'Manrope', sans-serif;
+    background: #000
+}
+
+
+.cross {
+    padding: 10px;
+    color: #d6312d;
+    cursor: pointer;
+    font-size: 23px
+}
+
+.cross i {
+    margin-top: -5px;
+    cursor: pointer
+}
+
+.comment-box {
+    padding: 5px
+}
+
+.comment-area textarea {
+    resize: none;
+    border: 1px solid #ff0000
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 1px rgb(255, 0, 0) !important
+}
+
+.send {
+    color: #fff;
+    background-color: rgb(29, 226, 226);
+    border-color:rgb(29, 226, 226);
+}
+
+.send:hover {
+    color: #fff;
+    background-color: rgb(29, 226, 226);
+    border-color:rgb(29, 226, 226)
+}
+
+.rating {
+    display: inline-flex;
+    margin-top: -10px;
+    flex-direction: row-reverse
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 28px;
+    font-size: 35px;
+    color: #ff0000;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+  opacity: 0.4
+}

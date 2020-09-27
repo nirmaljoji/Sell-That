@@ -105,10 +105,7 @@ a:hover {
 }
 
 
-.navbar-area {
-  background: rgba(0,0,0,.6);
-  border-bottom: 1px solid #000;
-}
+
 .site-navbar {
   display: flex;
   justify-content: space-between;
@@ -195,6 +192,45 @@ transform: translateY(-3px) rotate(-45deg);
 }
 /* intro-area css end */
 
+.headingEdit{
+  position: relative;
+  height: 720px;
+}
+
+.headingEdit .overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: #5533ff;
+  background: linear-gradient(95deg, #5533ff 40%, #25ddf5 100%);
+    -webkit-transform: skewY(-12deg);
+    transform: skewY(-12deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    z-index: -12;
+}
+
+.textArea{
+  margin-top: 10%;
+  margin-left: 5%;
+}
+
+.textArea h2{
+    color: #fff;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 60px;
+      margin-bottom: 20px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.textArea p{
+    color: #fff;
+      font-size: 18px;
+      line-height: 26px;
+}
 
 /* mobile breakpoint start */
 @media screen and (max-width: 767px) {
