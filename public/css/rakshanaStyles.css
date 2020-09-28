@@ -248,6 +248,10 @@ tabs for items
   border-top: none;
 }
 
+.tablinks{
+  font-size: large;
+}
+
 /*
 count down time
 */
