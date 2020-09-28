@@ -235,7 +235,7 @@ transform: translateY(-3px) rotate(-45deg);
 .headingEdit .overlay{
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 95%;
   top: 0px;
   left: 0px;
   background: #5533ff;
@@ -328,30 +328,50 @@ transform: translateY(-3px) rotate(-45deg);
   position: relative;
 }
 
-.over-main-img{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right :0px;
-  padding-right: 50px;
-  height: 90%; width: 90%;
-   object-fit: contain;
-  
-}
-.over-main-img2{
-  position: relative;
-  top: 0px;
-  left: 0px;
-  height: 120%; width: 100%; 
-  
+
+.imgg{
+margin: auto;
+margin-top: 5%;
 
 }
 
+.pp2{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  border-color: #0ea0ff;
+}
 
 
+.pp3{
+  padding-top:10px !important;
+  padding-bottom: 0 !important;
+  margin-top: auto !important;
+}
+
+.nopadding{
+  padding-left: 0% !important;
+  padding-right: 0% !important;
+}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 46f5962c0646e3f8ebd0f85e31829e5e9a0c2daa
+.pp2{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-color: #0ea0ff;
+
+}
 
 
-
+.nopadding{
+  padding-left: 0 !important;
+  padding-right:0 !important;
+}
 
 
 
