@@ -1,9 +1,7 @@
 
-
-/*hacchi added*/
 .h3 {
-	font-family: 'Dancing Script', cursive;
-    font-size: 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
     color:white;
     margin-bottom: 30px;
     
@@ -66,9 +64,7 @@ a:hover {
   border-color:  #0ea0ff;
 }
 
-#this{
-  background-color: #dde7ee;
-}
+
 
 .raksBtn{
   margin-left: 2%;
@@ -89,7 +85,6 @@ a:hover {
 
 .container .heading h2 {
   font-weight: 700;
-  font-size: 1.4rem; /*isha*/
   text-transform: uppercase;
   margin: 5%;
   text-align: center !important;
@@ -203,7 +198,23 @@ transform: translateY(-3px) rotate(-45deg);
 /* intro-area css start */
 
 #whatWeDo{
-  margin: 15%;
+  margin: 5%;
+  padding: 5%;
+  border: 2px solid gray;
+  border-radius: 1%;
+}
+
+#team{
+  padding-top: 2%;
+  background: linear-gradient(120deg, #7f70f5, #0ea0ff);
+}
+
+#this{
+  margin-top: 2%;
+}
+
+.footing{
+  background-color: whitesmoke;
 }
 
 .intro-area {
@@ -227,6 +238,12 @@ transform: translateY(-3px) rotate(-45deg);
 #space{
   margin-bottom: 10%;
 }
+
+.twos{
+  background-color: #dcdcdc;
+}
+
+
 
 .headingEdit{
   position: relative;
@@ -336,6 +353,8 @@ margin-top: 5%;
 padding: 2%;
 
 }
+
+
 
 .pp2{
   width: 50px;
