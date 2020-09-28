@@ -54,18 +54,44 @@ a:hover {
     color: #fff
 }
 
+.col-md-2{
+  margin: auto;
+}
 
+.pp{
+  width: 150%;
+  height: 150%;
+  border-radius: 50%;
+  border: 5px solid transparent; 
+  border-color:  #0ea0ff;
+}
 
+#this{
+  background-color: #dde7ee;
+}
 
+.raksBtn{
+  margin-left: 2%;
+  padding: 2% 5%;
+  font-size: large;
+  background-color:transparent;
+  color: white;
+  border: 3px solid whitesmoke;
+  border-radius: 8%;
+  transition-duration: 0.4s;
+}
 
-
+.raksBtn:hover {
+  background-color: violet; /* Green */
+  color: white;
+  font-weight: bold;
+}
 
 .container .heading h2 {
   font-weight: 700;
   font-size: 1.4rem; /*isha*/
   text-transform: uppercase;
   text-align: center !important;
-  
 }
 
 .centerHeading{
@@ -174,6 +200,11 @@ transform: translateY(-3px) rotate(-45deg);
 
 
 /* intro-area css start */
+
+#whatWeDo{
+  margin: 15%;
+}
+
 .intro-area {
   height: calc(100vh - 61px);
   display: flex;
@@ -192,6 +223,10 @@ transform: translateY(-3px) rotate(-45deg);
 }
 /* intro-area css end */
 
+#space{
+  margin-bottom: 10%;
+}
+
 .headingEdit{
   position: relative;
   height: 720px;
@@ -205,7 +240,8 @@ transform: translateY(-3px) rotate(-45deg);
   left: 0px;
   background: #5533ff;
   background: linear-gradient(95deg, #5533ff 40%, #25ddf5 100%);
-    -webkit-transform: skewY(-12deg);
+    -webkit-transform: skewY(-12
+    deg);
     transform: skewY(-12deg);
     -webkit-transform-origin: 0;
     transform-origin: 0;
@@ -213,7 +249,7 @@ transform: translateY(-3px) rotate(-45deg);
 }
 
 .textArea{
-  margin-top: 10%;
+  margin-top: 7%;
   margin-left: 5%;
 }
 
