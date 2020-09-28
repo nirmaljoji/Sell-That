@@ -356,9 +356,10 @@ transform: translateY(-3px) rotate(-45deg);
 }
 
 
-
-
-
+.nopadding{
+  padding-left: 0 !important;
+  padding-right:0 !important;
+}
 
 
 
