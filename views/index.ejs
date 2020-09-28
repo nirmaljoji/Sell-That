@@ -27,6 +27,7 @@
                 <nav class="site-navbar ">
                     <!-- site logo -->
                     <a href="#home" class="site-logo">SELL-THAT!</a>
+
                    
                     <!-- site menu/nav -->
                     <ul>
@@ -50,10 +51,14 @@
         <!--Sharon end-->
 
 
-        <!--Sharon end-->
+    
+
+
+
 
 
         <main>
+
 
             <section class="portfolio-block block-intro" id="space">
                 <!--Rakshana Start-->
@@ -95,9 +100,81 @@
                     </div>
                     -->
 
+
                 </div>
                 <!--Rakshana end-->
 
+
+
+
+                <div class="modal fade login" id="loginModal">
+                    <div class="modal-dialog login marginMid animated">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                
+                                <h4 class="modal-title">Login with</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="box">
+                                    <div class="content">
+                                        <div class="social">
+                                            <a class="circle github" href="#">
+                                                <i class="fa fa-github fa-fw"></i>
+                                            </a>
+                                            <a id="google_login" class="circle google" href="#">
+                                                <i class="fa fa-google-plus fa-fw"></i>
+                                            </a>
+                                            <a id="facebook_login" class="circle facebook" href="#">
+                                                <i class="fa fa-facebook fa-fw"></i>
+                                            </a>
+                                        </div>
+                                        <div class="division">
+                                            <div class="line l"></div>
+                                            <span>or</span>
+                                            <div class="line r"></div>
+                                        </div>
+                                        <div class="error"></div>
+                                        <div class="form loginBox">
+                                            <form method="" action="" accept-charset="UTF-8">
+                                                <input id="email" class="form-control" type="text" placeholder="Email"
+                                                    name="email">
+                                                <input id="password" class="form-control" type="password"
+                                                    placeholder="Password" name="password">
+                                                <input class="btn btn-default btn-login" type="button" value="Login"
+                                                    onclick="loginAjax()">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <div class="content registerBox" style="display:none;">
+                                        <div class="form">
+                                            <form method="" html="{:multipart=>true}" data-remote="true" action=""
+                                                accept-charset="UTF-8">
+                                                <input id="fname" class="form-control" type="text"
+                                                    placeholder="Full Name" pattern="[A-Za-z]{30}"  required>
+                                                <input id="regno" class="form-control" type="text"
+                                                    placeholder="Registration No."  required>
+                                                <input id="email" class="form-control" type="text" placeholder="Email"
+                                                    name="email"  required>
+                                                
+                                               
+                                                <input id="password" class="form-control" type="password"
+                                                    placeholder="Password" name="password"  required>
+                                                <input id="password_confirmation" class="form-control" type="password"
+                                                    placeholder="Repeat Password" name="password_confirmation"  required>
+                                                    <input id="contact" class="form-control" type="number" placeholder="Contact No." maxlength="10">
+                                                    <br>
+                                                <select id="college" name="college" class="form-control">
+                                                    <option value="" selected disabled hidden>Choose your College</option>
+                                                    <option value="Amrita">Amrita School of Engineering,Bangalore</option>
+                                                    <option value="PES">PES University</option>
+                                                    <option value="Christ">Christ University</option>
+                                                   
+                                                </select>
+                                                <br>
+                                                <input class="btn btn-default btn-register" type="button"
+                                                    value="Create account" name="commit">
 
                 <div class="modal fade login" id="loginModal">
                     <div class="modal-dialog login marginMid animated">
@@ -152,6 +229,7 @@
                                                     placeholder="Repeat Password" name="password_confirmation">
                                                 <input class="btn btn-default btn-register" type="button"
                                                     value="Create account" name="commit">
+
                                             </form>
                                         </div>
                                     </div>
@@ -222,8 +300,10 @@
 
                 <!--Isha End-->
 
+
             </section>
         </main>
+
 
         <section>
 
@@ -233,11 +313,14 @@
                     <br>
                 </div>
                 <div class="row">
+
                     <div class="col-md-2 nopadding">
+
                         <div class="card special-skill-item border-0">
                             <div class="card-header bg-transparent border-0 ">
                                 <img class="pp img-fluid" src="/img/team/harshitaImage1.jpeg" alt="">
                             </div>
+
                             <div class="card-body">
                                 <h3 class="card-title">Harshita</h3>
                                 <p class="card-text">PART 1</p>
@@ -282,7 +365,7 @@
                             <div class="card-header bg-transparent border-0"><i
                                     class="icon ion-information-circled"></i></div>
                             <div class="card-body">
-                                <h3 class="card-title">Rithwik</h3>
+             <h3 class="card-title">Rithwik</h3>
                                 <p class="card-text">PART 3</p>
                             </div>
                         </div>
@@ -306,8 +389,12 @@
         <script src="/js/jquery.min.js"></script>
         <script src="/js/login-register.js" type="text/javascript"></script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
+
         <script src="https://unpkg.com/@popperjs/core@2"></script>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+
         <script src="/js/theme.js"></script>
 
 
