@@ -15,13 +15,13 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('shopping');
+	res.render('index');
 });
 
 app.get('/dashboard', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('index');
+	res.render('dashboard');
 });
 app.get('/shopping', function(req, res) {
 

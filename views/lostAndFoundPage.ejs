@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost & Found new</title>
 
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/rakshanaStyles.css">
-    
-    <link rel="stylesheet" href="/css/index.css">
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-    <link rel="stylesheet" href="/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost & Found new</title>
+
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/rakshanaStyles.css">
+
+  <link rel="stylesheet" href="/css/index.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+  <link rel="stylesheet" href="/fonts/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
 
 </head>
+
 <body>
 
-  
+
   <div class="navbar-fixed-top bg">
     <div class="container bg">
       <nav class="site-navbar ">
@@ -39,153 +41,161 @@
       </nav>
     </div>
   </div>
-
-
-   
-
-      <!--
+  <!--
           end of nav bar
       -->
 
-    <div class="page-wrapper">
-      <div class="headpart">
-        
-        <h2 id="found">Found items near you</h2>
-        <button class=" btn float-right postBtn" id="postbtn">Your items</button>
-        <div id="postItemModal" class=modal>
-          <div class="modal-content">
-            <span class="close">x</span>
-            <div class="tab">
-              <button class="tablinks" onclick="openTab(event,'tab1')">Post an item you found</button>
-              <button class="tablinks" onclick="openTab(event,'tab2')">Previous items</button>
-              </div>
-            <div id="tab1" class="tabcontent">
-            <h3>Fill in the details</h3>
-            <h5>Please add the information for other students to view before submitting the item to the Admin Department.</h5>
+  <div class="page-wrapper">
+    <div class="headpart">
+      <h2 id="found">Found items near you</h2>
+      <button class=" btn float-right postBtn" id="postbtn">Your items</button>
+      <div id="postItemModal" class=modal>
+        <div class="modal-content">
+          <span class="close">&#10005;</span>
+          <div class="tab">
+            <button class="tablinks" onclick="openTab(event,'tab1')">Post an item you found</button>
+            <button class="tablinks" onclick="openTab(event,'tab2')">Previous items</button>
+          </div>
+          <div id="tab1" class="tabcontent">
+            <h4>Fill in the details</h4>
+            <h6>Please add the information for other students to view before submitting the item to the Admin
+              Department.</h6>
+            <br>
             <div class="formDiv">
-              <form action="/action_page.php">
+              <form action="">
                 <label for="fname">Item name</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
-            
+                <input type="text" id="fname" required name="firstname" placeholder="Item name">
+
                 <label for="lname">Found in</label>
-                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-            
+                <input type="text" id="lname" required name="lastname" placeholder="Location found">
+
                 <label for="details">Note</label>
                 <input type="text" id="details" name="details" placeholder="Add any relevant details..">
-            
-                <div class="container">
+                <hr>
+                <div>
                   <label for="upload" class="uploadButton">Upload image</label>
-                  <input type="file" name="upload" id="upload">
+                  <input type="file" name="upload" id="upload" required>
                 </div>
-<!--
-                <label for="country">Country</label>
-                <select id="country" name="country">
-                  <option value="australia">Australia</option>
-                  <option value="canada">Canada</option>
-                  <option value="usa">USA</option>
-                </select>
--->           
-                <input type="submit" value="Submit">
+                <br>
+                <input type="submit" value="Submit" onclick="lostFoundForm()">
               </form>
             </div>
           </div>
+
+          <div id="tab2" class="tabcontent">
+
+            <div class="prev">
+              <h5>Debit Card</h5>
+              <p>Found near reception</p>
+
+              <button class="btn btn-primary del">&#10005;</button>
+            </div>
+            <div class="prev">
+              <h5>Helmet</h5>
+              <p>Found in class</p>
+
+              <button class="btn btn-primary del">&#10005;</button>
+            </div>
+
+          </div>
+
           <div id="tab2" class="tabcontent">
             <p>prev</p>
 
           </div>
+        </div>
+      </div>
+      <hr class="headLine">
+    </div>
+
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card__image-holder">
+          <img class="card__image img-fluid" src="/img/lost/keys.jpg" alt="wave" />
+        </div>
+        <div class="card-title">
+
+          <span class="left"></span>
+          <span class="right"></span>
+          </a>
+          <h2>
+            Scooty keys
+            <small>Found on 4th floor</small>
+          </h2>
+        </div>
+        <div id="descBox">
+          <div class="card-description">
+            I found them near the girls' lockers outside the library.
+          </div>
+          <div class="">
+            <p class="demo"></p>
+            <div class="readmore">
+              <a class="btn">Contact</a>
+            </div>
           </div>
         </div>
-        <hr class="headLine">  
       </div>
 
-    
-      <div class="cards">
+      <div class="card">
+        <div class="card__image-holder">
+          <img class="card__image img-fluid" src="/img/lost/earp.jpg" alt="wave" />
+        </div>
+        <div class="card-title">
 
-            <div class="card">
-              <div class="card__image-holder">
-                <img class="card__image" src="/img/tech/image4.jpg" alt="wave" />
-              </div>
-              <div class="card-title">
-                
-                  <span class="left"></span>
-                  <span class="right"></span>
-                </a>
-                <h2>
-                    Scooty keys
-                    <small>Found on 4th floor</small>
-                </h2>
-              </div>
-              <div id="descBox">
-                <div class="card-description">
-                    blah blah bsodubce sovnes isdnvbensvu isebvvvvvvvvvv udbvsbseuv ioebvusr ouvsb nvsub
-                </div>
-                <div class="">
-                  <p id="demo"></p>
-                  <div class="readmore">
-                    <a class="btn">Claim</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card__image-holder">
-                <img class="card__image" src="/img/tech/image4.jpg" alt="wave" />
-              </div>
-              <div class="card-title">
-                
-                  <span class="left"></span>
-                  <span class="right"></span>
-                </a>
-                <h2>
-                    Scooty keys
-                    <small>Found on 4th floor</small>
-                </h2>
-              </div>
-              <div id="descBox">
-                <div class="card-description">
-                    blah blah bsodubce sovnes isdnvbensvu isebvvvvvvvvvv udbvsbseuv ioebvusr ouvsb nvsub
-                </div>
-                <div class="">
-                  <p id="demo"></p>
-                  <div class="readmore">
-                    <a class="btn">Claim</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card__image-holder">
-                <img class="card__image" src="/img/tech/image4.jpg" alt="wave" />
-              </div>
-              <div class="card-title">
-                
-                  <span class="left"></span>
-                  <span class="right"></span>
-                </a>
-                <h2>
-                    Scooty keys
-                    <small>Found on 4th floor</small>
-                </h2>
-              </div>
-              <div id="descBox">
-                <div class="card-description">
-                    blah blah bsodubce sovnes isdnvbensvu isebvvvvvvvvvv udbvsbseuv ioebvusr ouvsb nvsub
-                </div>
-                <div class="">
-                  <p id="demo"></p>
-                  <div class="readmore">
-                    <a class="btn">Claim</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-    
+          <span class="left"></span>
+          <span class="right"></span>
+          </a>
+          <h2>
+            Earphones
+            <small>Found near two wheeler parking</small>
+          </h2>
+        </div>
+        <div id="descBox">
+          <div class="card-description">
+            Inside the boys' hostel compound.. found near a bench.
           </div>
+          <div class="">
+            <p class="demo"></p>
+            <div class="readmore">
+              <a class="btn">Contact</a>
+            </div>
+          </div>
+        </div>
       </div>
-    
+
+      <div class="card">
+        <div class="card__image-holder">
+          <img class="card__image img-fluid" src="/img/lost/wallet.jpg" alt="wave" />
+        </div>
+        <div class="card-title">
+
+          <span class="left"></span>
+          <span class="right"></span>
+          </a>
+          <h2>
+            Wallet
+            <small>Found on ATM road</small>
+          </h2>
+        </div>
+        <div id="descBox">
+          <div class="card-description">
+            No ID was in wallet so just sunmitted to admin block..
+          </div>
+          <div class="">
+            <p class="demo"></p>
+            <div class="readmore">
+              <a class="btn">Contact</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
 </body>
 <script src="/js/rakshana.js"></script>
 

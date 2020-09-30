@@ -1,17 +1,23 @@
 @import url(https://fonts.googleapis.com/css?family=Calibri:400,300,700);
 
-
+.container{
+    font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: medium;
+}
 
 .centerScreen{
   margin:auto !important;
 }
 
+.cards{
+    max-width: 1500px;
+}
 
 .every {
     background: whitesmoke;
+    max-width: 1500px;
     height: 100vh;
     vertical-align: middle;
-    
     font-family: 'Calibri', sans-serif !important
 }
 
@@ -20,9 +26,9 @@
 }
 
 .content{
-  margin-top: 5%;
-  margin-left: auto !important;
-  margin-right: auto !important;
+ margin-top: 5%;
+ margin-left: auto;
+ margin-right: auto;
 }
 
 .mid{
@@ -37,11 +43,7 @@
     font-size: 17px;
     padding-right: 10%;
     padding-left: 10%;
-    
-    position:absolute;
-    
-    
-    
+    width: 175% ;
 }
 .cardPop {
   border-radius: 3vh;
@@ -82,7 +84,7 @@
   margin:  auto;
   display: grid;
   grid-gap: 1rem;
-  margin-top: 10%;
+  margin-top: 3%;
   
 }
 @media (min-width: 600px) {
@@ -218,9 +220,7 @@ textarea
 }
 
 /* Add some padding inside the card container */
-.container {
-  padding: 2px 16px;
-}
+
 /* show ans*/
 @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
 
