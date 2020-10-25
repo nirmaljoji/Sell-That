@@ -1,9 +1,16 @@
 var express = require('express');
 var app = express();
-
+const admin = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
+const db = admin.firestore();
 const bodyParser = require("body-parser") 
   
-// New app using express module 
+
+
+//initialize admin SDK using serciceAcountKey
+admin.initializeApp({
+	credential: admin.credential.cert(serviceAccount)
+	});
  
 app.use(bodyParser.urlencoded({ 
     extended:true
