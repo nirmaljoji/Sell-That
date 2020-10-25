@@ -42,7 +42,7 @@ app.get('/dashboard', function(req, res) {
 app.get('/shopping', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('trial');
+	res.render('shopping');
 });
 app.get('/forum', function(req, res) {
 
