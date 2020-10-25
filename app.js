@@ -1,6 +1,14 @@
 var express = require('express');
 var app = express();
 
+const bodyParser = require("body-parser") 
+  
+// New app using express module 
+ 
+app.use(bodyParser.urlencoded({ 
+    extended:true
+}));
+
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
 var port = process.env.PORT || 5000  ;
@@ -19,6 +27,14 @@ app.get('/', function(req, res) {
 
 });
 
+
+app.post('/login',function(req, res)
+{
+ console.log(req.body.email);
+
+ console.log(req.body.password);
+});
+
 app.get('/dashboard', function(req, res) {
 
 	// ejs render automatically looks in the views folder
@@ -27,7 +43,7 @@ app.get('/dashboard', function(req, res) {
 app.get('/shopping', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('trial');
+	res.render('shopping');
 });
 app.get('/forum', function(req, res) {
 
