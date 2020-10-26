@@ -1,5 +1,20 @@
+
+var dbAcc = require('./dbAccess.js');
 var express = require('express');
 var app = express();
+const bodyParser = require("body-parser") 
+const { admin } = require('./firebaseConfig.js');
+	
+const db = admin.firestore();
+  
+
+
+
+
+ 
+app.use(bodyParser.urlencoded({ 
+    extended:true
+}));
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -39,6 +54,26 @@ app.get('/', function(req, res) {
 
 });
 
+
+app.post('/login',function(req, res)
+{
+ console.log(req.body.email);
+
+ console.log(req.body.password);
+});
+
+app.post('/register',function(req, res)
+{
+ var fullName = req.body.fullName;
+ var  regNo = req.body.regNo;
+ var email= req.body.email;
+ var password = req.body.password;
+ var contactNo = req.body.contactNo;
+ var college = req.body.college;
+ dbAcc.registerUser(fullName,regNo,email,password,contactNo,college,db).then(()=>console.log("inserted to db"));
+
+
+});
 app.get('/dashboard', function(req, res) {
 
 	// ejs render automatically looks in the views folder
@@ -47,7 +82,7 @@ app.get('/dashboard', function(req, res) {
 app.get('/shopping', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('trial');
+	res.render('shopping');
 });
 app.get('/forum', function(req, res) {
 

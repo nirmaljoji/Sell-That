@@ -32,6 +32,7 @@
           <li><a href="shopping">Buy/Sell</a></li>
           <li><a href="lostAndFound">Lost & Found</a></li>
           <li><a href="forum">Forum</a></li>
+          <li><a class="pp3" href="/dashboard"><img class="img-fluid pp2" src="/img/team/jojo.jpg" alt=""> </a></li>
         </ul>
 
         <!-- nav-toggler for mobile version only -->
@@ -41,17 +42,12 @@
       </nav>
     </div>
   </div>
-
-
-
-
   <!--
           end of nav bar
       -->
 
   <div class="page-wrapper">
     <div class="headpart">
-
       <h2 id="found">Found items near you</h2>
       <button class=" btn float-right postBtn" id="postbtn">Your items</button>
       <div id="postItemModal" class=modal>
@@ -61,12 +57,11 @@
             <button class="tablinks" onclick="openTab(event,'tab1')">Post an item you found</button>
             <button class="tablinks" onclick="openTab(event,'tab2')">Previous items</button>
           </div>
-
           <div id="tab1" class="tabcontent">
             <h4>Fill in the details</h4>
             <h6>Please add the information for other students to view before submitting the item to the Admin
               Department.</h6>
-              <br>
+            <br>
             <div class="formDiv">
               <form action="">
                 <label for="fname">Item name</label>
@@ -77,16 +72,12 @@
 
                 <label for="details">Note</label>
                 <input type="text" id="details" name="details" placeholder="Add any relevant details..">
-
                 <hr>
-
                 <div>
                   <label for="upload" class="uploadButton">Upload image</label>
-                  <input type="file" name="upload" id="upload">
+                  <input type="file" name="upload" id="upload" required>
                 </div>
-    
                 <br>
-
                 <input type="submit" value="Submit" onclick="lostFoundForm()">
               </form>
             </div>
@@ -97,11 +88,11 @@
             <div class="prev">
               <h5>Debit Card</h5>
               <p>Found near reception</p>
-              
+
               <button class="btn btn-primary del">&#10005;</button>
             </div>
             <div class="prev">
-              <h5 >Helmet</h5>
+              <h5>Helmet</h5>
               <p>Found in class</p>
 
               <button class="btn btn-primary del">&#10005;</button>
@@ -210,4 +201,3 @@
 <script src="/js/rakshana.js"></script>
 
 </html>
-
