@@ -29,7 +29,7 @@ exports.registerUser = registerUser;
    })
  }
 
- exports.questionAdd = questionAdd;
+ exports.addQuestion = addQuestion;
 
 function editAnswer(ques_id,desc){
   return new Promise(resolve=>{
@@ -39,7 +39,7 @@ function editAnswer(ques_id,desc){
     })
   })
 }
-exports.answerEdit = answerEdit;
+exports.editAnswer = editAnswer;
 
 function deleteAnswer(ans_id,college,ques_id){
   return new Promise(resolve=>{
@@ -47,6 +47,7 @@ function deleteAnswer(ans_id,college,ques_id){
     docRef.delet();
   })
 }
+exports.deleteAnswer = deleteAnswer;
 
 function answerQues(college,user_id,ques_id,ans_desc,date){
   return new Promise(resolve=>{
@@ -61,3 +62,4 @@ function answerQues(college,user_id,ques_id,ans_desc,date){
     }) 
   })
 }
+exports.answerQues = answerQues;
