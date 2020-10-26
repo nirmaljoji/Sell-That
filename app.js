@@ -1,9 +1,16 @@
+
+var dbAcc = require('./dbAccess.js');
 var express = require('express');
 var app = express();
-
 const bodyParser = require("body-parser") 
+const { admin } = require('./firebaseConfig.js');
+	
+const db = admin.firestore();
   
-// New app using express module 
+
+
+
+
  
 app.use(bodyParser.urlencoded({ 
     extended:true
@@ -35,6 +42,18 @@ app.post('/login',function(req, res)
  console.log(req.body.password);
 });
 
+app.post('/register',function(req, res)
+{
+ var fullName = req.body.fullName;
+ var  regNo = req.body.regNo;
+ var email= req.body.email;
+ var password = req.body.password;
+ var contactNo = req.body.contactNo;
+ var college = req.body.college;
+ dbAcc.registerUser(fullName,regNo,email,password,contactNo,college,db).then(()=>console.log("inserted to db"));
+
+
+});
 app.get('/dashboard', function(req, res) {
 
 	// ejs render automatically looks in the views folder
