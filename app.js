@@ -5,6 +5,26 @@ var app = express();
 // process.env.PORT lets the port be set by Heroku
 var port = process.env.PORT || 5000  ;
 
+app.post('/question',function(req, res)
+{
+ 
+});
+
+app.post('/answer',function(req, res)
+{
+ 
+});
+
+app.post('/EditAns',function(req, res)
+{
+ 
+});
+
+app.post('/delete',function(req, res)
+{
+ 
+});
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
