@@ -7,7 +7,7 @@ const { admin } = require('./firebaseConfig.js');
 	
 const db = admin.firestore();
 
-const comments= [
+const trials= [
 	{
 	  id: 1,
 	  author: 'Harshita Reddy',
@@ -264,19 +264,19 @@ app.get('/shopping/:id', (req, res) => {
 app.get('/forum', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('forum', {comments:comments});
+	res.render('forum', {trials:trials});
 });
 
 app.get('/forum/:id', (req, res) => {
-	const comment = comments.filter((comment) => {
-	  return comment.id == req.params.id
+	const trial = trials.filter((trial) => {
+	  return trial.id == req.params.id
 	})[0]
 
-	res.render('comment', {
-	  author: comment.author,
-	  title: comment.title,
-	  date: comment.date,
-	  imagu: comment.imagu,
+	res.render('trial', {
+	  author: trial.author,
+	  title: trial.title,
+	  date: trial.date,
+	  imagu: trial.imagu,
 	  
 	})
 	})

@@ -133,16 +133,16 @@
                     <h4 class="card-title">what elective should i choose?,, cloud or machine learning?.</h4>
                   </div>
                   <div class="comment-widgets modal-body">
-                    <!--dynamic looping raks--><!-- Comment Row -->
+                    <!--dynamic looping ice--><!-- Comment Row -->
                     
-                    <% comments.forEach((comment) => { %>
+                    <% trials.forEach((trial) => { %>
                     <div class="d-flex flex-row comment-row">
-                      <div class="p-2"><img src=<%= comment.imagu %> alt="user" width="50" class="rounded-circle">
+                      <div class="p-2"><img src=<%= trial.imagu %> alt="user" width="50" class="rounded-circle">
                       </div>
                       <div class="comment-text w-100">
-                        <h5 class="font-medium"><%= comment.author %></h5> <span
-                          class="m-b-15 d-block"><%= comment.title %></span>
-                        <div class="comment-footer"> <span class="text-muted float-right"><%= comment.date %></span>
+                        <h5 class="font-medium"><%= trial.author %></h5> <span
+                          class="m-b-15 d-block"><%= trial.title %></span>
+                        <div class="comment-footer"> <span class="text-muted float-right"><%= trial.date %></span>
                           <span id="editing">
                             <button type="button" class="btn btn-success btn-sm" onclick="Edit_ans()">Edit</button>
                           </span>
