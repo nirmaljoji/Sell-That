@@ -22,8 +22,15 @@ var port = process.env.PORT || 5000  ;
 
 app.post('/question',function(req, res)
 {
- 
+ var college=req.body.college;
+ var user_id=req.body.user_id;
+ var date=req.body.date;
+ var desc=req.body.desc;
+ dbAcc.questionAdd(college,user_id,date,desc,db).then(()=>console.log("inserted  to db"));
+
+
 });
+
 
 app.post('/answer',function(req, res)
 {
@@ -54,14 +61,6 @@ app.get('/', function(req, res) {
 
 });
 
-
-app.post('/login',function(req, res)
-{
- console.log(req.body.email);
-
- console.log(req.body.password);
-});
-
 app.post('/register',function(req, res)
 {
  var fullName = req.body.fullName;
@@ -74,6 +73,15 @@ app.post('/register',function(req, res)
 
 
 });
+
+app.post('/login',function(req, res)
+{
+ console.log(req.body.email);
+
+ console.log(req.body.password);
+});
+
+
 app.get('/dashboard', function(req, res) {
 
 	// ejs render automatically looks in the views folder
