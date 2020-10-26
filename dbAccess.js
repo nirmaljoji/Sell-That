@@ -14,7 +14,35 @@
       resolve();
     });
   }
-  
-  exports.registerUser = registerUser;
 
-  
+exports.registerUser = registerUser;
+
+ function questionAdd(college,user_id,date,desc){
+   return new Promise(resolve => {
+     const docRef = db.collection('Forum').doc(college).collection('Questions').doc();
+     docRef.set({
+       user_id : user_id,
+       date : date,
+       desc : desc
+     })
+     
+   })
+ }
+
+ exports.questionAdd = questionAdd;
+
+function answerEdit(ques_id,desc){
+  return new Promise(resolve=>{
+    const docRef =  db.collection('Forum').doc(college).collection('Questions').doc(ques_id);
+    docRef.update({
+      desc : desc
+    })
+  })
+}
+exports.answerEdit = answerEdit;
+
+function deleteAnswer(ans_id,college,ques_id){
+  return new Promise(resolve=>{
+    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').
+  })
+}

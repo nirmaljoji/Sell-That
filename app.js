@@ -51,8 +51,6 @@ app.post('/register',function(req, res)
  var contactNo = req.body.contactNo;
  var college = req.body.college;
  dbAcc.registerUser(fullName,regNo,email,password,contactNo,college,db).then(()=>console.log("inserted to db"));
-
-
 });
 app.get('/dashboard', function(req, res) {
 
