@@ -7,11 +7,33 @@ const { admin } = require('./firebaseConfig.js');
 	
 const db = admin.firestore();
   
+//fake lost and found items
+
+const posts= [
+	{
+	  id: 1,
+	  author: 'Scooty Keys',
+	  title: 'Found on 4th floor',
+	  body: 'I found them near the girls lockers outside the library.',
+	  imagu: "/img/lost/keys.jpg"
+	},
+	{
+	  id: 2,
+	  author: 'Earphones',
+	  title: 'Found near two wheeler parking',
+	  body: 'Inside the boys hostel compound.. found near a bench.',
+	  imagu: "/img/lost/earp.jpg"
+	},
+	{
+	  id: 3,
+	  author: 'Wallet',
+	  title: 'Found on ATM road',
+	  body: 'No ID was in wallet so just sunmitted to admin block.',
+	  imagu: "/img/lost/wallet.jpg"
+	}
+  ]
 
 
-
-
- 
 app.use(bodyParser.urlencoded({ 
     extended:true
 }));
@@ -73,8 +95,22 @@ app.get('/forum', function(req, res) {
 app.get('/lostAndFound', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('lostAndFoundPage');
+	res.render('lostAndFoundPage', {posts:posts});
 });
+
+app.get('/lostAndFound/:id', (req, res) => {
+	// find the post in the `posts` array
+	const post = posts.filter((post) => {
+	  return post.id == req.params.id
+	})[0]
+	// render the `post.ejs` template with the post content
+	res.render('post', {
+	  author: post.author,
+	  title: post.title,
+	  body: post.body,
+	  imagu: post.imagu
+	})
+  })
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
