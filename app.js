@@ -147,6 +147,7 @@ app.get('/lostAndFound/:id', (req, res) => {
 
 
 //BUY AND SELL start
+//(am using same fake db for both buy and sell)
 //rendering all the products to buy
 app.get('/shopping', function(req, res) {
 	res.render('shopping', {buys: buys});
