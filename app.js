@@ -6,8 +6,33 @@ const bodyParser = require("body-parser")
 const { admin } = require('./firebaseConfig.js');
 	
 const db = admin.firestore();
+
+const comments= [
+	{
+	  id: 1,
+	  author: 'Harshita Reddy',
+	  title: 'ay u take whatever',
+	  date: 'September 25, 2020',
+	  imagu: "/img/team/harshitaImage1.jpeg"
+	},
+	{
+	  id: 2,
+	  author: 'Sharon Joji',
+	  title: 'cloud ra i made my own server',
+	  date: 'September 25, 2020',
+	  imagu: "/img/team/jojo.jpg"
+	},
+{
+	id: 3,
+	author: 'Raks',
+	title: 'sandwich',
+	date: 'September 26, 2020',
+	imagu: "/img/team/raks.jpg"
+}
+]
   
 //start of fake lost and found items
+
 
 const posts= [
 	{
@@ -234,6 +259,28 @@ app.get('/shopping/:id', (req, res) => {
   })
 
 //BUY AND SELL end
+
+//FORUM start
+app.get('/forum', function(req, res) {
+
+	// ejs render automatically looks in the views folder
+	res.render('forum', {comments:comments});
+});
+
+app.get('/forum/:id', (req, res) => {
+	const comment = comments.filter((comment) => {
+	  return comment.id == req.params.id
+	})[0]
+
+	res.render('comment', {
+	  author: comment.author,
+	  title: comment.title,
+	  date: comment.date,
+	  imagu: comment.imagu,
+	  
+	})
+	})
+	//Forum end
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);

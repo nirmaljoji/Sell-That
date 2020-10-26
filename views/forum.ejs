@@ -27,7 +27,7 @@
         $(this).find('#textarea1').focus();
       });
     });
-    
+
   </script>
 </head>
 
@@ -110,7 +110,8 @@
 
                         <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"
                             rows="4" name="Answer"></textarea> </div>
-                        <div class="text-center mt-4"> <input type="submit" class="btn btn-success send px-5" value="POST"> </input> </div>
+                        <div class="text-center mt-4"> <input type="submit" class="btn btn-success send px-5"
+                            value="POST"> </input> </div>
                       </div>
                     </div>
                   </div>
@@ -132,30 +133,31 @@
                     <h4 class="card-title">what elective should i choose?,, cloud or machine learning?.</h4>
                   </div>
                   <div class="comment-widgets modal-body">
-                    <!-- Comment Row -->
+                    <!--dynamic looping raks--><!-- Comment Row -->
+                    
+                    <% comments.forEach((comment) => { %>
                     <div class="d-flex flex-row comment-row">
-                      <div class="p-2"><img src="/img/team/harshitaImage1.jpeg" alt="user" width="50"
-                          class="rounded-circle"></div>
+                      <div class="p-2"><img src=<%= comment.imagu %> alt="user" width="50" class="rounded-circle">
+                      </div>
                       <div class="comment-text w-100">
-                        <h5 class="font-medium">Harshita Reddy</h5> <span class="m-b-15 d-block">I think you should go
-                          with
-                          Machine Learning , it is very interesting and easy to pick up </span>
-                        <div class="comment-footer"> <span class="text-muted float-right" >September 25, 2020</span>
-                        <span id="editing">
-                         <button type="button" class="btn btn-success btn-sm"  onclick="Edit_ans()">Edit</button>
-                        </span>
-                        
-                          
+                        <h5 class="font-medium"><%= comment.author %></h5> <span
+                          class="m-b-15 d-block"><%= comment.title %></span>
+                        <div class="comment-footer"> <span class="text-muted float-right"><%= comment.date %></span>
+                          <span id="editing">
+                            <button type="button" class="btn btn-success btn-sm" onclick="Edit_ans()">Edit</button>
+                          </span>
+
+
                           <form action="/delete" method="POST">
-                            <input type="submit" class="btn btn-danger btn-sm">Delete</input>
+                            <input type="submit" class="btn btn-danger btn-sm" value="Delete"></input>
                           </form>
-                          
+
                         </div>
                       </div>
                     </div>
 
 
-
+                    <% }) %>
                   </div> <!-- Card -->
                 </div>
 
@@ -181,14 +183,12 @@
     </div>
   </main>
   <script>
-    function Edit_ans()
-    {
-      
+    function Edit_ans() {
+
       document.getElementById("editing").innerHTML = "<form action='/EditAns' method='POST'><textarea  style='width: 100%;' ></textarea><input type='submit' class='btn btn-success btn-sm' onclick='rev()' value='Confirm Edit'></input></form>";
     }
-    function rev()
-    {
-      document.getElementById("editing").innerHTML ="<button type='button' class='btn btn-success btn-sm'  onclick='Edit_ans()'>Edit</button>";
+    function rev() {
+      document.getElementById("editing").innerHTML = "<button type='button' class='btn btn-success btn-sm'  onclick='Edit_ans()'>Edit</button>";
     }
   </script>
 </body>
