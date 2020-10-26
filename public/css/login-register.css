@@ -221,3 +221,6 @@
     display: inline-block;
   }
 
+.marginMid{
+    margin:10rem auto !important;
+}

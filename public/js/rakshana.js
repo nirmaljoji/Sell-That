@@ -1,67 +1,72 @@
+//for lost and found MODAL
+document.getElementById("tab1").style.display = "block";
+document.getElementById("tab1").className += " active";
 var modal = document.getElementById("postItemModal");
-
-// Get the button that opens the modal
 var btn = document.getElementById("postbtn");
 
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
+btn.onclick = function () {
   modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
   modal.style.display = "none";
 }
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+//to close modal if user clicks anywhere outside of it
+window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 }
 
-//tabs for your items
-function openTab(evt, tab){
+//tabs for "Your Items"
+function openTab(evt, tab) {
   var i, tabc, tabl;
 
-  tabc=document.getElementsByClassName("tabcontent");
-  for(i=0; i<tabc.length;i++){
-    tabc[i].style.display="none";
+  tabc = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabc.length; i++) {
+    tabc[i].style.display = "none";
   }
 
-  tabl=document.getElementsByClassName("tablinks");
-  for(i=0;i<tabl.length;i++){
-    tabl[i].className = tabl[i].className.replace(" active","");
+  tabl = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tabl.length; i++) {
+    tabl[i].className = tabl[i].className.replace(" active", "");
   }
 
-  document.getElementById(tab).style.display="block";
-  evt.currentTarget.className+=" active";
+  document.getElementById(tab).style.display = "block";
+  evt.currentTarget.className += " active";
 }
 
-//upload button
+//form validation for tab1 in "Your Items"
 
+function lostFoundForm() {
+  var file = document.getElementsById("upload");
+  if (file.files.length == 0) {
+    alert("add file");
+  }
+  else {
+    alert('hmm');
+  }
+}
 
-//timer countdown
+//timer countdown 
+//for now i am hard setting the id, once we have db, we will set id from there
 
 var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
-
-var x = setInterval(function() {
-
+var x = setInterval(function () {
   var now = new Date().getTime();
-
   var distance = countDownDate - now;
-
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  
 
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h left";
-
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
+  var demos = document.getElementsByClassName("demo");
+  var i;
+  for (i = 0; i < demos.length; i++) {
+    demos[i].innerHTML = days + "d " + hours + "h left";
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+    }
   }
+
 }, 1000);
