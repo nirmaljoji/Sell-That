@@ -34,27 +34,33 @@ app.post('/question',function(req, res)
 
 app.post('/answer',function(req, res)
 {
+
 	var college=req.body.college;
 	var user_id=req.body.user_id;
 	var ques_id=req.body.ques_id;
 	var ans_desc=req.body.ans_desc;
 	var date=req.body.date;
 	dbAcc.answerQues(college,user_id,ques_id,ans_desc,date,db).then(()=>console.log("inserted  to db"));
+
 });
 
 app.post('/EditAns',function(req, res)
 {
+
 	var ques_id=req.body.ques_id;
 	var desc=req.body.desc;
 	dbAcc.editAnswer(ques_id,desc,db).then(()=>console.log("inserted  to db"));
+
 });
 
 app.post('/delete',function(req, res)
 {
+
 	var ans_id=req.body.ans_id;
 	var college=req.body.college;
 	var ques_id=req.body.ques_id;
 	dbAcc.deleteAnswer(ans_id,college,ques_id,db).then(()=>console.log("inserted  to db"));
+
 });
 
 // set the view engine to ejs
