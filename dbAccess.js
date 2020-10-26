@@ -17,13 +17,13 @@
 
 exports.registerUser = registerUser;
 
- function questionAdd(college,user_id,date,desc){
+ function addQuestion(college,user_id,date,ques_desc){
    return new Promise(resolve => {
      const docRef = db.collection('Forum').doc(college).collection('Questions').doc();
      docRef.set({
-       user_id : user_id,
+       ques_user_id : user_id,
        date : date,
-       desc : desc
+       ques_desc : ques_desc
      })
      
    })
@@ -31,7 +31,7 @@ exports.registerUser = registerUser;
 
  exports.questionAdd = questionAdd;
 
-function answerEdit(ques_id,desc){
+function editAnswer(ques_id,desc){
   return new Promise(resolve=>{
     const docRef =  db.collection('Forum').doc(college).collection('Questions').doc(ques_id);
     docRef.update({
@@ -43,6 +43,21 @@ exports.answerEdit = answerEdit;
 
 function deleteAnswer(ans_id,college,ques_id){
   return new Promise(resolve=>{
-    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').
+    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc(ans_id);
+    docRef.delet();
+  })
+}
+
+function answerQues(college,user_id,ques_id,ans_desc,date){
+  return new Promise(resolve=>{
+    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc();
+    docRef.set({
+      ques_id :ques_id,
+      ans_desc:ans_desc,
+      ans_date : date,
+      ans_user_id :user_id
+
+
+    }) 
   })
 }
