@@ -7,7 +7,7 @@ const { admin } = require('./firebaseConfig.js');
 	
 const db = admin.firestore();
   
-//fake lost and found items
+//start of fake lost and found items
 
 const posts= [
 	{
@@ -32,7 +32,39 @@ const posts= [
 	  imagu: "/img/lost/wallet.jpg"
 	}
   ]
+  //end of fake lost and found items
 
+  //start of fake products for shopping
+const buys= [
+	{
+	  id: 1,
+	  author: 'Harshita',
+	  title: 'CASIO FX_991EX',
+	  body: 'It is 2 years old but acts as though it were brand new :)',
+	  imagu: '/img/material/calci.jpeg',
+	  ph: '9611402230',
+	  email: 'harshita@gmail.com'
+	},
+	{
+		id: 1,
+		author: 'Harshita',
+		title: 'CASIO FX_991EX',
+		body: 'It is 2 years old but acts as though it were brand new :)',
+		imagu: '/img/material/calci.jpeg',
+		ph: '9611402230',
+		email: 'harshita@gmail.com'
+	},
+	{
+		id: 1,
+		author: 'Harshita',
+		title: 'CASIO FX_991EX',
+		body: 'It is 2 years old but acts as though it were brand new :)',
+		imagu: '/img/material/calci.jpeg',
+		ph: '9611402230',
+		email: 'harshita@gmail.com'
+	  }
+  ]
+//end of fake products for shopping
 
 app.use(bodyParser.urlencoded({ 
     extended:true
@@ -81,17 +113,16 @@ app.get('/dashboard', function(req, res) {
 	// ejs render automatically looks in the views folder
 	res.render('dashboard');
 });
-app.get('/shopping', function(req, res) {
 
-	// ejs render automatically looks in the views folder
-	res.render('shopping');
-});
 app.get('/forum', function(req, res) {
 
 	// ejs render automatically looks in the views folder
 	res.render('forum');
 });
 
+//LOST AND FOUND start
+
+//rendering all the lost products
 app.get('/lostAndFound', function(req, res) {
 
 	// ejs render automatically looks in the views folder
@@ -103,7 +134,7 @@ app.get('/lostAndFound/:id', (req, res) => {
 	const post = posts.filter((post) => {
 	  return post.id == req.params.id
 	})[0]
-	// render the `post.ejs` template with the post content
+	
 	res.render('post', {
 	  author: post.author,
 	  title: post.title,
@@ -111,6 +142,32 @@ app.get('/lostAndFound/:id', (req, res) => {
 	  imagu: post.imagu
 	})
   })
+
+//LOST AND FOUND end
+
+
+//BUY AND SELL start
+//rendering all the products to buy
+app.get('/shopping', function(req, res) {
+	res.render('shopping', {buys: buys});
+});
+
+app.get('/shopping/:id', (req, res) => {
+	const buy = buys.filter((buy) => {
+	  return buy.id == req.params.id
+	})[0]
+	
+	res.render('buy', {
+	  author: buy.author,
+	  title: buy.title,
+	  body: buy.body,
+	  imagu: buy.imagu,
+	  ph: buy.ph,
+	  email: buy.email
+	})
+  })
+
+//BUY AND SELL end
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
