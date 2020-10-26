@@ -85,6 +85,27 @@ app.post('/question',function(req, res)
 
 });
 
+app.post('/lostFound',function(req, res)
+{
+ var firstname=req.body.firstname;
+ var lastname=req.body.lastname;
+ var details=req.body.details;
+ var upload=req.body.upload;
+ dbAcc.addLostFound(firstname,lastname,details,upload,db).then(()=>console.log("inserted  to db"));
+
+
+});
+
+app.post('/delLostAndFound',function(req, res)
+{
+
+	var item_id=req.body.item_id;
+	var college=req.body.college;
+	
+	dbAcc.deleteLostAndFound(item_id,college,db).then(()=>console.log("deleted from db"));
+
+});
+
 
 app.post('/answer',function(req, res)
 {
@@ -113,7 +134,7 @@ app.post('/delete',function(req, res)
 	var ans_id=req.body.ans_id;
 	var college=req.body.college;
 	var ques_id=req.body.ques_id;
-	dbAcc.deleteAnswer(ans_id,college,ques_id,db).then(()=>console.log("inserted  to db"));
+	dbAcc.deleteAnswer(ans_id,college,ques_id,db).then(()=>console.log("deleted from db"));
 
 });
 

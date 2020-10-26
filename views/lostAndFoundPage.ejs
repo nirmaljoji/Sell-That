@@ -63,7 +63,7 @@
               Department.</h6>
             <br>
             <div class="formDiv">
-              <form action="">
+              <form action="\lostFound" method="POST">
                 <label for="fname">Item name</label>
                 <input type="text" id="fname" required name="firstname" placeholder="Item name">
 
@@ -88,15 +88,12 @@
             <div class="prev">
               <h5>Debit Card</h5>
               <p>Found near reception</p>
-
-              <button class="btn btn-primary del">&#10005;</button>
+              <form action="/delLostAndFound" method="POST">
+                <input type="submit" class="btn btn-primary del">&#10005;</input>
+              </form>
+              
             </div>
-            <div class="prev">
-              <h5>Helmet</h5>
-              <p>Found in class</p>
-
-              <button class="btn btn-primary del">&#10005;</button>
-            </div>
+            
 
           </div>
 

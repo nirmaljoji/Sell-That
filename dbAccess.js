@@ -63,3 +63,30 @@ function answerQues(college,user_id,ques_id,ans_desc,date){
   })
 }
 exports.answerQues = answerQues;
+
+
+function addLostFound(firstname,lastname,details,upload,db) {
+  return new Promise(resolve => {
+      const docRef = db.collection('lostAndFound').doc(college).collection('items').doc();
+      docRef.set({
+        firstname: firstname,
+        lastname: lastname,
+        details: details,
+        password: password,
+        upload: upload,
+        
+      });
+    resolve();
+  });
+}
+
+exports.addLostFound = addLostFound;
+
+function deleteLostAndFound(item_id,college){
+  return new Promise(resolve=>{
+    const docRef = db.collection('lostAndFound').doc(college).collection('items').doc(item_id);
+    docRef.delet();
+  })
+}
+exports.deleteLostAndFound = deleteLostAndFound;
+
