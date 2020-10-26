@@ -168,7 +168,6 @@ app.get('/forum', function(req, res) {
 
 //rendering all the lost products
 app.get('/lostAndFound', function(req, res) {
-
 	// ejs render automatically looks in the views folder
 	res.render('lostAndFoundPage', {posts:posts});
 });
