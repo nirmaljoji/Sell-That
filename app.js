@@ -66,6 +66,61 @@ const buys= [
   ]
 //end of fake products for shopping
 
+//start of fake dashboard items
+
+const notifications= [
+	{
+	  id: 1,
+	  person:'Isha',
+	  title: 'Product Request',
+	  desc: 'has requested for your Calculator',
+	  classname: "card3 card--01"
+	},
+	{
+	  id: 2,
+	  person: 'Pikachu',
+	  title: 'Lost Item',
+	  desc: 'found a pokeball near amrita tree!',
+	  classname: "card3 card--02"
+
+	},
+	{
+		id: 3,
+		person: 'Raks',
+		title: 'Product Request',
+		desc: 'has requested for your cute ass to meet them in the cafeteria',
+		classname: "card3 card--01"
+  
+	}
+  ]
+  //end of fake dashboard items
+
+  //start of fake AD dashboard items
+
+const ads= [
+	{
+	  aid: 1,
+	  person:'Isha',
+	  desc: 'calculator',
+	  price: 'Rs.500'
+	},
+	{
+	  aid: 2,
+	  person: 'Rithwik',
+	  desc: 'headphones',
+	  price: 'Rs.500'
+
+	},
+	{
+		aid: 3,
+		person: 'Hacchi',
+		desc: 'football',
+		price: 'Rs.200'
+  
+	}
+  ]
+  //end of fake AD dashboard items
+
 app.use(bodyParser.urlencoded({ 
     extended:true
 }));
@@ -152,12 +207,6 @@ app.post('/login',function(req, res)
 });
 
 
-app.get('/dashboard', function(req, res) {
-
-	// ejs render automatically looks in the views folder
-	res.render('dashboard');
-});
-
 app.get('/forum', function(req, res) {
 
 	// ejs render automatically looks in the views folder
@@ -168,7 +217,6 @@ app.get('/forum', function(req, res) {
 
 //rendering all the lost products
 app.get('/lostAndFound', function(req, res) {
-
 	// ejs render automatically looks in the views folder
 	res.render('lostAndFoundPage', {posts:posts});
 });
@@ -213,6 +261,31 @@ app.get('/shopping/:id', (req, res) => {
   })
 
 //BUY AND SELL end
+
+//Dashboard start
+
+//rendering all the lost products
+app.get('/dashboard', function(req, res) {
+	// ejs render automatically looks in the views folder
+	res.render('dashboard', {notifications:notifications,ads:ads});
+});
+
+app.get('/dashboard/:id', (req, res) => {
+	// find the post in the `posts` array
+	const notification = notifications.filter((notification) => {
+	  return notification.id == req.params.id
+	})[0]
+  })
+
+  app.get('/dashboard/:aid', (req, res) => {
+	// find the post in the `posts` array
+	const ad = ads.filter((ad) => {
+	  return ad.aid == req.params.aid
+	})[0]
+  })
+
+//Dashboard end
+
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
