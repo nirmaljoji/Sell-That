@@ -1,4 +1,5 @@
 
+
 var dbAcc = require('./dbAccess.js');
 var express = require('express');
 var app = express();
@@ -58,6 +59,8 @@ app.get('/', function (req, res) {
 
 });
 
+
+// REGISTER//
 app.post('/register', function (req, res) {
 	var fullName = req.body.fullName;
 	var regNo = req.body.regNo;
@@ -68,8 +71,9 @@ app.post('/register', function (req, res) {
 	dbAcc.registerUser(fullName, regNo, email, password, contactNo, college, db).then(() => console.log("inserted to db"));
 
 
-});
+});//END REGISTER//
 
+// LOGIN//
 app.post('/login', function (req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
@@ -92,12 +96,11 @@ app.post('/login', function (req, res) {
 	}
 
 
-});
+});//END LOGIN//
 
 
 
-
-
+//DASHBOARD//
 app.get('/dashboard', function (req, res) {
 
 	if (req.session.loggedin) {
@@ -109,8 +112,10 @@ app.get('/dashboard', function (req, res) {
 		res.send('Please login to view this page!');
 	}
 	res.end();
-});
+});//END DASHBOARD//
 
+
+//SHOPPING//
 app.get('/shopping', async function(req, res) {
 
 	try{
@@ -125,12 +130,12 @@ app.get('/shopping', async function(req, res) {
 
         res.send('Some error');
 	 }
-});
+});//END SHOPPING//
+
+
+//FORUM//
 app.get('/forum', function (req, res) {
 	
-	
-	
-	// ejs render automatically looks in the views folder
 	res.render('forum');
 });
 app.post('/question', function (req, res) {
@@ -139,11 +144,7 @@ app.post('/question', function (req, res) {
 	var date = req.body.date;
 	var desc = req.body.desc;
 	dbAcc.questionAdd(college, user_id, date, desc, db).then(() => console.log("inserted  to db"));
-
-
 });
-
-
 app.post('/answer', function (req, res) {
 	var college = req.body.college;
 	var user_id = req.body.user_id;
@@ -152,25 +153,22 @@ app.post('/answer', function (req, res) {
 	var date = req.body.date;
 	dbAcc.answerQues(college, user_id, ques_id, ans_desc, date, db).then(() => console.log("inserted  to db"));
 });
-
 app.post('/EditAns', function (req, res) {
 	var ques_id = req.body.ques_id;
 	var desc = req.body.desc;
 	dbAcc.editAnswer(ques_id, desc, db).then(() => console.log("inserted  to db"));
 });
-
 app.post('/delete', function (req, res) {
 	var ans_id = req.body.ans_id;
 	var college = req.body.college;
 	var ques_id = req.body.ques_id;
 	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("inserted  to db"));
-});
+});//END FORUM//
 
 
+//LOST AND FOUND//
 app.get('/lostAndFound', async function (req, res) {
-
-	// ejs render automatically looks in the views folder
-     try{
+ try{
 		let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
 		let posts=[];
 		items.forEach(item => {
@@ -179,11 +177,10 @@ app.get('/lostAndFound', async function (req, res) {
 		console.log(posts);
 		res.render('lostAndFoundPage', {posts:posts});
 	 }catch{
-
         res.send('Some error');
-	 }
-	
+	 }	
 });
+
 app.post('/lostFound',function(req, res)
 {
  var author=req.body.item_name;
@@ -191,19 +188,16 @@ app.post('/lostFound',function(req, res)
  var body=req.body.item_desc;
  var upload=req.body.upload;
  dbAcc.addLostFound(author,title,body,upload,db).then(()=>console.log("inserted  to db"));
-
-
 });
 
 app.post('/delLostAndFound',function(req, res)
 {
-
 	var item_id=req.body.item_id;
 	var college=req.body.college;
-	
 	dbAcc.deleteLostAndFound(item_id,college,db).then(()=>console.log("deleted from db"));
+});//END LOST AND FOUND//
 
-});
+
 
 app.listen(port, function () {
 	console.log('Our app is running on http://localhost:' + port);
