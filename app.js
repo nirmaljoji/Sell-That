@@ -158,10 +158,12 @@ app.get('/shopping', async function(req, res) {
 
 
 //FORUM//
+
 app.get('/forum', function(req, res) {
 
 	// ejs render automatically looks in the views folder
 	res.render('forum', {trials:trials});
+
 });
 app.post('/question', function (req, res) {
 	var college = req.body.college;
