@@ -88,15 +88,12 @@
             <div class="prev">
               <h5>Debit Card</h5>
               <p>Found near reception</p>
+              <form action="/delLostAndFound" method="POST">
+                <input type="submit" class="btn btn-primary del">&#10005;</input>
+              </form>
 
-              <button class="btn btn-primary del">&#10005;</button>
             </div>
-            <div class="prev">
-              <h5>Helmet</h5>
-              <p>Found in class</p>
 
-              <button class="btn btn-primary del">&#10005;</button>
-            </div>
 
           </div>
 
@@ -110,42 +107,41 @@
     </div>
 
 
-<div class="cards">
-<!--dynamic looping raks-->
-<% posts.forEach((post) => { %>
-  <div class="card">
-    <div class="card__image-holder">
-      <img class="card__image img-fluid" src=<%= post.imagu %>
-       alt="wave" />
-    </div>
-    <div class="card-title">
+    <div class="cards">
+      <!--dynamic looping raks-->
+      <% posts.forEach((post) => { %>
+      <div class="card">
+        <div class="card__image-holder">
+          <img class="card__image img-fluid" src=<%= post.imagu %> alt="wave" />
+        </div>
+        <div class="card-title">
 
-      <span class="left"></span>
-      <span class="right"></span>
-      </a>
-      <h2>
-        <%= post.author %>
-        <small><%= post.title %></small>
-      </h2>
-    </div>
-    <div id="descBox">
-      <div class="card-description">
-        <%= post.body %>
-      </div>
-      <div class="">
-        <p class="demo"></p>
-        <div class="readmore">
-          <a class="btn">Contact</a>
+          <span class="left"></span>
+          <span class="right"></span>
+          </a>
+          <h2>
+            <%= post.author %>
+            <small><%= post.title %></small>
+          </h2>
+        </div>
+        <div id="descBox">
+          <div class="card-description">
+            <%= post.body %>
+          </div>
+          <div class="">
+            <p class="demo"></p>
+            <div class="readmore">
+              <a class="btn">Contact</a>
+            </div>
+          </div>
         </div>
       </div>
+
+      <% }) %>
+
     </div>
-  </div>
 
-<% }) %>
-
-</div>
-
-<!--
+    <!--
 
     <div class="cards">
 
@@ -231,7 +227,7 @@
       </div>
 
 -->
-    </div>
+  </div>
   </div>
 
 </body>
