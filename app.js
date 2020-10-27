@@ -51,10 +51,11 @@ app.post('/login', function (req, res) {
 	var password = req.body.password;
 	if (email && password) {
 		
-			if (dbAcc.checkLogin(email,password,db)==true) {
+			if (dbAcc.checkLogin(email,password,db)) {
+				
 				req.session.loggedin = true;
 				req.session.email = email;
-				req.session.college = dbAcc.retCollege(email,db);
+				
 				res.redirect('/dashboard');
 			} else {
 				res.send('Incorrect Username and/or Password!');
@@ -76,20 +77,35 @@ app.post('/login', function (req, res) {
 app.get('/dashboard', function (req, res) {
 
 	if (req.session.loggedin) {
-		console.log('logged in user ='+req.session.college);
+		console.log('logged in user ='+req.session.email);
+		
+		
 		res.render('dashboard');
 	} else {
 		res.send('Please login to view this page!');
 	}
 	res.end();
 });
-app.get('/shopping', function (req, res) {
 
-	// ejs render automatically looks in the views folder
-	res.render('shopping');
+app.get('/shopping', async function(req, res) {
+
+	try{
+		let items = await db.collection('buyAndSell').doc('Amrita').collection('products').get();
+		let buys=[];
+		items.forEach(item => {
+			buys.push(item.data());
+		});
+		console.log(buys);
+		res.render('shopping', {buys:buys});
+	 }catch{
+
+        res.send('Some error');
+	 }
 });
 app.get('/forum', function (req, res) {
-
+	
+	
+	
 	// ejs render automatically looks in the views folder
 	res.render('forum');
 });
@@ -127,10 +143,42 @@ app.post('/delete', function (req, res) {
 });
 
 
-app.get('/lostAndFound', function (req, res) {
+app.get('/lostAndFound', async function (req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('lostAndFoundPage');
+     try{
+		let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
+		let posts=[];
+		items.forEach(item => {
+			posts.push(item.data());
+		});
+		console.log(posts);
+		res.render('lostAndFoundPage', {posts:posts});
+	 }catch{
+
+        res.send('Some error');
+	 }
+	
+});
+app.post('/lostFound',function(req, res)
+{
+ var author=req.body.item_name;
+ var title=req.body.item_place;
+ var body=req.body.item_desc;
+ var upload=req.body.upload;
+ dbAcc.addLostFound(author,title,body,upload,db).then(()=>console.log("inserted  to db"));
+
+
+});
+
+app.post('/delLostAndFound',function(req, res)
+{
+
+	var item_id=req.body.item_id;
+	var college=req.body.college;
+	
+	dbAcc.deleteLostAndFound(item_id,college,db).then(()=>console.log("deleted from db"));
+
 });
 
 app.listen(port, function () {
