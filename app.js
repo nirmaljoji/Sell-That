@@ -1,257 +1,204 @@
 
+
 var dbAcc = require('./dbAccess.js');
 var express = require('express');
 var app = express();
-const bodyParser = require("body-parser") 
+const session = require('express-session');
+const bodyParser = require("body-parser")
 const { admin } = require('./firebaseConfig.js');
-	
 const db = admin.firestore();
 
-
-  
-//start of fake lost and found items
-
-
-const posts= [
+const comments= [
 	{
 	  id: 1,
-	  author: 'Scooty Keys',
-	  title: 'Found on 4th floor',
-	  body: 'I found them near the girls lockers outside the library.',
-	  imagu: "/img/lost/keys.jpg"
+	  author: 'Harshita Reddy',
+	  title: 'ay u take whatever',
+	  date: 'September 25, 2020',
+	  imagu: "/img/team/harshitaImage1.jpeg"
 	},
 	{
 	  id: 2,
-	  author: 'Earphones',
-	  title: 'Found near two wheeler parking',
-	  body: 'Inside the boys hostel compound.. found near a bench.',
-	  imagu: "/img/lost/earp.jpg"
+	  author: 'Sharon Joji',
+	  title: 'cloud ra i made my own server',
+	  date: 'September 25, 2020',
+	  imagu: "/img/team/jojo.jpg"
 	},
-	{
-	  id: 3,
-	  author: 'Wallet',
-	  title: 'Found on ATM road',
-	  body: 'No ID was in wallet so just sunmitted to admin block.',
-	  imagu: "/img/lost/wallet.jpg"
-	}
-  ]
-  //end of fake lost and found items
+{
+	id: 3,
+	author: 'Raks',
+	title: 'sandwich',
+	date: 'September 26, 2020',
+	imagu: "/img/team/raks.jpg"
+}
+]
 
-  //start of fake products for shopping
-const buys= [
-	{
-	  id: 1,
-	  author: 'Harshita',
-	  title: 'CASIO FX_991EX',
-	  body: 'It is 2 years old but acts as though it were brand new :)',
-	  imagu: '/img/material/calci.jpeg',
-	  ph: '9611402230',
-	  email: 'harshita@gmail.com'
-	},
-	{
-		id: 1,
-		author: 'Harshita',
-		title: 'CASIO FX_991EX',
-		body: 'It is 2 years old but acts as though it were brand new :)',
-		imagu: '/img/material/calci.jpeg',
-		ph: '9611402230',
-		email: 'harshita@gmail.com'
-	},
-	{
-		id: 1,
-		author: 'Harshita',
-		title: 'CASIO FX_991EX',
-		body: 'It is 2 years old but acts as though it were brand new :)',
-		imagu: '/img/material/calci.jpeg',
-		ph: '9611402230',
-		email: 'harshita@gmail.com'
-	  }
-  ]
-//end of fake products for shopping
-
-app.use(bodyParser.urlencoded({ 
-    extended:true
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
 }));
 
-// set the port of our application
-// process.env.PORT lets the port be set by Heroku
-var port = process.env.PORT || 5000  ;
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
-app.post('/question',function(req, res)
-{
- var college=req.body.college;
- var user_id=req.body.user_id;
- var date=req.body.date;
- var desc=req.body.desc;
- dbAcc.questionAdd(college,user_id,date,desc,db).then(()=>console.log("inserted  to db"));
+var port = process.env.PORT || 5000;
 
-
-});
-
-app.post('/lostFound',function(req, res)
-{
- var firstname=req.body.firstname;
- var lastname=req.body.lastname;
- var details=req.body.details;
- var upload=req.body.upload;
- dbAcc.addLostFound(firstname,lastname,details,upload,db).then(()=>console.log("inserted  to db"));
-
-
-});
-
-app.post('/delLostAndFound',function(req, res)
-{
-
-	var item_id=req.body.item_id;
-	var college=req.body.college;
-	
-	dbAcc.deleteLostAndFound(item_id,college,db).then(()=>console.log("deleted from db"));
-
-});
-
-
-app.post('/answer',function(req, res)
-{
-
-	var college=req.body.college;
-	var user_id=req.body.user_id;
-	var ques_id=req.body.ques_id;
-	var ans_desc=req.body.ans_desc;
-	var date=req.body.date;
-	dbAcc.answerQues(college,user_id,ques_id,ans_desc,date,db).then(()=>console.log("inserted  to db"));
-
-});
-
-app.post('/EditAns',function(req, res)
-{
-
-	var ques_id=req.body.ques_id;
-	var desc=req.body.desc;
-	dbAcc.editAnswer(ques_id,desc,db).then(()=>console.log("inserted  to db"));
-
-});
-
-app.post('/delete',function(req, res)
-{
-
-	var ans_id=req.body.ans_id;
-	var college=req.body.college;
-	var ques_id=req.body.ques_id;
-	dbAcc.deleteAnswer(ans_id,college,ques_id,db).then(()=>console.log("deleted from db"));
-
-});
-
-// set the view engine to ejs
 app.set('view engine', 'ejs');
 
-// make express look in the public directory for assets (css/js/img)
 app.use(express.static(__dirname + '/public'));
 
-// set the home page route
-app.get('/', function(req, res) {
-
-	// ejs render automatically looks in the views folder
+app.get('/', function (req, res) {
+	sess = req.session;
+	if (sess.email) {
+		return res.redirect('/dashboard');
+	}
+	
 	res.render('index');
 
 });
 
-app.post('/register',function(req, res)
-{
- var fullName = req.body.fullName;
- var  regNo = req.body.regNo;
- var email= req.body.email;
- var password = req.body.password;
- var contactNo = req.body.contactNo;
- var college = req.body.college;
- dbAcc.registerUser(fullName,regNo,email,password,contactNo,college,db).then(()=>console.log("inserted to db"));
+
+// REGISTER//
+app.post('/register', function (req, res) {
+	var fullName = req.body.fullName;
+	var regNo = req.body.regNo;
+	var email = req.body.email;
+	var password = req.body.password;
+	var contactNo = req.body.contactNo;
+	var college = req.body.college;
+	dbAcc.registerUser(fullName, regNo, email, password, contactNo, college, db).then(() => console.log("inserted to db"));
 
 
-});
+});//END REGISTER//
 
-app.post('/login',function(req, res)
-{
- console.log(req.body.email);
+// LOGIN//
+app.post('/login', function (req, res) {
+	var email = req.body.email;
+	var password = req.body.password;
+	if (email && password) {
+		
+			if (dbAcc.checkLogin(email,password,db)) {
+				
+				req.session.loggedin = true;
+				req.session.email = email;
+				
+				res.redirect('/dashboard');
+			} else {
+				res.send('Incorrect Username and/or Password!');
+			}			
+			res.end();
+		
+	} else {
+		res.send('Please enter Username and Password!');
+		res.end();
+	}
 
- console.log(req.body.password);
-});
 
-
-app.get('/dashboard', function(req, res) {
-
-	// ejs render automatically looks in the views folder
-	res.render('dashboard');
-});
+});//END LOGIN//
 
 
 
-//LOST AND FOUND start
+//DASHBOARD//
+app.get('/dashboard', function (req, res) {
 
-//rendering all the lost products
-app.get('/lostAndFound', function(req, res) {
+	if (req.session.loggedin) {
+		console.log('logged in user ='+req.session.email);
+		
+		
+		res.render('dashboard');
+	} else {
+		res.send('Please login to view this page!');
+	}
+	res.end();
+});//END DASHBOARD//
 
-	// ejs render automatically looks in the views folder
-	res.render('lostAndFoundPage', {posts:posts});
-});
 
-app.get('/lostAndFound/:id', (req, res) => {
-	// find the post in the `posts` array
-	const post = posts.filter((post) => {
-	  return post.id == req.params.id
-	})[0]
+//SHOPPING//
+app.get('/shopping', async function(req, res) {
+
+	try{
+		let items = await db.collection('buyAndSell').doc('Amrita').collection('products').get();
+		let buys=[];
+		items.forEach(item => {
+			buys.push(item.data());
+		});
+		console.log(buys);
+		res.render('shopping', {buys:buys});
+	 }catch{
+
+        res.send('Some error');
+	 }
+});//END SHOPPING//
+
+
+//FORUM//
+app.get('/forum', function (req, res) {
 	
-	res.render('post', {
-	  author: post.author,
-	  title: post.title,
-	  body: post.body,
-	  imagu: post.imagu
-	})
-  })
+	res.render('forum');
+});
+app.post('/question', function (req, res) {
+	var college = req.body.college;
+	var user_id = req.body.user_id;
+	var date = req.body.date;
+	var desc = req.body.desc;
+	dbAcc.questionAdd(college, user_id, date, desc, db).then(() => console.log("inserted  to db"));
+});
+app.post('/answer', function (req, res) {
+	var college = req.body.college;
+	var user_id = req.body.user_id;
+	var ques_id = req.body.ques_id;
+	var ans_desc = req.body.ans_desc;
+	var date = req.body.date;
+	dbAcc.answerQues(college, user_id, ques_id, ans_desc, date, db).then(() => console.log("inserted  to db"));
+});
+app.post('/EditAns', function (req, res) {
+	var ques_id = req.body.ques_id;
+	var desc = req.body.desc;
+	dbAcc.editAnswer(ques_id, desc, db).then(() => console.log("inserted  to db"));
+});
+app.post('/delete', function (req, res) {
+	var ans_id = req.body.ans_id;
+	var college = req.body.college;
+	var ques_id = req.body.ques_id;
+	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("inserted  to db"));
+});//END FORUM//
 
-//LOST AND FOUND end
 
-
-//BUY AND SELL start
-//(am using same fake db for both buy and sell)
-//rendering all the products to buy
-app.get('/shopping', function(req, res) {
-	res.render('shopping', {buys: buys});
+//LOST AND FOUND//
+app.get('/lostAndFound', async function (req, res) {
+ try{
+		let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
+		let posts=[];
+		items.forEach(item => {
+			posts.push(item.data());
+		});
+		console.log(posts);
+		res.render('lostAndFoundPage', {posts:posts});
+	 }catch{
+        res.send('Some error');
+	 }	
 });
 
-app.get('/shopping/:id', (req, res) => {
-	const buy = buys.filter((buy) => {
-	  return buy.id == req.params.id
-	})[0]
-	
-	res.render('buy', {
-	  author: buy.author,
-	  title: buy.title,
-	  body: buy.body,
-	  imagu: buy.imagu,
-	  ph: buy.ph,
-	  email: buy.email
-	})
-  })
+app.post('/lostFound',function(req, res)
+{
+ var author=req.body.item_name;
+ var title=req.body.item_place;
+ var body=req.body.item_desc;
+ var upload=req.body.upload;
+ dbAcc.addLostFound(author,title,body,upload,db).then(()=>console.log("inserted  to db"));
+});
 
-//BUY AND SELL end
-
-//FORUM start
+app.post('/delLostAndFound',function(req, res)
+{
+	var item_id=req.body.item_id;
+	var college=req.body.college;
+	dbAcc.deleteLostAndFound(item_id,college,db).then(()=>console.log("deleted from db"));
+});//END LOST AND FOUND//
 
 
-app.get('/forum/:id', (req, res) => {
-	const trial = trials.filter((trial) => {
-	  return trial.id == req.params.id
-	})[0]
 
-	res.render('trial', {
-	  author: trial.author,
-	  title: trial.title,
-	  date: trial.date,
-	  imagu: trial.imagu,
-	  
-	})
-	})
-	//Forum end
-
-app.listen(port, function() {
+app.listen(port, function () {
 	console.log('Our app is running on http://localhost:' + port);
 });
