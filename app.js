@@ -7,29 +7,7 @@ const { admin } = require('./firebaseConfig.js');
 	
 const db = admin.firestore();
 
-const trials= [
-	{
-	  id: 1,
-	  author: 'Harshita Reddy',
-	  title: 'ay u take whatever',
-	  date: 'September 25, 2020',
-	  imagu: "/img/team/harshitaImage1.jpeg"
-	},
-	{
-	  id: 2,
-	  author: 'Sharon Joji',
-	  title: 'cloud ra i made my own server',
-	  date: 'September 25, 2020',
-	  imagu: "/img/team/jojo.jpg"
-	},
-{
-	id: 3,
-	author: 'Raks',
-	title: 'sandwich',
-	date: 'September 26, 2020',
-	imagu: "/img/team/raks.jpg"
-}
-]
+
   
 //start of fake lost and found items
 
@@ -204,11 +182,7 @@ app.get('/dashboard', function(req, res) {
 	res.render('dashboard');
 });
 
-app.get('/forum', function(req, res) {
 
-	// ejs render automatically looks in the views folder
-	res.render('forum');
-});
 
 //LOST AND FOUND start
 
@@ -261,11 +235,7 @@ app.get('/shopping/:id', (req, res) => {
 //BUY AND SELL end
 
 //FORUM start
-app.get('/forum', function(req, res) {
 
-	// ejs render automatically looks in the views folder
-	res.render('forum', {trials:trials});
-});
 
 app.get('/forum/:id', (req, res) => {
 	const trial = trials.filter((trial) => {
