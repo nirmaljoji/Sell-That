@@ -63,15 +63,15 @@
               Department.</h6>
             <br>
             <div class="formDiv">
-              <form action="">
+              <form action="/lostFound" method="POST">
                 <label for="fname">Item name</label>
-                <input type="text" id="fname" required name="firstname" placeholder="Item name">
+                <input type="text" id="fname" required name="item_name" placeholder="Item name">
 
                 <label for="lname">Found in</label>
-                <input type="text" id="lname" required name="lastname" placeholder="Location found">
+                <input type="text" id="lname" required name="item_place" placeholder="Location found">
 
                 <label for="details">Note</label>
-                <input type="text" id="details" name="details" placeholder="Add any relevant details..">
+                <input type="text" id="details" name="item_desc" placeholder="Add any relevant details..">
                 <hr>
                 <div>
                   <label for="upload" class="uploadButton">Upload image</label>
