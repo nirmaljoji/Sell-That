@@ -12,7 +12,7 @@ const trials= [
 	{
 	  id: 1,
 	  author: 'Harshita Reddy',
-	  title: 'ay u take whatever',
+	  title: 'ay u take whatever ',
 	  date: 'September 25, 2020',
 	  imagu: "/img/team/harshitaImage1.jpeg"
 	},
@@ -32,26 +32,27 @@ const trials= [
 }
 ]
 
-const comments= [
+const info= [
 	{
 	  id: 1,
-	  author: 'Harshita Reddy',
-	  title: 'ay u take whatever',
-	  date: 'September 25, 2020',
-	  imagu: "/img/team/harshitaImage1.jpeg"
+	  name: 'Harshita Reddy',
+	  regNo: 'BL.EN.U4CSE17043',
+		question: 'what can i eat at the canteen',
+		imagu: "/img/team/raks.jpg"
+	  
 	},
 	{
 	  id: 2,
-	  author: 'Sharon Joji',
-	  title: 'cloud ra i made my own server',
-	  date: 'September 25, 2020',
-	  imagu: "/img/team/jojo.jpg"
+	  name: 'Sharon Joji',
+	  regNo: 'BL.EN.U4CSE17091',
+		question: 'can we have a gaming team',
+		imagu: "/img/team/raks.jpg"
 	},
 {
 	id: 3,
-	author: 'Raks',
-	title: 'sandwich',
-	date: 'September 26, 2020',
+	name: 'Raks',
+	regNo: 'BL.EN.U4CSE17091',
+	question: 'can we have a gaming team!!!!?',
 	imagu: "/img/team/raks.jpg"
 }
 ]
@@ -158,11 +159,17 @@ app.get('/shopping', async function(req, res) {
 
 
 //FORUM//
+
+
+
 app.get('/forum', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('forum', {trials:trials});
+	res.render('forum', {trials:trials,info:info});
 });
+
+
+
 app.post('/question', function (req, res) {
 	var college = req.body.college;
 	var user_id = req.body.user_id;

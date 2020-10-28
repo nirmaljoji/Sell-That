@@ -258,7 +258,8 @@ textarea
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-    padding: 1.25rem
+    padding: 1.25rem;
+    align-self: center;
 }
 
 .card .card-title {
@@ -274,11 +275,11 @@ textarea
 
 .comment-widgets .comment-row {
     border-bottom: 1px solid transparent;
-    padding: 14px;
+    /* padding: 20px; */
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin: 10px 0
+    /* margin: 20px 10px */
 }
 
 .p-2 {
@@ -286,7 +287,8 @@ textarea
 }
 
 .comment-text {
-    padding-left: 15px
+    padding-left: 55px;
+    width: 100%;
 }
 
 .w-100 {
