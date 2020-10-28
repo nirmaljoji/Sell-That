@@ -32,30 +32,7 @@ const trials= [
 }
 ]
 
-const info= [
-	{
-	  id: 1,
-	  name: 'Harshita Reddy',
-	  regNo: 'BL.EN.U4CSE17043',
-		question: 'what can i eat at the canteen',
-		imagu: "/img/team/raks.jpg"
-	  
-	},
-	{
-	  id: 2,
-	  name: 'Sharon Joji',
-	  regNo: 'BL.EN.U4CSE17091',
-		question: 'can we have a gaming team',
-		imagu: "/img/team/raks.jpg"
-	},
-{
-	id: 3,
-	name: 'Raks',
-	regNo: 'BL.EN.U4CSE17091',
-	question: 'can we have a gaming team!!!!?',
-	imagu: "/img/team/raks.jpg"
-}
-]
+
 
 app.use(session({
 	secret: 'secret',
@@ -165,7 +142,7 @@ app.get('/shopping', async function(req, res) {
 app.get('/forum', function(req, res) {
 
 	// ejs render automatically looks in the views folder
-	res.render('forum', {trials:trials,info:info});
+	res.render('forum', {trials:trials});
 });
 
 
