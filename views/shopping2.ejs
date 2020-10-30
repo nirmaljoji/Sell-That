@@ -71,14 +71,14 @@
         </form>
       </div>
 
-      <button class=" btn float-right postBtn" id="postBtn2">Your items</button>
+      <button class=" btn float-right postBtn" id="postBtn2">Sell</button>
       <div id="postItemModal2" class=modal>
         <div class="modal-content">
           <span class="close">&#10005;</span>
           <div class="tab">
-            <button class="tablinks" onclick="openTab(event,'bstab1')">Post an item you found</button>
-            <button class="tablinks" onclick="openTab(event,'bstab2')">Previous items</button>
-            <button class="tablinks" onclick="openTab(event,'bstab3')">xxx</button>
+            <button class="tablinks" onclick="openTab(event,'bstab1')">Sell your item</button>
+            <button class="tablinks" onclick="openTab(event,'bstab2')">Your Ads</button>
+            <button class="tablinks" onclick="openTab(event,'bstab3')">Cart</button>
           </div>
           <div id="bstab1" class="tabcontent">
             <h4>Fill in the details</h4>
@@ -90,11 +90,15 @@
                 <label for="fname">Item name</label>
                 <input type="text" id="fname" required name="item_name" placeholder="Item name">
 
-                <label for="lname">Found in</label>
-                <input type="text" id="lname" required name="item_place" placeholder="Location found">
+                <label for="lname">Desc</label>
+                <input type="text" id="lname" required name="item_place" placeholder="About item">
 
-                <label for="details">Note</label>
-                <input type="text" id="details" name="item_desc" placeholder="Add any relevant details..">
+                <label for="details">Original Price</label>
+                <input type="number" id="details" name="item_desc" placeholder="">
+
+                <label for="details">Selling Price</label>
+                <input type="number" id="details" name="item_desc" placeholder="">
+
                 <hr>
                 <div>
                   <label for="upload" class="uploadButton">Upload image</label>
@@ -111,17 +115,29 @@
             <div class="prev">
               <h5>Debit Card</h5>
               <p>Found near reception</p>
+              <div style="width: 10%; text-align: center; height: 10%;">
               <form action="/delLostAndFound" method="POST">
-                <input type="submit" class="btn btn-primary del">&#10005;</input>
+                <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
               </form>
+              <button class="cont">Contact</button>
 
+            </div>
             </div>
 
 
           </div>
 
           <div id="bstab3" class="tabcontent">
-
+            <div class="prev">
+              <h5>Debit Card</h5>
+              <p>Found near reception</p>
+              <div style="width: 10%; text-align: center; border-radius: 100%;">
+              <form action="/delLostAndFound" method="POST">
+                <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
+              </form>
+              <button class="cont">Contact</button>
+            </div>
+            </div>
           </div>
 
         
@@ -153,9 +169,7 @@
 				</div>
 
 				<footer class="content">
-					<span class="qt-minus">-</span>
-					<span class="qt">2</span>
-					<span class="qt-plus">+</span>
+					<button class="cont">Contact</button>
 
 					<h2 class="full-price">
 						29.98€
@@ -167,74 +181,7 @@
 				</footer>
 			</article>
 
-			<article class="product">
-				<header>
-					
-						<img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/3.jpg" alt="">
-
-					
-				</header>
-
-				<div class="content">
-
-					<h1>Lorem ipsum dolor</h1>
-
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, numquam quis perspiciatis ea ad omnis provident laborum dolore in atque.
-
-					<div title="You have selected this product to be shipped in the color red." style="top: 0" class="color red"></div>
-					<div title="You have selected this product to be shipped sized Small."  style="top: 43px" class="type small">Small</div>
-				</div>
-
-				<footer class="content">
-					
-					<span class="qt-minus">-</span>
-					<span class="qt">1</span>
-					<span class="qt-plus">+</span>
-
-					<h2 class="full-price">
-						79.99€
-					</h2>
-
-					<h2 class="price">
-						79.99€
-					</h2>
-				</footer>
-			</article>
-
-			<article class="product">
-				<header>
-					
-						<img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/5.jpg" alt="">
-
-						
-					
-				</header>
-
-				<div class="content">
-
-					<h1>Lorem ipsum dolor ipsdu</h1>
-
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, numquam quis perspiciatis ea ad omnis provident laborum dolore in atque.
-
-					<div title="You have selected this product to be shipped in the color blue." style="top: 0" class="color blue"></div>
-					<div style="top: 43px" class="type small">Large</div>
-				</div>
-
-				<footer class="content">
-					
-					<span class="qt-minus">-</span>
-					<span class="qt">3</span>
-					<span class="qt-plus">+</span>
-
-					<h2 class="full-price">
-						53.99€
-					</h2>
-
-					<h2 class="price">
-						17.99€
-					</h2>
-				</footer>
-			</article>
+			
 
 		</section>
 

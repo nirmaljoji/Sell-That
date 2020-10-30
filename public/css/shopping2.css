@@ -401,3 +401,24 @@ input#search-bar:focus:-ms-placeholder {
     font-size: 20px;
     font-weight: 500;
  }
+
+ .cont{
+	 width: auto;
+	background: #53b5aa;
+	color: #fff;
+	font-size: 20px;
+	font-weight: 250;
+	line-height: 49px;
+	margin: 0;
+	padding: 0 30px;
+	border: #429188;
+	-webkit-transition: margin .15s linear;
+	-moz-transition: margin .15s linear;
+	-ms-transition: margin .15s linear;
+	-o-transition: margin .15s linear;
+	transition: margin .15s linear;
+ }
+
+ .cont:hover{
+	 background-color: #429188;
+ }

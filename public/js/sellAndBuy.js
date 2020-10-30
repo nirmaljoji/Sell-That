@@ -1,12 +1,10 @@
 //for lost and found MODAL
 
-alert('entering vars');
 document.getElementById("bstab1").style.display = "block";
 document.getElementById("bstab1").className += " active";
 var modal = document.getElementById("postItemModal2");
-alert('doing btn now');
-alert(btn);
-var btn = document.getElementById("postbtn2");
+var btn = document.getElementById("postBtn2");
+
 var span = document.getElementsByClassName("close")[0];
 
 btn.onclick = function () {
