@@ -82,7 +82,7 @@ app.get('/', function (req, res) {
 		return res.redirect('/dashboard');
 	}
 	
-	res.render('index');
+	res.render('shopping2');
 
 });
 
