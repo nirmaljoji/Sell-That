@@ -125,7 +125,7 @@ div.card {
 .postBtn2:hover {
   background-color:#5533ff; 
   opacity: 0.75;
-  color: rgb(136, 127, 127)36, 127, 127);
+  color: rgb(136, 127, 127,36, 127, 127);
 
 }
 
@@ -139,7 +139,7 @@ div.card {
   padding: 1% 2%;
   transition-duration: 0.4s;
   font-size: larger;
-  
+}
 
 /*
 modalpopup starts from here
