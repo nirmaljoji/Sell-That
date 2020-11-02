@@ -51,7 +51,7 @@ exports.deleteAnswer = deleteAnswer;
 
 function answerQues(college, user_id, ques_id, ans_desc, date) {
   return new Promise(resolve => {
-    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc();
+    const docRef = db.collection('Forum').doc('Amrita').collection('Questions').doc(ques_id).collection('Answers').doc();
     docRef.set({
       ques_id: ques_id,
       ans_desc: ans_desc,
