@@ -100,7 +100,7 @@
             <hr>
 
             <button type="button" class="btn1" data-toggle="modal" data-target="#form">Answer </button>
-            <form action="\answer" method="POST">
+            <form>
               <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -111,10 +111,9 @@
                       <div class="comment-box text-center">
                         <h4>Add a comment</h4>
 
-                        <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"
-                            rows="4" name="Answer"></textarea> </div>
-                        <div class="text-center mt-4"> <input type="submit" class="btn btn-success send px-5"
-                            value="POST"> </input> </div>
+                        <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"  
+                            rows="4" name="Answer" id="Answer"></textarea> </div>
+                        <div class="text-center mt-4"> <button class="delete-button" onclick="insertAnswer(<%= info._id %>,document.getElementById('Answer').value)">Submit</button> </div>
                       </div>
                     </div>
                   </div>

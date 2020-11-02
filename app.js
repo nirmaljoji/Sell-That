@@ -191,14 +191,14 @@ app.post('/question', function (req, res) {
 	var college = req.body.college;
 	var user_id = req.body.user_id;
 	var date = req.body.date;
-	var desc = req.body.desc;
+	var desc = req.body.Question;
 	dbAcc.questionAdd(college, user_id, date, desc, db).then(() => console.log("inserted  to db"));
 });
 app.post('/answer', function (req, res) {
 	var college = req.body.college;
 	var user_id = req.body.user_id;
-	var ques_id = req.body.ques_id;
-	var ans_desc = req.body.ans_desc;
+	var ques_id = req.body.id;
+	var ans_desc = req.body.answer;
 	var date = req.body.date;
 	dbAcc.answerQues(college, user_id, ques_id, ans_desc, date, db).then(() => console.log("inserted  to db"));
 });
