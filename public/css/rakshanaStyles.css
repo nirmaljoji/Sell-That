@@ -122,6 +122,25 @@ div.card {
   font-weight: 400;
 }
 
+.postBtn2:hover {
+  background-color:#5533ff; 
+  opacity: 0.75;
+  color: rgb(136, 127, 127,36, 127, 127);
+
+}
+
+#postbtn2{
+  color: black;
+  margin-top: 1%;
+  background-color: white;
+  width: 15%;
+  border: 3px solid #5533ff;
+  border-radius: 8%;
+  padding: 1% 2%;
+  transition-duration: 0.4s;
+  font-size: larger;
+}
+
 /*
 modalpopup starts from here
 */
