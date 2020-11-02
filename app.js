@@ -164,26 +164,33 @@ app.get('/shopping', async function(req, res) {
 
 app.get('/forum', async function (req, res) {
 	try{
-		 let questions = await db.collection('Forum').doc('Amrita').collection('Questions').get();
-		 let answers=[];
+		let finalAnswers=[]
+		 let questions = await db.collection('Forum').doc(req.session.college).collection('Questions').get();
+		 questions.forEach(question=>{
+			let answers = await db.collection('Forum').doc(req.session.college).collection('Questions').doc(question.id).collection('Answers').get();
+			let AnswersForQues =[];
+			answers.forEach(answer => {
+				AnswersForQues.push(answer.data());
+				
+			});
+			finalAnswers.push(AnswersForQues);
+
+			
+		 })
+	
 		 let posts=[];
 		 questions.forEach(questions => {
 			 posts.push(questions.data());
 			 
 		 });
 		 console.log(posts);
-		 res.render('forum', {info:posts});
+		 res.render('forum', {info:posts,finalAnswers:finalAnswers});
 		}catch{
 				 res.send('Some error');
 		}	
  });
 
-app.get('/forum', function(req, res) {
 
-	// ejs render automatically looks in the views folder
-	res.render('forum', {trials:trials,info:info});
-
-});
 
 
 
