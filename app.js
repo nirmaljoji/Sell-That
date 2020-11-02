@@ -147,6 +147,7 @@ app.get('/shopping', async function(req, res) {
 
 	try{
 		let items = await db.collection('buyAndSell').doc('Amrita').collection('products').get();
+		
 		let buys=[];
 		items.forEach(item => {
 			buys.push(item.data());
@@ -161,20 +162,42 @@ app.get('/shopping', async function(req, res) {
 
 
 //FORUM//
+async function  returnAns(id){
 
-app.get('/forum', async function (req, res) {
-	try{
-		let finalAnswers=[]
-		 let questions = await db.collection('Forum').doc(req.session.college).collection('Questions').get();
-		 questions.forEach(question=>{
-			let answers = await db.collection('Forum').doc(req.session.college).collection('Questions').doc(question.id).collection('Answers').get();
+	return new Promise(resolve => {
+	let answers =  db.collection('Forum').doc('Amrita').collection('Questions').doc(id).collection('Answers').get();
 			let AnswersForQues =[];
+
 			answers.forEach(answer => {
 				AnswersForQues.push(answer.data());
 				
 			});
-			finalAnswers.push(AnswersForQues);
 
+			return AnswersForQues;
+
+		});
+
+}
+
+
+app.get('/forum', async function (req, res) {
+	try{
+		console.log('i am here');
+		let finalAnswers=[]
+		 await db.collection('Forum').doc('Amrita').collection('Questions').get().then(value=>{
+
+
+			questions.forEach(question=>{
+				var q_ans =   returnAns(question.id)
+				console.log(q_ans)
+			   finalAnswers.push( q_ans);
+   
+
+
+
+		 });
+		 
+		
 			
 		 })
 	
@@ -185,8 +208,8 @@ app.get('/forum', async function (req, res) {
 		 });
 		 console.log(posts);
 		 res.render('forum', {info:posts,finalAnswers:finalAnswers});
-		}catch{
-				 res.send('Some error');
+		}catch(err){
+				 res.send("Error");
 		}	
  });
 
@@ -226,11 +249,12 @@ app.post('/delete', function (req, res) {
 app.get('/lostAndFound', async function (req, res) {
  try{
 		let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
+		
 		let posts=[];
 		items.forEach(item => {
 			posts.push(item.data());
 		});
-		console.log(posts);
+		//console.log(posts);
 		res.render('lostAndFoundPage', {posts:posts});
 	 }catch{
         res.send('Some error');

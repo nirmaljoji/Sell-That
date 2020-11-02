@@ -87,7 +87,7 @@
 
 
       <div class="cards">
-
+        <% var i = 0 %>
         <% info.forEach((info) => { %>
         <div class="card">
           <div class="card-body">
@@ -139,8 +139,8 @@
                   <div class="comment-widgets modal-body" style="width: 100%;">
                     <!--dynamic looping ice-->
                     <!-- Comment Row -->
-
-                    <% trials.forEach((trial) => { %>
+                    
+                    <% finalAnswers[i].forEach((trial) => { %>
                     <div class="d-flex flex-row comment-row">
                       <div class="p-2">
                         <img alt="user" width="70" class="rounded-circle" src=<%= trial.imagu %> />
@@ -167,6 +167,7 @@
 
 
                     <% }) %>
+                    <% ++i; %>
                   </div> <!-- Card -->
                 </div>
 
