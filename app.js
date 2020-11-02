@@ -162,6 +162,22 @@ app.get('/shopping', async function(req, res) {
 
 //FORUM//
 
+app.get('/forum', async function (req, res) {
+	try{
+		 let questions = await db.collection('Forum').doc('Amrita').collection('Questions').get();
+		 let answers=[];
+		 let posts=[];
+		 questions.forEach(questions => {
+			 posts.push(questions.data());
+			 
+		 });
+		 console.log(posts);
+		 res.render('forum', {info:posts});
+		}catch{
+				 res.send('Some error');
+		}	
+ });
+
 app.get('/forum', function(req, res) {
 
 	// ejs render automatically looks in the views folder
