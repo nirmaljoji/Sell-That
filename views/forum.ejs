@@ -87,16 +87,16 @@
 
 
       <div class="cards">
-        <% var i = 0 %>
-        <% info.forEach((info) => { %>
+        
+        <%  for(var i =0;i< info.length;i++){ %>
         <div class="card">
           <div class="card-body">
             <div class="p-2">
-              <img alt="user" width="70" class="rounded-circle" src=<%= info.imagu %> />
+              <img alt="user" width="70" class="rounded-circle" src=<%= info[i].imagu %> />
             </div>
-            <h4 class="card-title"><%= info.name %></h4>
-            <h6 class="card-subtitle mb-2 text-muted"><%= info.regNo %></h6>
-            <p class="card-text"><%= info.question %></p>
+            <h4 class="card-title"><%= info[i].name %></h4>
+            <h6 class="card-subtitle mb-2 text-muted"><%= info[i].regNo %></h6>
+            <p class="card-text"><%= info[i].question %></p>
             <hr>
 
             <button type="button" class="btn1" data-toggle="modal" data-target="#form">Answer </button>
@@ -113,42 +113,45 @@
 
                         <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"  
                             rows="4" name="Answer" id="Answer"></textarea> </div>
-                        <div class="text-center mt-4"> <button class="delete-button" onclick="insertAnswer(<%= info._id %>,document.getElementById('Answer').value)">Submit</button> </div>
+                        <div class="text-center mt-4"> <button class="delete-button" onclick="insertAnswer('fd',document.getElementById('Answer').value)">Submit</button> </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </form>
-            <form action="/showAns" method="POST">
-              <input type="submit" value="Show Answers" class="btn1" data-toggle="modal" data-target="#myModal1"></input>
-            </form>
+           
+              <button type="submit" class="btn1" data-toggle="modal" data-target="#myModal<%= i %>">Show Answer</button>
+            
+
             
 
 
 
             <!-- Modal -->
-            <div id="myModal1" class="modal fade" role="dialog">
+            <div id="myModal<%= i %>" class="modal fade" role="dialog">
               <div class="modal-dialog  ">
 
 
                 <div class="card2 modal-content modal-dialog-scrollable">
                   <div class="card-body modal-header text-center ">
-                    <h4 class="card-title">what elective should i choose?,, cloud or machine learning?.</h4>
+                    <h4 class="card-title"><%= info[i].question %></h4>
                   </div>
                   <div class="comment-widgets modal-body" style="width: 100%;">
                     <!--dynamic looping ice-->
                     <!-- Comment Row -->
                     
-                    <% finalAnswers[i].forEach((trial) => { %>
+                    
+                    <% for(let j =0;j <finalAnswers[i].length;j++ ){  %>
+                      
                     <div class="d-flex flex-row comment-row">
                       <div class="p-2">
-                        <img alt="user" width="70" class="rounded-circle" src=<%= trial.imagu %> />
+                        <img alt="user" width="70" class="rounded-circle" src=<%= finalAnswers[i][j].imagu %> />
                       </div>
                       <div class="comment-text w-150 ">
-                        <h4 class="font-medium"><%= trial.author %></h4> <span
-                          class="m-b-15 d-block"><%= trial.title %></span>
-                        <div class="comment-footer"> <span class="text-muted float-right"><%= trial.date %></span>
+                        <h4 class="font-medium"><%= finalAnswers[i][j].author %></h4> <span
+                          class="m-b-15 d-block"><%= finalAnswers[i][j].title %></span>
+                        <div class="comment-footer"> <span class="text-muted float-right"><%= finalAnswers[i][j].date %></span>
                           <div id="editing">
                             <button type="button" class="btn btn-success btn-sm" style="width:100%;"
                               onclick="Edit_ans()">Edit</button>
@@ -166,8 +169,8 @@
                     </div>
 
 
-                    <% }) %>
-                    <% ++i; %>
+                    <% } %>
+                   
                   </div> <!-- Card -->
                 </div>
 
@@ -187,7 +190,7 @@
         </div>
 
 
-        <% }) %>
+        <% } %>
       </div>
 
     </div>

@@ -8,53 +8,53 @@ const bodyParser = require("body-parser")
 const { admin } = require('./firebaseConfig.js');
 const db = admin.firestore();
 
-const info= [
+const info = [
 	{
-	  id: 1,
-	  name: 'Harshita Reddy',
-	  regNo: 'BL.EN.U4CSE17043',
+		id: 1,
+		name: 'Harshita Reddy',
+		regNo: 'BL.EN.U4CSE17043',
 		question: 'what can i eat at the canteen',
 		imagu: "/img/team/raks.jpg"
-	  
+
 	},
 	{
-	  id: 2,
-	  name: 'Sharon Joji',
-	  regNo: 'BL.EN.U4CSE17091',
+		id: 2,
+		name: 'Sharon Joji',
+		regNo: 'BL.EN.U4CSE17091',
 		question: 'can we have a gaming team',
 		imagu: "/img/team/raks.jpg"
 	},
-{
-	id: 3,
-	name: 'Raks',
-	regNo: 'BL.EN.U4CSE17091',
-	question: 'can we have a gaming team!!!!?',
-	imagu: "/img/team/raks.jpg"
-}
+	{
+		id: 3,
+		name: 'Raks',
+		regNo: 'BL.EN.U4CSE17091',
+		question: 'can we have a gaming team!!!!?',
+		imagu: "/img/team/raks.jpg"
+	}
 ]
 
-const trials= [
+const trials = [
 	{
-	  id: 1,
-	  author: 'Harshita Reddy',
-	  title: 'ay u take whatever ',
-	  date: 'September 25, 2020',
-	  imagu: "/img/team/harshitaImage1.jpeg"
+		id: 1,
+		author: 'Harshita Reddy',
+		title: 'ay u take whatever ',
+		date: 'September 25, 2020',
+		imagu: "/img/team/harshitaImage1.jpeg"
 	},
 	{
-	  id: 2,
-	  author: 'Sharon Joji',
-	  title: 'cloud ra i made my own server',
-	  date: 'September 25, 2020',
-	  imagu: "/img/team/jojo.jpg"
+		id: 2,
+		author: 'Sharon Joji',
+		title: 'cloud ra i made my own server',
+		date: 'September 25, 2020',
+		imagu: "/img/team/jojo.jpg"
 	},
-{
-	id: 3,
-	author: 'Raks',
-	title: 'sandwich',
-	date: 'September 26, 2020',
-	imagu: "/img/team/raks.jpg"
-}
+	{
+		id: 3,
+		author: 'Raks',
+		title: 'sandwich',
+		date: 'September 26, 2020',
+		imagu: "/img/team/raks.jpg"
+	}
 ]
 
 
@@ -81,7 +81,7 @@ app.get('/', function (req, res) {
 	if (sess.email) {
 		return res.redirect('/dashboard');
 	}
-	
+
 	res.render('shopping2');
 
 });
@@ -105,18 +105,18 @@ app.post('/login', function (req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
 	if (email && password) {
-		
-			if (dbAcc.checkLogin(email,password,db)) {
-				
-				req.session.loggedin = true;
-				req.session.email = email;
-				
-				res.redirect('/dashboard');
-			} else {
-				res.send('Incorrect Username and/or Password!');
-			}			
-			res.end();
-		
+
+		if (dbAcc.checkLogin(email, password, db)) {
+
+			req.session.loggedin = true;
+			req.session.email = email;
+
+			res.redirect('/dashboard');
+		} else {
+			res.send('Incorrect Username and/or Password!');
+		}
+		res.end();
+
 	} else {
 		res.send('Please enter Username and Password!');
 		res.end();
@@ -131,9 +131,9 @@ app.post('/login', function (req, res) {
 app.get('/dashboard', function (req, res) {
 
 	if (req.session.loggedin) {
-		console.log('logged in user ='+req.session.email);
-		
-		
+		console.log('logged in user =' + req.session.email);
+
+
 		res.render('dashboard');
 	} else {
 		res.send('Please login to view this page!');
@@ -143,75 +143,75 @@ app.get('/dashboard', function (req, res) {
 
 
 //SHOPPING//
-app.get('/shopping', async function(req, res) {
+app.get('/shopping', async function (req, res) {
 
-	try{
+	try {
 		let items = await db.collection('buyAndSell').doc('Amrita').collection('products').get();
-		
-		let buys=[];
+
+		let buys = [];
 		items.forEach(item => {
 			buys.push(item.data());
 		});
 		console.log(buys);
-		res.render('shopping', {buys:buys});
-	 }catch{
+		res.render('shopping', { buys: buys });
+	} catch {
 
-        res.send('Some error');
-	 }
+		res.send('Some error');
+	}
 });//END SHOPPING//
 
 
 //FORUM//
-async function  returnAns(id){
 
-	return new Promise(resolve => {
-	let answers =  db.collection('Forum').doc('Amrita').collection('Questions').doc(id).collection('Answers').get();
-			let AnswersForQues =[];
 
-			answers.forEach(answer => {
-				AnswersForQues.push(answer.data());
-				
-			});
 
-			return AnswersForQues;
-
-		});
-
-}
 
 
 app.get('/forum', async function (req, res) {
-	try{
-		console.log('i am here');
-		let finalAnswers=[]
-		 await db.collection('Forum').doc('Amrita').collection('Questions').get().then(value=>{
+	try {
+		let AnswersForQues;
+		let finalAnswers = []
+		let posts = [];
+		let doc_id=[];
 
 
-			questions.forEach(question=>{
-				var q_ans =   returnAns(question.id)
-				console.log(q_ans)
-			   finalAnswers.push( q_ans);
-   
+		let questionsRef = await db.collection('Forum').doc('Amrita').collection('Questions').get();
+		questionsRef.forEach(question => {
+			posts.push(question.data())
+			doc_id.push(question.id);
+		})
 
 
+		var answerPromises = [];
 
-		 });
-		 
-		
+
+		//console.log("Answer for ques ->"+AnswersForQues);
+		for (var i = 0; i < posts.length; i++) {
+			answerPromises.push(new Promise(async (resolve) => {
+
+
+				console.log('id-' + posts[i].doc_id);
+				let answers = await db.collection('Forum').doc('Amrita').collection('Questions').doc(posts[i].doc_id).collection('Answers').get();
+				AnswersForQues = [];
+				answers.forEach(answer => {
+					//console.log("pls so i can sleep"+answer.data().author);
+					AnswersForQues.push(answer.data());
+				})
+
+               resolve(AnswersForQues);
+
+			}))
+		}
+
+		Promise.all(answerPromises).then(result => {
 			
-		 })
-	
-		 let posts=[];
-		 questions.forEach(questions => {
-			 posts.push(questions.data());
-			 
-		 });
-		 console.log(posts);
-		 res.render('forum', {info:posts,finalAnswers:finalAnswers});
-		}catch(err){
-				 res.send("Error");
-		}	
- });
+			//console.log(posts);
+			res.render('forum', { info: posts, finalAnswers: result });
+		})
+	} catch (err) {
+		res.send("Error");
+	}
+});
 
 
 
@@ -247,34 +247,32 @@ app.post('/delete', function (req, res) {
 
 //LOST AND FOUND//
 app.get('/lostAndFound', async function (req, res) {
- try{
+	try {
 		let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
-		
-		let posts=[];
+
+		let posts = [];
 		items.forEach(item => {
 			posts.push(item.data());
 		});
 		//console.log(posts);
-		res.render('lostAndFoundPage', {posts:posts});
-	 }catch{
-        res.send('Some error');
-	 }	
+		res.render('lostAndFoundPage', { posts: posts });
+	} catch {
+		res.send('Some error');
+	}
 });
 
-app.post('/lostFound',function(req, res)
-{
- var author=req.body.item_name;
- var title=req.body.item_place;
- var body=req.body.item_desc;
- var upload=req.body.upload;
- dbAcc.addLostFound(author,title,body,upload,db).then(()=>console.log("inserted  to db"));
+app.post('/lostFound', function (req, res) {
+	var author = req.body.item_name;
+	var title = req.body.item_place;
+	var body = req.body.item_desc;
+	var upload = req.body.upload;
+	dbAcc.addLostFound(author, title, body, upload, db).then(() => console.log("inserted  to db"));
 });
 
-app.post('/delLostAndFound',function(req, res)
-{
-	var item_id=req.body.item_id;
-	var college=req.body.college;
-	dbAcc.deleteLostAndFound(item_id,college,db).then(()=>console.log("deleted from db"));
+app.post('/delLostAndFound', function (req, res) {
+	var item_id = req.body.item_id;
+	var college = req.body.college;
+	dbAcc.deleteLostAndFound(item_id, college, db).then(() => console.log("deleted from db"));
 });//END LOST AND FOUND//
 
 
