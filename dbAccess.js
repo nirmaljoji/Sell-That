@@ -20,11 +20,17 @@ exports.registerUser = registerUser;
 function addQuestion(college, user_id, date, ques_desc) {
   return new Promise(resolve => {
     const docRef = db.collection('Forum').doc(college).collection('Questions').doc();
+    
     docRef.set({
       ques_user_id: user_id,
       date: date,
       ques_desc: ques_desc
     })
+    const docRef2 = db.collection('users').doc(college).collection('users').doc(user_id).collection('questions').doc();
+    docRef2.set({
+      user_id : docRef.id,
+    })
+
 
   })
 }
@@ -51,7 +57,7 @@ exports.deleteAnswer = deleteAnswer;
 
 function answerQues(college, user_id, ques_id, ans_desc, date) {
   return new Promise(resolve => {
-    const docRef = db.collection('Forum').doc('Amrita').collection('Questions').doc(ques_id).collection('Answers').doc();
+    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc();
     docRef.set({
       ques_id: ques_id,
       ans_desc: ans_desc,
@@ -59,6 +65,10 @@ function answerQues(college, user_id, ques_id, ans_desc, date) {
       ans_user_id: user_id
 
 
+    })
+    const docRef2 = db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc();
+    docRef2.set({
+      ans_id : docRef.id,
     })
   })
 }
@@ -122,6 +132,7 @@ function addLostFound(author, title, body, upload, db) {
       item_pic: upload,
 
     });
+    
     resolve();
   });
 }
@@ -136,4 +147,3 @@ function deleteLostAndFound(item_id, college) {
   })
 }
 exports.deleteLostAndFound = deleteLostAndFound;
-
