@@ -32,6 +32,7 @@
           <li><a href="shopping">Buy/Sell</a></li>
           <li><a href="lostAndFound">Lost & Found</a></li>
           <li><a href="forum">Forum</a></li>
+          <li><a class="pp3" href="/dashboard"><img class="img-fluid pp2" src="/img/team/jojo.jpg" alt=""> </a></li>
         </ul>
 
         <!-- nav-toggler for mobile version only -->
@@ -62,15 +63,15 @@
               Department.</h6>
             <br>
             <div class="formDiv">
-              <form action="">
+              <form action="/lostFound" method="POST">
                 <label for="fname">Item name</label>
-                <input type="text" id="fname" required name="firstname" placeholder="Item name">
+                <input type="text" id="fname" required name="item_name" placeholder="Item name">
 
                 <label for="lname">Found in</label>
-                <input type="text" id="lname" required name="lastname" placeholder="Location found">
+                <input type="text" id="lname" required name="item_place" placeholder="Location found">
 
                 <label for="details">Note</label>
-                <input type="text" id="details" name="details" placeholder="Add any relevant details..">
+                <input type="text" id="details" name="item_desc" placeholder="Add any relevant details..">
                 <hr>
                 <div>
                   <label for="upload" class="uploadButton">Upload image</label>
@@ -87,33 +88,30 @@
             <div class="prev">
               <h5>Debit Card</h5>
               <p>Found near reception</p>
-
-              <button class="btn btn-primary del">&#10005;</button>
+              <div style="width: 5%; text-align: center;">
+              <form action="/delLostAndFound" method="POST">
+                <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
+              </form>
             </div>
-            <div class="prev">
-              <h5>Helmet</h5>
-              <p>Found in class</p>
-
-              <button class="btn btn-primary del">&#10005;</button>
             </div>
+
 
           </div>
 
-          <div id="tab2" class="tabcontent">
-            <p>prev</p>
-
-          </div>
+         
         </div>
       </div>
       <hr class="headLine">
     </div>
+  </div>
 
 
     <div class="cards">
-
+      <!--dynamic looping raks-->
+      <% posts.forEach((post) => { %>
       <div class="card">
         <div class="card__image-holder">
-          <img class="card__image img-fluid" src="/img/lost/keys.jpg" alt="wave" />
+          <img class="card__image img-fluid" src=<%= post.imagu %> alt="wave" />
         </div>
         <div class="card-title">
 
@@ -121,13 +119,13 @@
           <span class="right"></span>
           </a>
           <h2>
-            Scooty keys
-            <small>Found on 4th floor</small>
+            <%= post.author %>
+            <small><%= post.title %></small>
           </h2>
         </div>
         <div id="descBox">
           <div class="card-description">
-            I found them near the girls' lockers outside the library.
+            <%= post.body %>
           </div>
           <div class="">
             <p class="demo"></p>
@@ -138,62 +136,12 @@
         </div>
       </div>
 
-      <div class="card">
-        <div class="card__image-holder">
-          <img class="card__image img-fluid" src="/img/lost/earp.jpg" alt="wave" />
-        </div>
-        <div class="card-title">
-
-          <span class="left"></span>
-          <span class="right"></span>
-          </a>
-          <h2>
-            Earphones
-            <small>Found near two wheeler parking</small>
-          </h2>
-        </div>
-        <div id="descBox">
-          <div class="card-description">
-            Inside the boys' hostel compound.. found near a bench.
-          </div>
-          <div class="">
-            <p class="demo"></p>
-            <div class="readmore">
-              <a class="btn">Contact</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card__image-holder">
-          <img class="card__image img-fluid" src="/img/lost/wallet.jpg" alt="wave" />
-        </div>
-        <div class="card-title">
-
-          <span class="left"></span>
-          <span class="right"></span>
-          </a>
-          <h2>
-            Wallet
-            <small>Found on ATM road</small>
-          </h2>
-        </div>
-        <div id="descBox">
-          <div class="card-description">
-            No ID was in wallet so just sunmitted to admin block..
-          </div>
-          <div class="">
-            <p class="demo"></p>
-            <div class="readmore">
-              <a class="btn">Contact</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <% }) %>
 
     </div>
+
+    
+  </div>
   </div>
 
 </body>

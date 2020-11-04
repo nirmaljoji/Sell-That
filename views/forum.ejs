@@ -3,7 +3,7 @@
 <head>
   <link rel="stylesheet" href="/css/forum.css">
   <link rel="stylesheet" href="/css/index.css">
-  
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
@@ -27,6 +27,7 @@
         $(this).find('#textarea1').focus();
       });
     });
+
   </script>
 </head>
 
@@ -44,6 +45,7 @@
           <li><a href="shopping">Buy/Sell</a></li>
           <li><a href="lostAndFound">Lost & Found</a></li>
           <li><a href="forum">Forum</a></li>
+          <li><a class="pp3" href="/dashboard"><img class="img-fluid pp2" src="/img/team/jojo.jpg" alt=""> </a></li>
         </ul>
 
         <!-- nav-toggler for mobile version only -->
@@ -55,220 +57,150 @@
   </div>
 
   <main>
-<div class="every">
-  <div class="row" style="margin-top: 2% !important;">
-    <div class="content">
-      <button type="button" class="modal-button" data-toggle="modal" data-target="#myModal">ASK A QUESTION!</button>
-    </div>
+    <div class="every">
+      <div class="row" style="margin-top: 2% !important;">
+        <div class="content">
+          <button type="button" class="modal-button" data-toggle="modal" data-target="#myModal">ASK A QUESTION!</button>
+        </div>
 
 
-  </div>
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="card">
-        <div class="card-img"> <img class="img-fluid centerScreen" src="./img/avatars/ask.png"> </div>
-        <div class="card-title">
-          <p style="align-items: center;">Ask away!</p>
-        </div>
-        <div class="card-text">
-          <textarea id="textarea1" style="background-color: antiquewhite;" cols="57" rows="6"
-            placeholder="Type Here..."></textarea>
-        </div>
-        <input type="button" style="background-color:  rgb(29, 226, 226); position: relative;
+      </div>
+      <form action="/question" method="POST">
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <div class="card">
+              <div class="card-img"> <img class="img-fluid centerScreen" src="./img/avatars/ask.png"> </div>
+              <div class="card-title">
+                <p style="align-items: center;">Ask away!</p>
+              </div>
+              <div class="card-text">
+                <textarea id="textarea1" style="background-color: antiquewhite;" cols="57" rows="6"
+                  placeholder="Type Here..." name="Question"></textarea>
+              </div>
+              <input type="submit" style="background-color:  rgb(29, 226, 226); position: relative;
                     bottom: -20px;" class="btn" value="POST"></input>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="cards">
-
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Isha Saikumar</h4>
-        <h6 class="card-subtitle mb-2 text-muted">BL.EN.U4CSE17048</h6>
-        <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
-        <hr>
-        <button type="button" class="btn1" data-toggle="modal" data-target="#form">Answer </button>
-        <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="text-right cross"> </div>
-              <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
-                <div class="comment-box text-center">
-                  <h4>Add a comment</h4>
-
-                  <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"
-                      rows="4"></textarea> </div>
-                  <div class="text-center mt-4"> <button class="btn btn-success send px-5">POST <i
-                        class="fa fa-long-arrow-right ml-1"></i></button> </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-        <button class="btn1">Show Answer</button>
-        <hr>
+      </form>
 
-        <label>Share this</label>
-        <br>
-        <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
-        <a href="https://www.linkedin.com/home" class="fa fa-linkedin"></a>
-        <a href="#" class="fa fa-google"></a>
 
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Isha Saikumar</h4>
-        <h6 class="card-subtitle mb-2 text-muted">BL.EN.U4CSE17048</h6>
-        <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
-        <hr>
-        <button type="button" class="btn1" data-toggle="modal" data-target="#form">Answer </button>
-        <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="text-right cross"> </div>
-              <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
-                <div class="comment-box text-center">
-                  <h4>Add a comment</h4>
 
-                  <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"
-                      rows="4"></textarea> </div>
-                  <div class="text-center mt-4"> <button class="btn btn-success send px-5">POST <i
-                        class="fa fa-long-arrow-right ml-1"></i></button> </div>
+      <div class="cards">
+
+        <% info.forEach((info) => { %>
+        <div class="card">
+          <div class="card-body">
+            <div class="p-2">
+              <img alt="user" width="70" class="rounded-circle" src=<%= info.imagu %> />
+            </div>
+            <h4 class="card-title"><%= info.name %></h4>
+            <h6 class="card-subtitle mb-2 text-muted"><%= info.regNo %></h6>
+            <p class="card-text"><%= info.question %></p>
+            <hr>
+
+            <button type="button" class="btn1" data-toggle="modal" data-target="#form">Answer </button>
+            <form action="\answer" method="POST">
+              <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="text-right cross"> </div>
+                    <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100"
+                        width="100">
+                      <div class="comment-box text-center">
+                        <h4>Add a comment</h4>
+
+                        <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"
+                            rows="4" name="Answer"></textarea> </div>
+                        <div class="text-center mt-4"> <input type="submit" class="btn btn-success send px-5"
+                            value="POST"> </input> </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </form>
+            <form action="/showAns" method="POST">
+              <input type="submit" value="Show Answers" class="btn1" data-toggle="modal" data-target="#myModal1"></input>
+            </form>
+            
+
+
+
+            <!-- Modal -->
+            <div id="myModal1" class="modal fade" role="dialog">
+              <div class="modal-dialog  ">
+
+
+                <div class="card2 modal-content modal-dialog-scrollable">
+                  <div class="card-body modal-header text-center ">
+                    <h4 class="card-title">what elective should i choose?,, cloud or machine learning?.</h4>
+                  </div>
+                  <div class="comment-widgets modal-body" style="width: 100%;">
+                    <!--dynamic looping ice-->
+                    <!-- Comment Row -->
+
+                    <% trials.forEach((trial) => { %>
+                    <div class="d-flex flex-row comment-row">
+                      <div class="p-2">
+                        <img alt="user" width="70" class="rounded-circle" src=<%= trial.imagu %> />
+                      </div>
+                      <div class="comment-text w-150 ">
+                        <h4 class="font-medium"><%= trial.author %></h4> <span
+                          class="m-b-15 d-block"><%= trial.title %></span>
+                        <div class="comment-footer"> <span class="text-muted float-right"><%= trial.date %></span>
+                          <div id="editing">
+                            <button type="button" class="btn btn-success btn-sm" style="width:100%;"
+                              onclick="Edit_ans()">Edit</button>
+                          </div>
+
+
+                          <form action="/delete" method="POST">
+                            <input type="submit" class="btn btn-danger btn-sm" style="width:100%;"
+                              value="Delete"></input>
+                          </form>
+                          <hr>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <% }) %>
+                  </div> <!-- Card -->
+                </div>
+
+
+
+
+              </div>
             </div>
+            <hr>
+            <label>Share this</label>
+            <br>
+            <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+            <a href="https://www.linkedin.com/home" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-google"></a>
+
           </div>
         </div>
-        <button type="button" class="btn1" data-toggle="modal" data-target="#myModal1">Show Answers</button>
-
-  <!-- Modal -->
-  <div id="myModal1" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-scrollable ">
-      
-        
-          <div class="card2 modal-content">
-            <div class="card-body modal-header text-center">
-              <h4 class="card-title">what elective should i choose?,, cloud or machine learning?.</h4>
-            </div>
-            <div class="comment-widgets modal-body">
-              <!-- Comment Row -->
-              <div class="d-flex flex-row comment-row">
-                <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg"
-                    alt="user" width="50" class="rounded-circle"></div>
-                <div class="comment-text w-100">
-                  <h5 class="font-medium">Harshita Reddy</h5> <span class="m-b-15 d-block">I think you should go with
-                    Machine Learning , it is very interesting and easy to pick up </span>
-                  <div class="comment-footer"> <span class="text-muted float-right">September 25, 2020</span> <button
-                      type="button" class="btn btn-success btn-sm">Edit</button><button type="button"
-                      class="btn btn-danger btn-sm">Delete</button> </div>
-                </div>
-              </div>
-               <!-- Comment Row -->
-              <div class="d-flex flex-row comment-row">
-                <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583319/AAA/3.jpg"
-                    alt="user" width="50" class="rounded-circle"></div>
-                <div class="comment-text active w-100">
-                  <h5 class="font-medium">Rakshana J</h5> <span class="m-b-15 d-block">Maybe you could pick either of
-                    them now and do a course on your own that you didn't pick </span>
-                  <div class="comment-footer"> <span class="text-muted float-right">September 24, 2020</span><button
-                      type="button" class="btn btn-success btn-sm">Edit</button><button type="button"
-                      class="btn btn-danger btn-sm">Delete</button> </div>
-                </div>
-              </div> <!-- Comment Row -->
-              <div class="d-flex flex-row comment-row">
-                <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg"
-                    alt="user" width="50" class="rounded-circle"></div>
-                <div class="comment-text w-100">
-                  <h5 class="font-medium">Nirmal Sharon Joji</h5> <span class="m-b-15 d-block">Take cloud its the best,
-                    you can make your own CSgo servers </span>
-                  <div class="comment-footer"> <span class="text-muted float-right">September 24, 2020</span> <button
-                      type="button" class="btn btn-success btn-sm">Edit</button> <button type="button"
-                      class="btn btn-danger btn-sm">Delete</button> </div>
-                </div>
-              </div>
-            </div> <!-- Card -->
-          </div>
-        
-     
 
 
-    </div>
-  </div>
-        <hr>
-        <label>Share this</label>
-        <br>
-        <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
-        <a href="https://www.linkedin.com/home" class="fa fa-linkedin"></a>
-        <a href="#" class="fa fa-google"></a>
-
+        <% }) %>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Isha Saikumar</h4>
-        <h6 class="card-subtitle mb-2 text-muted">BL.EN.U4CSE17048</h6>
-        <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
-        <hr>
-        <input type="button" class="btn1" value="Answer">
-        <input type="button" class="btn1" value="Show Answers">
-        <hr>
-        <label>Share this</label>
-        <br>
-        <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
-        <a href="https://www.linkedin.com/home" class="fa fa-linkedin"></a>
-        <a href="#" class="fa fa-google"></a>
 
-      </div>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Isha Saikumar</h4>
-        <h6 class="card-subtitle mb-2 text-muted">BL.EN.U4CSE17048</h6>
-        <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
-        <hr>
-        <input type="button" class="btn1" value="Answer">
-        <input type="button" class="btn1" onclick="btnclicked()" value="Show Answers">
-        <script>
-          function btnclicked() {
-            document.location.href = "showans.ejs";
-          }
-        </script>
-        <hr>
-        <label>Share this</label>
-        <br>
-        <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
-        <a href="#" class="fa fa-linkedin"></a>
-        <a href="#" class="fa fa-google"></a>
+  </main>
+  <script>
+    function Edit_ans() {
 
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Isha Saikumar</h4>
-        <h6 class="card-subtitle mb-2 text-muted">BL.EN.U4CSE17048</h6>
-        <p class="card-text">what elective should i choose?,, cloud or machine learning?.</p>
-        <hr>
-        <input type="button" class="btn1" value="Answer">
-        <input type="button" class="btn1" value="Show Answers">
-        <hr>
-        <a href="#" class="card-link">Share this</a>
-        <br>
-        <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
-        <a href="#" class="fa fa-linkedin"></a>
-        <a href="#" class="fa fa-google"></a>
-
-      </div>
-    </div>
-  </div>
-
-</div>
-</main>
+      document.getElementById("editing").innerHTML = "<form action='/EditAns' method='POST'><textarea  style='width: 100%;' ></textarea><input type='submit' class='btn btn-success btn-sm' onclick='rev()' value='Confirm Edit'></input></form>";
+    }
+    function rev() {
+      document.getElementById("editing").innerHTML = "<button type='button' class='btn btn-success btn-sm'  onclick='Edit_ans()'>Edit</button>";
+    }
+  </script>
 </body>
 
 </html>

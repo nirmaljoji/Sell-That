@@ -51,34 +51,31 @@
   </div>
   <div class=row>
     <span class="col-md-2 col-sm-1 col-xs-1"></span>
+
     <div class="col-md-8 gradient-border content" id="box">
+
       <div class="row">
+        <% notifications.forEach((notification) => { %>
+
         <div class="col-md-3 col-sm-6 card-holder">
 
-          <section class="card3 card--01">
-            <h1 class="card__heading">Product Request</h1>
+          <section class="<%= notification.classname %>">
+            <h1 class="card__heading"><%= notification.title %></h1>
             <p class="card__text">
-              Isha has requested for your Calculator
+              <%= notification.person %> <%= notification.desc %>
             </p>
           </section>
+
           <span class="card-shadow card-shadow--01"></span>
-
         </div>
-        <div class="col-md-3 col-sm-6 card-holder">
+        <% }) %>
 
-          <section class="card3 card--02">
-            <h1 class="card__heading">LOST ITEM</h1>
-            <p class="card__text">
-              Scooty keys , found near amrita tree!
-            </p>
-          </section>
-          <span class="card-shadow card-shadow--02"></span>
-        </div>
       </div>
+
     </div>
+
     <span class="col-md-2 col-sm-1 col-xs-1"></span>
   </div>
-
   <div class="row" style="margin-bottom:10%">
     <span class="col-md-2 col-sm-1 col-xs-1"></span>
     <div class="col-md-3">
@@ -87,42 +84,26 @@
           <img src="/img/team/jojo.jpg" alt="Chyno Deluxe">
           <h1>Nirmal Sharon Joji</h1>
           <h2>Amrita School of Engineering</h2>
-          <a class="button"  target="_blank"> 0 Ads</a>
-          <a class="button"  target="_blank"> 0 Answers</a>
+          <a class="button" target="_blank"> 0 Ads</a>
+          <a class="button" target="_blank"> 0 Answers</a>
         </div>
       </div>
     </div>
+
     <div class="col-md-5">
       <table class="rwd-table">
-        
+        <% ads.forEach((ad) => { %>
         <tr>
-          <td data-th="Movie Title">Harshita </td>
-          <td data-th="Genre">Posted an Ad for</td>
-          <td data-th="Year">Calculator</td>
-          <td data-th="Gross">Rs500</td>
+          <td data-th="Movie Title"> <%= ad.person %> </td>
+          <td data-th="Genre">posted an Ad for</td>
+          <td data-th="Year"> <%= ad.desc %> </td>
+          <td data-th="Gross"> <%= ad.price %> </td>
         </tr>
-        <tr>
-          <td data-th="Movie Title">Rithwik</td>
-          <td data-th="Genre">found a lost item</td>
-          <td data-th="Year">Scooty Keys</td>
-          <td data-th="Gross">near Amrita Fountain</td>
-        </tr>
-        <tr>
-          <td data-th="Movie Title">Rithwik</td>
-          <td data-th="Genre">found a lost item</td>
-          <td data-th="Year">Credit Cards</td>
-          <td data-th="Gross">near 1st floor</td>
-        </tr>
-        <tr>
-          <td data-th="Movie Title">Isha </td>
-          <td data-th="Genre">Posted an Ad for</td>
-          <td data-th="Year">Football</td>
-          <td data-th="Gross">Rs200</td>
-        </tr>
+        <% }) %>
       </table>
     </div>
     <span class="col-md-2 col-sm-1 col-xs-1"></span>
-    
+
   </div>
 
 
