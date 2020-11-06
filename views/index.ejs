@@ -13,6 +13,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
     <link href='http://fonts.googleapis.com/css?family=Leckerli+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+    function validateEmail(emailField){
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (reg.test(emailField.value) == false) 
+        {
+            alert('Invalid Email Address');
+            return false;
+        }
+        return true;
+    }
+
+    function confirmPassword(pass1,pass2){
+        if (pass1.value!=pass2.value) 
+        {
+            alert('Passwords don\'t match');
+            alert(pass1.value);
+            alert(pass2.value);
+            return false;
+        }
+        return true;
+    }
+
+    function validatePhone(num){
+        var re = /^\d{10}$/;
+
+        if (re.test(num.value) == false) 
+        {
+            alert('Invalid Phone Number');
+            return false;
+        }
+        return true;
+    }
+    
+
+    </script>
 </head>
 
 
@@ -145,9 +182,9 @@
                                                 <div class="form loginBox">
                                                     <form method="POST" action="/login" accept-charset="UTF-8">
                                                         <input id="email" class="form-control" type="text"
-                                                            placeholder="Email" name="email" required>
+                                                            placeholder="Email" name="email" required onblur="validateEmail(this);">
                                                         <input id="password" class="form-control" type="password"
-                                                            placeholder="Password" name="password">
+                                                            placeholder="Password" name="password" required>
                                                         <input class="btn btn-default btn-login" type="submit"
                                                             value="Login">
 
@@ -161,22 +198,22 @@
                                                     <form method="POST" html="{:multipart=>true}" data-remote="true"
                                                         action="/register" accept-charset="UTF-8">
                                                         <input id="fname" class="form-control" type="text"
-                                                            placeholder="Full Name" name="fullName">
+                                                            placeholder="Full Name" name="fullName" required>
                                                         <input id="regno" class="form-control" type="text"
                                                             placeholder="Registration No." name="regNo" required>
                                                         <input id="email" class="form-control" type="text"
-                                                            placeholder="Email" name="email" required>
+                                                            placeholder="Email" name="email" required onblur="validateEmail(this);">
 
 
                                                         <input id="password" class="form-control" type="password"
                                                             placeholder="Password" name="password" required>
                                                         <input id="password_confirmation" class="form-control"
                                                             type="password" placeholder="Repeat Password"
-                                                            name="password_confirmation" required>
-                                                        <input id="contact" class="form-control" type="number"
-                                                            placeholder="Contact No." name="contactNo" maxlength="10">
+                                                            name="password_confirmation" required  onblur="confirmPassword(this,password)">
+                                                        <input id="contact" class="form-control" type="text"
+                                                            placeholder="Contact No." name="contactNo" maxlength="10" required onblur="validatePhone(this);">
                                                         <br>
-                                                        <select id="college" name="college" class="form-control">
+                                                        <select id="college" name="college" class="form-control" required>
                                                             <option value="" selected disabled hidden>Choose your
                                                                 College
                                                             </option>
