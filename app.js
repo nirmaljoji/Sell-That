@@ -189,7 +189,6 @@ app.get('/forum', async function (req, res) {
 		for (var i = 0; i < posts.length; i++) {
 			answerPromises.push(new Promise(async (resolve) => {
 
-
 				console.log('id-' + posts[i].doc_id);
 				let answers = await db.collection('Forum').doc('Amrita').collection('Questions').doc(posts[i].doc_id).collection('Answers').get();
 				AnswersForQues = [];
@@ -218,12 +217,14 @@ app.get('/forum', async function (req, res) {
 
 
 app.post('/question', function (req, res) {
-	var college = req.body.college;
-	var user_id = req.body.user_id;
-	var date = req.body.date;
+	var college = req.session.college;
+	var user_id = req.session.email;
+	var date = "monday";
 	var desc = req.body.Question;
-	dbAcc.questionAdd(college, user_id, date, desc, db).then(() => console.log("inserted  to db"));
+	console.log("umm"+desc);
+	dbAcc.addQuestion(college, user_id, date, desc, db).then(() => console.log("inserted  to db"));
 });
+
 app.post('/answer', function (req, res) {
 	var college = req.body.college;
 	var user_id = req.body.user_id;

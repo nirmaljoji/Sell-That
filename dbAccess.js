@@ -17,20 +17,28 @@ function registerUser(fullName, regNo, email, password, contactNo, college, db) 
 
 exports.registerUser = registerUser;
 
-function addQuestion(college, user_id, date, ques_desc) {
-  return new Promise(resolve => {
-    const docRef = db.collection('Forum').doc(college).collection('Questions').doc();
-    
-    docRef.set({
-      ques_user_id: user_id,
-      date: date,
-      ques_desc: ques_desc
-    })
-    const docRef2 = db.collection('users').doc(college).collection('users').doc(user_id).collection('questions').doc();
-    docRef2.set({
-      user_id : docRef.id,
-    })
+function addQuestion(college, user_id, date, ques_desc, db) {
+  return new Promise(async (resolve) => {
+    let user_nameDocRef = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').get();
+    user_name = user_nameDocRef.data();
 
+    console.log(user_name);
+      const docRef =await db.collection('Forum').doc('Amrita').collection('Questions').doc();
+      
+      docRef.set({
+        doc_id:docRef.id ,
+        name: user_name.name,
+        ques_user_id: "sharonjoji99@gmail.com",
+        date: date,
+        ques_desc: ques_desc,
+      });
+      
+      const docRef2 = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('questions').doc().set({
+        user_id: docRef.id,
+      })
+      resolve();
+
+    
 
   })
 }
@@ -68,7 +76,7 @@ function answerQues(college, user_id, ques_id, ans_desc, date) {
     })
     const docRef2 = db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc();
     docRef2.set({
-      ans_id : docRef.id,
+      ans_id: docRef.id,
     })
   })
 }
@@ -132,7 +140,7 @@ function addLostFound(author, title, body, upload, db) {
       item_pic: upload,
 
     });
-    
+
     resolve();
   });
 }

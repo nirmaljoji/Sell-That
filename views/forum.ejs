@@ -65,7 +65,7 @@
 
 
       </div>
-      <form action="/question" method="POST">
+      <!-- <form action="/question" method="POST">
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
             <div class="card">
@@ -79,6 +79,26 @@
               </div>
               <input type="submit" style="background-color:  rgb(29, 226, 226); position: relative;
                     bottom: -20px;" class="btn" value="POST"></input>
+            </div>
+          </div>
+        </div>
+      </form> -->
+      <form action="/question" method="POST">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="text-right cross"> </div>
+              <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100"
+                  width="100">
+                <div class="comment-box text-center">
+                  <h4>Ask away</h4>
+
+                  <div class="comment-area" style="width: 100%;"> <textarea  class="form-control" placeholder="ASK HERE"  
+                      rows="4" cols="5" name="Question" id="Answer"></textarea> </div>
+                  <div class="text-center mt-4"><input type="submit" class="btn btn-success btn-sm" value="POST" ></input> </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -113,7 +133,7 @@
 
                         <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"  
                             rows="4" name="Answer" id="Answer"></textarea> </div>
-                        <div class="text-center mt-4"> <button class="delete-button" onclick="insertAnswer('fd',document.getElementById('Answer').value)">Submit</button> </div>
+                        <div class="text-center mt-4"> <input  type="submit" value="POST" class="btn btn-success btn-sm" onclick="insertAnswer(this.id,document.getElementById('Answer').value)"></input> </div>
                       </div>
                     </div>
                   </div>
