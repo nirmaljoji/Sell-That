@@ -133,10 +133,6 @@ function addLostFound(item_name, place, desc, upload, db) {
      await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').doc().set({
       item_id:docRef.id
     });
-<<<<<<< HEAD
-=======
-
->>>>>>> b059ee92cefed5b04557c12dfaa6ba92fc75032b
     resolve();
   });
 
