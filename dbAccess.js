@@ -21,6 +21,7 @@ function addQuestion(college, user_id, date, ques_desc, db) {
   return new Promise(async (resolve) => {
     let user_nameDocRef = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').get();
     user_name = user_nameDocRef.data();
+    
 
     console.log(user_name);
       const docRef =await db.collection('Forum').doc('Amrita').collection('Questions').doc();
@@ -28,9 +29,10 @@ function addQuestion(college, user_id, date, ques_desc, db) {
       docRef.set({
         doc_id:docRef.id ,
         name: user_name.name,
+        regNo:user_name.regNo,
         ques_user_id: "sharonjoji99@gmail.com",
         date: date,
-        ques_desc: ques_desc,
+        question: ques_desc,
       });
       
       const docRef2 = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('questions').doc().set({
@@ -55,24 +57,29 @@ function editAnswer(ques_id, desc) {
 }
 exports.editAnswer = editAnswer;
 
-function deleteAnswer(ans_id, college, ques_id) {
-  return new Promise(resolve => {
-    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc(ans_id);
-    docRef.delet();
+function deleteAnswer(ans_id, college, ques_id,db) {
+  return new Promise(async(resolve) => {
+    const docRef = await db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc(ans_id).delete();
+    //docRef.delete();
   })
 }
 exports.deleteAnswer = deleteAnswer;
 
 function answerQues(college, user_id, ques_id, ans_desc, date,db) {
   return new Promise(async (resolve) => {
-    const docRef =await  db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc().set({
-      ques_id: ques_id,
-      ans_desc: ans_desc,
+
+    let user_nameDocRef = await db.collection('users').doc(college).collection('users').doc(user_id).get();
+    user_name = user_nameDocRef.data();
+
+    const docRef =await  db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc();
+    await docRef.set({
+      ans_id:docRef.id,
+      author:user_name.name,
+      title: ans_desc,
       ans_date: date,
-      ans_user_id: user_id
-
-
+      user_id: user_id,
     })
+    console.log(docRef.id);
     await db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc().set({
       ans_id : docRef.id,
     })

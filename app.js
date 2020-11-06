@@ -232,20 +232,30 @@ app.get('/forum', async function (req, res) {
 
 
 app.post('/question', function (req, res) {
-	var college = req.session.college;
-	var user_id = req.session.email;
+	//var college = req.session.college;
+	var college='Amrita';
+	var user_id='sharonjoji99@gmail.com';
+	//var user_id = req.session.email;
+	
 	var date = "monday";
 	var desc = req.body.Question;
-	console.log("umm"+desc);
-	dbAcc.addQuestion(college, user_id, date, desc, db).then(() => console.log("inserted  to db"));
+	console.log("umm" + desc);
+	dbAcc.addQuestion(college, user_id, date, desc, db).then(() => {
+		console.log("inserted  to db");
+		return res.redirect('/forum');
+	});
 });
 
-app.post('/answer', function (req, res) {
-	var college = req.body.college;
-	var user_id = req.body.user_id;
-	var ques_id = req.body.id;
-	var ans_desc = req.body.answer;
-	var date = req.body.date;
+app.post('/answer/:id', function (req, res) {
+	var college='Amrita';
+
+	var user_id='sharonjoji99@gmail.com';
+	//var college = req.body.college;
+	//var user_id = req.body.user_id;
+	console.log("thisss ok"+req.params.id);
+	var ques_id = req.params.id;
+	var ans_desc = req.body.Answer;
+	var date = 'mondaaay';
 	dbAcc.answerQues(college, user_id, ques_id, ans_desc, date, db).then(() => {
 		console.log("inserted  to db");
 		res.redirect('/forum');
@@ -256,11 +266,16 @@ app.post('/EditAns', function (req, res) {
 	var desc = req.body.desc;
 	dbAcc.editAnswer(ques_id, desc, db).then(() => console.log("inserted  to db"));
 });
-app.post('/delete', function (req, res) {
-	var ans_id = req.body.ans_id;
-	var college = req.body.college;
-	var ques_id = req.body.ques_id;
-	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("inserted  to db"));
+app.post('/delete/:id/:id2', function (req, res) {
+	var college='Amrita';
+
+	var user_id='sharonjoji99@gmail.com';
+	var ans_id = req.params.id;
+	console.log("here ma"+ans_id);
+	//var college = req.body.college;
+	var ques_id = req.params.id2;
+	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("deleting  to db"));
+	res.redirect('/forum');
 });//END FORUM//
 
 
@@ -269,11 +284,11 @@ app.get('/lostAndFound', async function (req, res) {
 	try {
 		let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
 
-		let posts=[];
-		
-		let foundItems=await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').get();
-		let fPosts=[];
-		
+		let posts = [];
+
+		let foundItems = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').get();
+		let fPosts = [];
+
 		items.forEach(item => {
 			posts.push(item.data());
 		});
@@ -283,28 +298,26 @@ app.get('/lostAndFound', async function (req, res) {
 		});
 
 		console.log(fPosts);
-		res.render('lostAndFoundPage', {posts:posts,fPosts});
-	 }catch{
-        res.send('error modafuka');
-	 }	
+		res.render('lostAndFoundPage', { posts: posts, fPosts });
+	} catch {
+		res.send('error modafuka');
+	}
 });
 
-app.post('/lostFound',function(req, res)
-{
- var author=req.body.item_name;
- var title=req.body.item_place;
- var body=req.body.item_desc;
- var upload=req.body.upload;
- dbAcc.addLostFound(author,title,body,upload,db).then(()=>console.log("inserted  to db"));
- return res.redirect('/lostAndFound');
+app.post('/lostFound', function (req, res) {
+	var author = req.body.item_name;
+	var title = req.body.item_place;
+	var body = req.body.item_desc;
+	var upload = req.body.upload;
+	dbAcc.addLostFound(author, title, body, upload, db).then(() => console.log("inserted  to db"));
+	return res.redirect('/lostAndFound');
 });
 
-app.post('/delLostAndFound',function(req, res)
-{
-	var item_id=req.body.item_id;
-	var college=req.body.college;
-	console.log("deleting "+item_id);
-	dbAcc.deleteLostAndFound(item_id,college,db).then(()=>console.log("deleted from db"));
+app.post('/delLostAndFound', function (req, res) {
+	var item_id = req.body.item_id;
+	var college = req.body.college;
+	console.log("deleting " + item_id);
+	dbAcc.deleteLostAndFound(item_id, college, db).then(() => console.log("deleted from db"));
 
 });//END LOST AND FOUND//
 
