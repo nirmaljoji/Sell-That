@@ -63,10 +63,9 @@ function deleteAnswer(ans_id, college, ques_id) {
 }
 exports.deleteAnswer = deleteAnswer;
 
-function answerQues(college, user_id, ques_id, ans_desc, date) {
-  return new Promise(resolve => {
-    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc();
-    docRef.set({
+function answerQues(college, user_id, ques_id, ans_desc, date,db) {
+  return new Promise(async (resolve) => {
+    const docRef =await  db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc().set({
       ques_id: ques_id,
       ans_desc: ans_desc,
       ans_date: date,
@@ -74,10 +73,11 @@ function answerQues(college, user_id, ques_id, ans_desc, date) {
 
 
     })
-    const docRef2 = db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc();
-    docRef2.set({
-      ans_id: docRef.id,
+    await db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc().set({
+      ans_id : docRef.id,
     })
+
+    resolve();
   })
 }
 exports.answerQues = answerQues;
@@ -130,15 +130,19 @@ exports.checkLogin = checkLogin;
 
 
 
-function addLostFound(author, title, body, upload, db) {
-  return new Promise(resolve => {
-    const docRef = db.collection('lostAndFound').doc('Amrita').collection('items').doc();
+function addLostFound(item_name, place, desc, upload, db) {
+  return new Promise(async (resolve) => {
+    const docRef = await db.collection('lostAndFound').doc('Amrita').collection('items').doc();
     docRef.set({
-      author: author,
-      title: title,
-      body: body,
+      item_name: item_name,
+      place: place,
+      desc: desc,
       item_pic: upload,
+      item_id:docRef
+    });
 
+     await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').doc().set({
+      item_id:docRef.id
     });
 
     resolve();
@@ -148,7 +152,7 @@ function addLostFound(author, title, body, upload, db) {
 exports.addLostFound = addLostFound;
 
 
-function deleteLostAndFound(item_id, college) {
+function deleteLostAndFound(item_id, college,db) {
   return new Promise(resolve => {
     const docRef = db.collection('lostAndFound').doc(college).collection('items').doc(item_id);
     docRef.delete();

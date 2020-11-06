@@ -3,11 +3,18 @@ document.getElementById("tab1").style.display = "block";
 document.getElementById("tab1").className += " active";
 var modal = document.getElementById("postItemModal");
 var btn = document.getElementById("postbtn");
+var closeOnSubmit = document.getElementById("closeOnSubmit");
 
 var span = document.getElementsByClassName("close")[0];
 btn.onclick = function () {
   modal.style.display = "block";
 }
+
+closeOnSubmit.onclick=function() {
+  modal.style.display="none";
+  location.reload();
+}
+
 
 span.onclick = function () {
   modal.style.display = "none";
@@ -70,3 +77,5 @@ var x = setInterval(function () {
   }
 
 }, 1000);
+
+//add found details to db

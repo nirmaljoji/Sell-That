@@ -78,27 +78,30 @@
                   <input type="file" name="upload" id="upload" required>
                 </div>
                 <br>
-                <input type="submit" value="Submit" onclick="lostFoundForm()">
+                <input type="submit" id="closeOnSubmit" value="Submit" onclick="lostFoundForm()">
               </form>
             </div>
           </div>
 
           <div id="tab2" class="tabcontent">
 
-            <div class="prev">
-              <h5>Debit Card</h5>
-              <p>Found near reception</p>
-              <div style="width: 5%; text-align: center;">
-              <form action="/delLostAndFound" method="POST">
-                <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
-              </form>
+            <div>
+              <% fPosts.forEach((fPost) => { %>
+              <div class="prev">
+                <h5> <%= fPost.item_id %> </h5>
+                <p>Found near reception</p>
+                <div style="width: 5%; text-align: center;">
+                  <form action="/delLostAndFound" method="POST">
+                    <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
+                  </form>
+                </div>
+              </div>
+              <% }) %>
             </div>
-            </div>
-
 
           </div>
 
-         
+
         </div>
       </div>
       <hr class="headLine">
@@ -106,41 +109,41 @@
   </div>
 
 
-    <div class="cards">
-      <!--dynamic looping raks-->
-      <% posts.forEach((post) => { %>
-      <div class="card">
-        <div class="card__image-holder">
-          <img class="card__image img-fluid" src=<%= post.imagu %> alt="wave" />
-        </div>
-        <div class="card-title">
+  <div class="cards">
+    <!--dynamic looping raks-->
+    <% posts.forEach((post) => { %>
+    <div class="card">
+      <div class="card__image-holder">
+        <img class="card__image img-fluid" src=<%= post.imagu %> alt="wave" />
+      </div>
+      <div class="card-title">
 
-          <span class="left"></span>
-          <span class="right"></span>
-          </a>
-          <h2>
-            <%= post.author %>
-            <small><%= post.title %></small>
-          </h2>
+        <span class="left"></span>
+        <span class="right"></span>
+        </a>
+        <h2>
+          <%= post.item_name %>
+          <small><%= post.place %></small>
+        </h2>
+      </div>
+      <div id="descBox">
+        <div class="card-description">
+          <%= post.desc %>
         </div>
-        <div id="descBox">
-          <div class="card-description">
-            <%= post.body %>
-          </div>
-          <div class="">
-            <p class="demo"></p>
-            <div class="readmore">
-              <a class="btn">Contact</a>
-            </div>
+        <div class="">
+          <p class="demo"></p>
+          <div class="readmore">
+            <a class="btn">Contact</a>
           </div>
         </div>
       </div>
-
-      <% }) %>
-
     </div>
 
-    
+    <% }) %>
+
+  </div>
+
+
   </div>
   </div>
 
