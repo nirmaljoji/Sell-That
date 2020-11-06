@@ -220,13 +220,22 @@ app.get('/lostAndFound', async function (req, res) {
  try{
 		let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
 		let posts=[];
+		
+		let foundItems=await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').get();
+		let fPosts=[];
+		
 		items.forEach(item => {
 			posts.push(item.data());
 		});
-		console.log(posts);
-		res.render('lostAndFoundPage', {posts:posts});
+
+		foundItems.forEach(foundItem => {
+			fPosts.push(foundItem.data());
+		});
+
+		console.log(fPosts);
+		res.render('lostAndFoundPage', {posts:posts,fPosts});
 	 }catch{
-        res.send('Some error');
+        res.send('error modafuka');
 	 }	
 });
 
@@ -237,12 +246,14 @@ app.post('/lostFound',function(req, res)
  var body=req.body.item_desc;
  var upload=req.body.upload;
  dbAcc.addLostFound(author,title,body,upload,db).then(()=>console.log("inserted  to db"));
+ return res.redirect('/lostAndFound');
 });
 
 app.post('/delLostAndFound',function(req, res)
 {
 	var item_id=req.body.item_id;
 	var college=req.body.college;
+	console.log("deleting "+item_id);
 	dbAcc.deleteLostAndFound(item_id,college,db).then(()=>console.log("deleted from db"));
 });//END LOST AND FOUND//
 

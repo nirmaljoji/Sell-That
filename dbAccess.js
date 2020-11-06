@@ -112,16 +112,21 @@ exports.checkLogin = checkLogin;
 
 
 
-function addLostFound(author, title, body, upload, db) {
-  return new Promise(resolve => {
-    const docRef = db.collection('lostAndFound').doc('Amrita').collection('items').doc();
+function addLostFound(item_name, place, desc, upload, db) {
+  return new Promise(async (resolve) => {
+    const docRef = await db.collection('lostAndFound').doc('Amrita').collection('items').doc();
     docRef.set({
-      author: author,
-      title: title,
-      body: body,
+      item_name: item_name,
+      place: place,
+      desc: desc,
       item_pic: upload,
-
+      item_id:docRef
     });
+
+     await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').doc().set({
+      item_id:docRef.id
+    });
+
     resolve();
   });
 }
@@ -129,7 +134,7 @@ function addLostFound(author, title, body, upload, db) {
 exports.addLostFound = addLostFound;
 
 
-function deleteLostAndFound(item_id, college) {
+function deleteLostAndFound(item_id, college,db) {
   return new Promise(resolve => {
     const docRef = db.collection('lostAndFound').doc(college).collection('items').doc(item_id);
     docRef.delete();
