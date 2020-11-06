@@ -82,7 +82,7 @@ app.get('/', function (req, res) {
 		return res.redirect('/dashboard');
 	}
 
-	res.render('shopping2');
+	res.render('index');
 
 });
 
@@ -95,27 +95,42 @@ app.post('/register', function (req, res) {
 	var password = req.body.password;
 	var contactNo = req.body.contactNo;
 	var college = req.body.college;
-	dbAcc.registerUser(fullName, regNo, email, password, contactNo, college, db).then(() => console.log("inserted to db"));
+	dbAcc.registerUser(fullName, regNo, email, password, contactNo, college, db).then(() =>{
+	
+	console.log("inserted to db");
+	res.redirect('/dashboard');
+
+	});
 
 
 });//END REGISTER//
 
 // LOGIN//
-app.post('/login', function (req, res) {
+app.post('/login', function  (req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
 	if (email && password) {
 
 		if (dbAcc.checkLogin(email, password, db)) {
+			     try{
+					db.collection('users').doc(email).get().then(doc=>{
 
-			req.session.loggedin = true;
-			req.session.email = email;
+						req.session.loggedin = true;
+						req.session.email = email;
+						req.session.college= doc.data().college;
+						res.redirect('/dashboard');
+					});
 
-			res.redirect('/dashboard');
-		} else {
+				 }catch{
+					 res.send('Not able to fetch doc');
+					 
+				 }
+			  
+			}
+			else {
 			res.send('Incorrect Username and/or Password!');
 		}
-		res.end();
+		
 
 	} else {
 		res.send('Please enter Username and Password!');
@@ -132,7 +147,7 @@ app.get('/dashboard', function (req, res) {
 
 	if (req.session.loggedin) {
 		console.log('logged in user =' + req.session.email);
-
+        console.log('logged in user, college=' +req.session.college)
 
 		res.render('dashboard');
 	} else {
