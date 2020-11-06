@@ -223,17 +223,20 @@ app.get('/lostAndFound', async function (req, res) {
 		
 		let foundItems=await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').get();
 		let fPosts=[];
+		let fPostsDesc=[];
+		let fPostsPlace=[];
 		
 		items.forEach(item => {
 			posts.push(item.data());
 		});
 
-		foundItems.forEach(foundItem => {
-			fPosts.push(foundItem.data());
+		foundItems.forEach(async (foundItem) => {
+			let docRef = await db.collection('lostAndFound').doc('Amrita').collection('items').doc(foundItem.data().item_id).get();
+			fPosts.push(docRef.data());
 		});
 
 		console.log(fPosts);
-		res.render('lostAndFoundPage', {posts:posts,fPosts});
+		res.render('lostAndFoundPage', {posts:posts,fPosts,fPostsDesc,fPostsPlace});
 	 }catch{
         res.send('error modafuka');
 	 }	
