@@ -251,22 +251,34 @@ app.get('/lostAndFound', async function (req, res) {
 		let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
 		let posts=[];
 		
-		let foundItems=await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').get();
-		let fPosts=[];
-		let fPostsDesc=[];
-		let fPostsPlace=[];
+		let fitems=await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').get();
+		let foundItems = []
+		let fPostsPromises=[];
+	
 		
 		items.forEach(item => {
 			posts.push(item.data());
 		});
 
-		foundItems.forEach(async (foundItem) => {
-			let docRef = await db.collection('lostAndFound').doc('Amrita').collection('items').doc(foundItem.data().item_id).get();
-			fPosts.push(docRef.data());
+		fitems.forEach(item => {
+			foundItems.push(item.data());
 		});
 
-		console.log(fPosts);
-		res.render('lostAndFoundPage', {posts:posts,fPosts,fPostsDesc,fPostsPlace});
+		for(var i=0;i<foundItems.length;i++){
+			fPostsPromises.push(new Promise(async (resolve)=>{
+
+				
+				let item = await  db.collection('lostAndFound').doc('Amrita').collection('items').doc(foundItems[i].item_id).get();
+				let final_item = item.data();
+				resolve(final_item);
+			}))
+		}
+
+		Promise.all(fPostsPromises).then(result=>{
+			console.log(result[0].item_name);
+			res.render('lostAndFoundPage', {posts:posts,fPosts:result});
+		})
+
 	 }catch{
         res.send('error modafuka');
 	 }	
