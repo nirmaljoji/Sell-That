@@ -18,19 +18,16 @@ function registerUser(fullName, regNo, email, password, contactNo, college, db) 
 exports.registerUser = registerUser;
 
 function addQuestion(college, user_id, date, ques_desc) {
-  return new Promise(resolve => {
-    const docRef = db.collection('Forum').doc(college).collection('Questions').doc();
-    
-    docRef.set({
+  return new Promise(async (resolve) => {
+    const docRef = await db.collection('Forum').doc(college).collection('Questions').doc.set({
       ques_user_id: user_id,
       date: date,
       ques_desc: ques_desc
     })
-    const docRef2 = db.collection('users').doc(college).collection('users').doc(user_id).collection('questions').doc();
-    docRef2.set({
-      user_id : docRef.id,
+   await db.collection('users').doc(college).collection('users').doc(user_id).collection('questions').doc().set({
+      ques_id : docRef.id,
     })
-
+     resolve();
 
   })
 }
@@ -55,10 +52,9 @@ function deleteAnswer(ans_id, college, ques_id) {
 }
 exports.deleteAnswer = deleteAnswer;
 
-function answerQues(college, user_id, ques_id, ans_desc, date) {
-  return new Promise(resolve => {
-    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc();
-    docRef.set({
+function answerQues(college, user_id, ques_id, ans_desc, date,db) {
+  return new Promise(async (resolve) => {
+    const docRef =await  db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc().set({
       ques_id: ques_id,
       ans_desc: ans_desc,
       ans_date: date,
@@ -66,10 +62,11 @@ function answerQues(college, user_id, ques_id, ans_desc, date) {
 
 
     })
-    const docRef2 = db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc();
-    docRef2.set({
+    await db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc().set({
       ans_id : docRef.id,
     })
+
+    resolve();
   })
 }
 exports.answerQues = answerQues;
@@ -136,6 +133,10 @@ function addLostFound(item_name, place, desc, upload, db) {
      await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').doc().set({
       item_id:docRef.id
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> b059ee92cefed5b04557c12dfaa6ba92fc75032b
     resolve();
   });
 
