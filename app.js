@@ -95,10 +95,10 @@ app.post('/register', function (req, res) {
 	var password = req.body.password;
 	var contactNo = req.body.contactNo;
 	var college = req.body.college;
-	dbAcc.registerUser(fullName, regNo, email, password, contactNo, college, db).then(() =>{
-	
-	console.log("inserted to db");
-	res.redirect('/dashboard');
+	dbAcc.registerUser(fullName, regNo, email, password, contactNo, college, db).then(() => {
+
+		console.log("inserted to db");
+		res.redirect('/dashboard');
 
 	});
 
@@ -106,31 +106,31 @@ app.post('/register', function (req, res) {
 });//END REGISTER//
 
 // LOGIN//
-app.post('/login', function  (req, res) {
+app.post('/login', function (req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
 	if (email && password) {
 
 		if (dbAcc.checkLogin(email, password, db)) {
-			     try{
-					db.collection('users').doc(email).get().then(doc=>{
+			try {
+				db.collection('users').doc(email).get().then(doc => {
 
-						req.session.loggedin = true;
-						req.session.email = email;
-						req.session.college= doc.data().college;
-						res.redirect('/dashboard');
-					});
+					req.session.loggedin = true;
+					req.session.email = email;
+					req.session.college = doc.data().college;
+					res.redirect('/dashboard');
+				});
 
-				 }catch{
-					 res.send('Not able to fetch doc');
-					 
-				 }
-			  
+			} catch {
+				res.send('Not able to fetch doc');
+
 			}
-			else {
+
+		}
+		else {
 			res.send('Incorrect Username and/or Password!');
 		}
-		
+
 
 	} else {
 		res.send('Please enter Username and Password!');
@@ -147,7 +147,7 @@ app.get('/dashboard', function (req, res) {
 
 	if (req.session.loggedin) {
 		console.log('logged in user =' + req.session.email);
-        console.log('logged in user, college=' +req.session.college)
+		console.log('logged in user, college=' + req.session.college)
 
 		res.render('dashboard');
 	} else {
@@ -187,7 +187,7 @@ app.get('/forum', async function (req, res) {
 		let AnswersForQues;
 		let finalAnswers = []
 		let posts = [];
-		let doc_id=[];
+		let doc_id = [];
 
 
 		let questionsRef = await db.collection('Forum').doc('Amrita').collection('Questions').get();
@@ -213,13 +213,13 @@ app.get('/forum', async function (req, res) {
 					AnswersForQues.push(answer.data());
 				})
 
-               resolve(AnswersForQues);
+				resolve(AnswersForQues);
 
 			}))
 		}
 
 		Promise.all(answerPromises).then(result => {
-			
+
 			//console.log(posts);
 			res.render('forum', { info: posts, finalAnswers: result });
 		})
@@ -233,11 +233,16 @@ app.get('/forum', async function (req, res) {
 
 
 app.post('/question', function (req, res) {
-	var college = req.body.college;
-	var user_id = req.body.user_id;
-	var date = req.body.date;
+	console.log('Add question page');
+	var college = req.session.college;
+	var user_id = req.session.email;
+	var date = "monday";
 	var desc = req.body.Question;
-	dbAcc.questionAdd(college, user_id, date, desc, db).then(() => console.log("inserted  to db"));
+	dbAcc.questionAdd(college, user_id, date, desc, db).then(() => {
+		console.log("inserted  to db");
+		res.redirect('/forum');
+	});
+
 });
 app.post('/answer', function (req, res) {
 	var college = req.body.college;
@@ -245,7 +250,10 @@ app.post('/answer', function (req, res) {
 	var ques_id = req.body.id;
 	var ans_desc = req.body.answer;
 	var date = req.body.date;
-	dbAcc.answerQues(college, user_id, ques_id, ans_desc, date, db).then(() => console.log("inserted  to db"));
+	dbAcc.answerQues(college, user_id, ques_id, ans_desc, date, db).then(() => {
+		console.log("inserted  to db");
+		res.redirect('/forum');
+	});
 });
 app.post('/EditAns', function (req, res) {
 	var ques_id = req.body.ques_id;
