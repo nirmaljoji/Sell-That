@@ -44,7 +44,7 @@
 
   <div class="row">
     <div class="welcome-text content">
-      <h1 class="welcome-h1">Hi, Nirmal Joji</h1>
+      <h1 class="welcome-h1">Hi, <%= user_name %></h1>
     </div>
 
 
@@ -55,14 +55,14 @@
     <div class="col-md-8 gradient-border content" id="box">
 
       <div class="row">
-        <% notifications.forEach((notification) => { %>
+        <% requests.forEach((request) => { %>
 
         <div class="col-md-3 col-sm-6 card-holder">
 
-          <section class="<%= notification.classname %>">
-            <h1 class="card__heading"><%= notification.title %></h1>
+          <section class="cards card3">
+            <h1 class="card__heading">Product alert</h1>
             <p class="card__text">
-              <%= notification.person %> <%= notification.desc %>
+              <%= request.name %> has requested for <%= request.req_product %>
             </p>
           </section>
 
@@ -82,10 +82,10 @@
       <div class="container2">
         <div class="card2 content">
           <img src="/img/team/jojo.jpg" alt="Chyno Deluxe">
-          <h1>Nirmal Sharon Joji</h1>
-          <h2>Amrita School of Engineering</h2>
-          <a class="button" target="_blank"> 0 Ads</a>
-          <a class="button" target="_blank"> 0 Answers</a>
+          <h1><%= user_name %></h1>
+          <h2><%= user_college %></h2>
+          <a class="button" target="_blank"> <%= productCount %> Ads</a>
+          <a class="button" target="_blank"> <%= answersCount %> Answers</a>
         </div>
       </div>
     </div>
@@ -94,10 +94,10 @@
       <table class="rwd-table">
         <% ads.forEach((ad) => { %>
         <tr>
-          <td data-th="Movie Title"> <%= ad.person %> </td>
-          <td data-th="Genre">posted an Ad for</td>
-          <td data-th="Year"> <%= ad.desc %> </td>
-          <td data-th="Gross"> <%= ad.price %> </td>
+          <td data-th="Movie Title"> <%= ad.name %> </td>
+          <td data-th="Genre"><%= ad.notiType %></td>
+          <td data-th="Year"> <%= ad.product_name %> </td>
+          <td data-th="Gross"> <%= ad.info_noti %> </td>
         </tr>
         <% }) %>
       </table>

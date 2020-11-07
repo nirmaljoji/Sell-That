@@ -90,10 +90,10 @@ exports.retCollege = retCollege;
 
 
 
-async function checkLogin(email, password, db) {
+async function checkLogin(email, password, college ,db) {
 
   try {
-    const docRef = db.collection('users').doc(email);
+    const docRef = db.collection('users').doc(college).collection('users').doc(email);
     const doc = await docRef.get();
     if (!doc.exists) {
       console.log('No matching documents.');
