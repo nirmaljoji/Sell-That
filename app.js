@@ -111,9 +111,9 @@ app.post('/login', function (req, res) {
 	var password = req.body.password;
 	if (email && password) {
 
-		if (dbAcc.checkLogin(email, password, db)) {
+		if (dbAcc.checkLogin(email, password,'Amrita' ,db)) {
 			try {
-				db.collection('users').doc(email).get().then(doc => {
+				db.collection('users').doc('Amrita').collection('users').doc(email).get().then(doc => {
 
 					req.session.loggedin = true;
 					req.session.email = email;
@@ -143,13 +143,34 @@ app.post('/login', function (req, res) {
 
 
 //DASHBOARD//
-app.get('/dashboard', function (req, res) {
+app.get('/dashboard',  async function (req, res) {
 
 	if (req.session.loggedin) {
 		console.log('logged in user =' + req.session.email);
-		console.log('logged in user, college=' + req.session.college)
+		console.log('logged in user, college=' + req.session.college);
+		let user_nameDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).get();
+		let user_name =await user_nameDoc_ref.data().name;
+		let requestsDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_requests').get();
+		let requests = [];
+		requestsDoc_ref.forEach(item=>{
+			requests.push(item.data());
+		})
+		console.log('dashboard-'+requests[0].req_name);
+		productCountDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_ads').get();
+		var productCount =  productCountDoc_ref.size;
+		answersCountDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('answers').get();
+		var answersCount =  answersCountDoc_ref.size;
 
-		res.render('dashboard');
+		let notificationsDoc_ref = await db.collection('notifications').doc(req.session.college).collection('notifications').get();
+		let notifications = [];
+		notificationsDoc_ref.forEach(item=>{
+			notifications.push(item.data());
+		})
+
+
+
+
+		res.render('dashboard',{  user_name: user_name,requests:requests,productCount:productCount,answersCount:answersCount,user_college:req.session.college,ads:notifications});
 	} else {
 		res.send('Please login to view this page!');
 	}
@@ -168,12 +189,13 @@ app.get('/shopping', async function (req, res) {
 			buys.push(item.data());
 		});
 		console.log(buys);
-		res.render('shopping', { buys: buys });
+		res.render('shopping2', { buys: buys });
 	} catch {
 
 		res.send('Some error');
 	}
 });//END SHOPPING//
+ 
 
 
 //FORUM//
