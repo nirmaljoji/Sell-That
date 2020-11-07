@@ -218,9 +218,9 @@ app.get('/forum', async function (req, res) {
 		}
 
 		Promise.all(answerPromises).then(result => {
-
+        var user = req.session.email;
 			//console.log(posts);
-			res.render('forum', { info: posts, finalAnswers: result });
+			res.render('forum', { info: posts, finalAnswers: result ,cur_user:user});
 		})
 	} catch (err) {
 		res.send("Error");
@@ -272,10 +272,18 @@ app.post('/delete/:id/:id2', function (req, res) {
 	var user_id='sharonjoji99@gmail.com';
 	var ans_id = req.params.id;
 	console.log("here ma"+ans_id);
+
 	//var college = req.body.college;
 	var ques_id = req.params.id2;
-	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("deleting  to db"));
+	var current=req.session.id;
+
+
+	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("deleting from db"));
 	res.redirect('/forum');
+
+	//res.send("You cannot delete");
+
+	
 });//END FORUM//
 
 

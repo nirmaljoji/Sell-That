@@ -172,7 +172,9 @@
                       <div class="comment-text w-150 ">
                         <h4 class="font-medium"><%= finalAnswers[i][j].author %></h4> <span
                           class="m-b-15 d-block"><%= finalAnswers[i][j].title %></span>
-                        <div class="comment-footer"> <span class="text-muted float-right"><%= finalAnswers[i][j].date %></span>
+                        <div class="comment-footer"> <span class="text-muted float-right"><%= finalAnswers[i][j].ans_date %></span>
+                          
+                         <% if(cur_user == info[i].user_id){ %>
                           <div id="editing">
                             <button type="button" class="btn btn-success btn-sm" style="width:100%;"
                               onclick="Edit_ans()">Edit</button>
@@ -183,6 +185,11 @@
                             <input type="submit" class="btn btn-danger btn-sm" style="width:100%;"
                               value="Delete"></input>
                           </form>
+                        <%}%>
+
+
+
+
                           <hr>
 
                         </div>
