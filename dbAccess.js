@@ -108,10 +108,10 @@ exports.retCollege = retCollege;
 
 
 
-async function checkLogin(email, password, db) {
+async function checkLogin(email, password, college ,db) {
 
   try {
-    const docRef = db.collection('users').doc(email);
+    const docRef = db.collection('users').doc(college).collection('users').doc(email);
     const doc = await docRef.get();
     if (!doc.exists) {
       console.log('No matching documents.');
@@ -135,6 +135,42 @@ async function checkLogin(email, password, db) {
 }
 exports.checkLogin = checkLogin;
 
+function addNewProduct(item_name,item_desc,original_price,selling_price,seller_id,college,db) {
+  return new Promise(async (resolve) => {
+    const docRef = await db.collection('buyAndSell').doc('Amrita').collection('products').doc();
+    docRef.set({
+      item_name: item_name,
+      item_desc: item_desc,
+      original_price: original_price,
+      selling_price: selling_price,
+      seller_id: seller_id,
+      item_id: docRef.id
+      //add seller_id here pls
+    });
+
+     await db.collection('users').doc(college).collection('users').doc(seller_id).collection('product_ads').doc().set({
+      item_id:docRef.id
+    });
+    resolve();
+  });
+
+}
+
+exports.addNewProduct = addNewProduct;
+
+
+function addItemToCart(item_id, buyer, db) {
+  return new Promise(async (resolve) => {
+    const docRef = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('item_cart').doc();
+    docRef.set({
+      item_id: item_id,
+      buyer: buyer
+    });
+    resolve();
+  });
+}
+
+exports.addItemToCart = addItemToCart;
 
 
 function addLostFound(item_name, place, desc, upload, db) {
@@ -145,15 +181,15 @@ function addLostFound(item_name, place, desc, upload, db) {
       place: place,
       desc: desc,
       item_pic: upload,
-      item_id:docRef
+      item_id:docRef.id
     });
 
      await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').doc().set({
       item_id:docRef.id
     });
-
     resolve();
   });
+
 }
 
 exports.addLostFound = addLostFound;
@@ -166,4 +202,3 @@ function deleteLostAndFound(item_id, college,db) {
   })
 }
 exports.deleteLostAndFound = deleteLostAndFound;
-
