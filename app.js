@@ -7,10 +7,10 @@ const bodyParser = require("body-parser")
 const { admin } = require('./firebaseConfig.js');
 const db = admin.firestore();
 
-//storage
-var storage= admin.storage();
-var storageRef = storage.ref();
-var imagesRef = storageRef.child('images');
+// //storage
+// var storage= admin.storage();
+// var storageRef = storage.ref();
+// var imagesRef = storageRef.child('images');
 
 
 
@@ -293,7 +293,8 @@ app.get('/forum', async function (req, res) {
 		}
 
 		Promise.all(answerPromises).then(result => {
-        var user = req.session.email;
+				var user = req.session.email;
+				//console.log("number 1 :"+user+"\n numer 2: "+result[2][0].user_id );
 			//console.log(posts);
 			res.render('forum', { info: posts, finalAnswers: result ,cur_user:user});
 		})
