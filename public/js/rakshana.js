@@ -5,6 +5,7 @@ var modal = document.getElementById("postItemModal");
 var btn = document.getElementById("postbtn");
 var closeOnSubmit = document.getElementById("closeOnSubmit");
 
+
 var span = document.getElementsByClassName("close")[0];
 btn.onclick = function () {
   modal.style.display = "block";

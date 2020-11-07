@@ -1,5 +1,4 @@
 
-
 var dbAcc = require('./dbAccess.js');
 var express = require('express');
 var app = express();
@@ -7,6 +6,14 @@ const session = require('express-session');
 const bodyParser = require("body-parser")
 const { admin } = require('./firebaseConfig.js');
 const db = admin.firestore();
+
+//storage
+var storage= admin.storage();
+var storageRef = storage.ref();
+var imagesRef = storageRef.child('images');
+
+
+
 
 const info = [
 	{
