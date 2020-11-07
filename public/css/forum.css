@@ -260,6 +260,7 @@ textarea
     flex: 1 1 auto;
     padding: 1.25rem;
     align-self: center;
+    width: 100%;
 }
 
 .card .card-title {

@@ -118,9 +118,9 @@ app.post('/login', function (req, res) {
 	var password = req.body.password;
 	if (email && password) {
 
-		if (dbAcc.checkLogin(email, password, db)) {
+		if (dbAcc.checkLogin(email, password,'Amrita' ,db)) {
 			try {
-				db.collection('users').doc(email).get().then(doc => {
+				db.collection('users').doc('Amrita').collection('users').doc(email).get().then(doc => {
 
 					req.session.loggedin = true;
 					req.session.email = email;
@@ -150,13 +150,34 @@ app.post('/login', function (req, res) {
 
 
 //DASHBOARD//
-app.get('/dashboard', function (req, res) {
+app.get('/dashboard',  async function (req, res) {
 
 	if (req.session.loggedin) {
 		console.log('logged in user =' + req.session.email);
-		console.log('logged in user, college=' + req.session.college)
+		console.log('logged in user, college=' + req.session.college);
+		let user_nameDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).get();
+		let user_name =await user_nameDoc_ref.data().name;
+		let requestsDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_requests').get();
+		let requests = [];
+		requestsDoc_ref.forEach(item=>{
+			requests.push(item.data());
+		})
+		console.log('dashboard-'+requests[0].req_name);
+		productCountDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_ads').get();
+		var productCount =  productCountDoc_ref.size;
+		answersCountDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('answers').get();
+		var answersCount =  answersCountDoc_ref.size;
 
-		res.render('dashboard');
+		let notificationsDoc_ref = await db.collection('notifications').doc(req.session.college).collection('notifications').get();
+		let notifications = [];
+		notificationsDoc_ref.forEach(item=>{
+			notifications.push(item.data());
+		})
+
+
+
+
+		res.render('dashboard',{  user_name: user_name,requests:requests,productCount:productCount,answersCount:answersCount,user_college:req.session.college,ads:notifications});
 	} else {
 		res.send('Please login to view this page!');
 	}
@@ -234,12 +255,8 @@ app.post('/addToCart', function (req, res) {
 //END SHOPPING//
 
 
+
 //FORUM//
-
-
-
-
-
 app.get('/forum', async function (req, res) {
 	try {
 		let AnswersForQues;
@@ -261,7 +278,6 @@ app.get('/forum', async function (req, res) {
 		//console.log("Answer for ques ->"+AnswersForQues);
 		for (var i = 0; i < posts.length; i++) {
 			answerPromises.push(new Promise(async (resolve) => {
-
 
 				console.log('id-' + posts[i].doc_id);
 				let answers = await db.collection('Forum').doc('Amrita').collection('Questions').doc(posts[i].doc_id).collection('Answers').get();
@@ -288,23 +304,30 @@ app.get('/forum', async function (req, res) {
 
 
 app.post('/question', function (req, res) {
-	console.log('Add question page');
-	var college = req.session.college;
-	var user_id = req.session.email;
+	//var college = req.session.college;
+	var college='Amrita';
+	var user_id='sharonjoji99@gmail.com';
+	//var user_id = req.session.email;
+	
 	var date = "monday";
 	var desc = req.body.Question;
-	dbAcc.questionAdd(college, user_id, date, desc, db).then(() => {
+	console.log("umm" + desc);
+	dbAcc.addQuestion(college, user_id, date, desc, db).then(() => {
 		console.log("inserted  to db");
-		res.redirect('/forum');
+		return res.redirect('/forum');
 	});
-
 });
-app.post('/answer', function (req, res) {
-	var college = req.body.college;
-	var user_id = req.body.user_id;
-	var ques_id = req.body.id;
-	var ans_desc = req.body.answer;
-	var date = req.body.date;
+
+app.post('/answer/:id', function (req, res) {
+	var college='Amrita';
+
+	var user_id='sharonjoji99@gmail.com';
+	//var college = req.body.college;
+	//var user_id = req.body.user_id;
+	console.log("thisss ok"+req.params.id);
+	var ques_id = req.params.id;
+	var ans_desc = req.body.Answer;
+	var date = 'mondaaay';
 	dbAcc.answerQues(college, user_id, ques_id, ans_desc, date, db).then(() => {
 		console.log("inserted  to db");
 		res.redirect('/forum');
@@ -315,11 +338,16 @@ app.post('/EditAns', function (req, res) {
 	var desc = req.body.desc;
 	dbAcc.editAnswer(ques_id, desc, db).then(() => console.log("inserted  to db"));
 });
-app.post('/delete', function (req, res) {
-	var ans_id = req.body.ans_id;
-	var college = req.body.college;
-	var ques_id = req.body.ques_id;
-	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("inserted  to db"));
+app.post('/delete/:id/:id2', function (req, res) {
+	var college='Amrita';
+
+	var user_id='sharonjoji99@gmail.com';
+	var ans_id = req.params.id;
+	console.log("here ma"+ans_id);
+	//var college = req.body.college;
+	var ques_id = req.params.id2;
+	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("deleting  to db"));
+	res.redirect('/forum');
 });//END FORUM//
 
 
