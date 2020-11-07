@@ -159,18 +159,72 @@ function addNewProduct(item_name,item_desc,original_price,selling_price,seller_i
 exports.addNewProduct = addNewProduct;
 
 
-function addItemToCart(item_id, buyer, db) {
+function addItemToCart(item_id,college, db) {
   return new Promise(async (resolve) => {
-    const docRef = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('item_cart').doc();
+    var  ad_posted_by ;
+    var item_name;
+    const userDocRef = await db.collection('buyAndSell').doc(college).collection('products').where('item_id','==',item_id).get();
+    userDocRef.forEach(doc=>{
+      ad_posted_by = doc.data().seller_id;
+      item_name = doc.data().item_name;
+    })
+   
+    const phDocRef = await db.collection('users').doc(college).collection('users').doc(ad_posted_by).get();
+    const phone_no = phDocRef.data().contactNo;
+    
+    const docRef = await db.collection('users').doc(college).collection('users').doc('sharonjoji99@gmail.com').collection('item_cart').doc();
     docRef.set({
       item_id: item_id,
-      buyer: buyer
+      seller_no : phone_no,
+      seller_email : ad_posted_by,
+      item_name :item_name
     });
     resolve();
   });
 }
 
 exports.addItemToCart = addItemToCart;
+
+function deleteAddedProduct(item_id, logged_user,college,db) {
+  console.log("check for item id"+college);
+  return new Promise(resolve => {
+    const docRef = db.collection('buyAndSell').doc(college).collection('products').doc(item_id);
+    docRef.delete();
+    const cartDocRef = db.collection('users').doc(college).collection('users').doc(logged_user).collection('item_cart').where('item_id','==',item_id);
+    cartDocRef.get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        doc.ref.delete();
+      })
+    })
+   
+    const userDocRef = db.collection('users').doc(college).collection('users').doc(logged_user).collection('product_ads').where('item_id','==',item_id);
+    userDocRef.get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        doc.ref.delete();
+      })
+    })
+   resolve();
+
+  })
+}
+exports.deleteAddedProduct = deleteAddedProduct;
+
+function deleteFromCart(item_id, logged_user,college,db) {
+  console.log("check for item id"+college);
+  return new Promise(resolve => {
+    
+    const userDocRef = db.collection('users').doc(college).collection('users').doc(logged_user).collection('item_cart').where('item_id','==',item_id);
+    userDocRef.get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        doc.ref.delete();
+      })
+    })
+   resolve();
+
+  })
+}
+exports.deleteFromCart = deleteFromCart;
+
 
 
 function addLostFound(item_name, place, desc, upload, db) {
