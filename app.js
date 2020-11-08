@@ -7,7 +7,7 @@ const session = require('express-session');
 const bodyParser = require("body-parser")
 const { admin } = require('./firebaseConfig.js');
 const db = admin.firestore();
-var flash = require('connect-flash');
+
 
 app.use(session({
 	secret: 'secret',
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
-app.use(flash());
+
 
 var port = process.env.PORT || 5000;
 app.set('view engine', 'ejs');
@@ -167,10 +167,7 @@ app.get('/shopping', async function (req, res) {
 
 			Promise.all(adPromises).then(result => {
 				console.log('am here');
-				for (var i = 0; i < adPromises.length; i++) {
-					console.log("item_name " + result[i].item_name);
 
-				}
 				res.render('shopping2', { buys: buys, user_ads: result, your_cart: your_cart });
 			})
 
@@ -196,8 +193,11 @@ app.post('/sellProduct', function (req, res) {
 	var seller_id = 'sharonjoji99@gmail.com';
 	var college = 'Amrita';
 
-	dbAcc.addNewProduct(item_name, item_desc, original_price, selling_price, seller_id, college, db).then(() => console.log("inserted to db"));
-	return res.redirect('/shopping');
+	dbAcc.addNewProduct(item_name, item_desc, original_price, selling_price, seller_id, college, db).then(() => {
+		console.log("inserted to db");
+		return res.redirect('/shopping');
+	});
+
 
 });
 
