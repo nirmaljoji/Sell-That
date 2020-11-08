@@ -249,10 +249,17 @@ function addLostFound(item_name, place, desc, upload, db) {
 exports.addLostFound = addLostFound;
 
 
-function deleteLostAndFound(item_id, college,db) {
+function deleteLostAndFound(item_id,logged_user, college,db) {
   return new Promise(resolve => {
     const docRef = db.collection('lostAndFound').doc(college).collection('items').doc(item_id);
     docRef.delete();
+    const userAddedTabRef=db.collection('users').doc(college).collection('users').doc(logged_user).collection('lost_and_found').where('item_id','==',item_id);
+    userAddedTabRef.get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        doc.ref.delete();
+      })
+    })
+    resolve();
   })
 }
 exports.deleteLostAndFound = deleteLostAndFound;

@@ -86,18 +86,18 @@
           <div id="tab2" class="tabcontent">
 
             <div>
-              <% for(var i =0;i<fPosts.length;i++){
+              <% fPosts.forEach((i)=> { %>
                  %>
               <div class="prev">
-                <h5 id='<%= fPosts[i].item_id %>' > <%= fPosts[i].item_name %> </h5>
-                <p>Found near <%= fPosts[i].place %> </p>
+                <h5 > <%= i.item_name %> </h5>
+                <p>Found near <%= i.place %> </p>
                 <div style="width: 5%; text-align: center;">
-                  <form action="/delLostAndFound" method="POST">
+                  <form action="/delLostAndFound/<%= i.item_id %>" method="POST">
                     <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
                   </form>
                 </div>
               </div>
-              <% } %>
+              <% }) %>
             </div>
           </div>
 

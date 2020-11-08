@@ -430,11 +430,16 @@ app.post('/lostFound', function (req, res) {
 
 });
 
-app.post('/delLostAndFound', function (req, res) {
-	var item_id = req.body.item_id;
-	var college = req.body.college;
+app.post('/delLostAndFound/:id', function (req, res) {
+	var item_id = req.params.id;
+	var college = 'Amrita';
+	var logged_user='sharonjoji99@gmail.com';
 	console.log("deleting " + item_id);
-	dbAcc.deleteLostAndFound(item_id, college, db).then(() => console.log("deleted from db"));
+	dbAcc.deleteLostAndFound(item_id,logged_user, college, db).then(() => {console.log("deleted from db");
+	return res.redirect('/lostAndFound');
+});
+return res.redirect('/lostAndFound');
+
 });//END LOST AND FOUND//
 
 
