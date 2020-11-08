@@ -181,8 +181,8 @@
           <h2 class="price">
             Actual Price - <%= item.original_price %>
           </h2>
-          <form method="POST" action="/addToCart/<%= item.item_id %>">
-            <input type="submit" value="Add to Cart">
+          <form style="float: left;" method="POST" action="/addToCart/<%= item.item_id %>">
+            <input id="addCart" type="submit" value="Add to Cart">
           </form>
           
         </footer>
