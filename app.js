@@ -7,10 +7,13 @@ const bodyParser = require("body-parser")
 const { admin } = require('./firebaseConfig.js');
 const db = admin.firestore();
 
+<<<<<<< HEAD
 // //storage
 // var storage= admin.storage();
 // var storageRef = storage.ref();
 // var imagesRef = storageRef.child('images');
+=======
+>>>>>>> e0a2ea052d9e55f246f7a2101596231ead32b0a7
 
 
 
@@ -196,7 +199,12 @@ app.get('/shopping', async function (req, res) {
 		let user_ads = [];
 		let adPromises = [];
 
+		let your_cartDocRef = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('item_cart').get();
+		let your_cart = [];
 
+		your_cartDocRef.forEach(item => {
+			your_cart.push(item.data());
+		});
 
 		items.forEach(item => {
 			buys.push(item.data());
@@ -218,7 +226,7 @@ app.get('/shopping', async function (req, res) {
 
 		Promise.all(adPromises).then(result => {
 			console.log('am here');
-			res.render('shopping2', { buys: buys, user_ads: result });
+			res.render('shopping2', { buys: buys, user_ads: result, your_cart: your_cart });
 		})
 
 
@@ -245,12 +253,44 @@ app.post('/sellProduct', function (req, res) {
 
 });
 
-app.post('/addToCart', function (req, res) {
+app.post('/addToCart/:id', function (req, res) {
 	var buyer = 'sharonjoji99@gmail.com';
-	var item_id = req.body.item_place;
-	dbAcc.addItemToCart(item_id, buyer, db).then(() => console.log("inserted  to db"));
-	return res.redirect('/shopping');
+	var college = 'Amrita';
+	var item_id = req.params.id;
+	console.log("params :"+item_id);
+	dbAcc.addItemToCart(item_id,college, db).then(() => { 
+		console.log("inserted  to db"); 
+		return res.redirect('/shopping');
+		 });
+		
+
 });
+
+app.post('/delAddedProduct/:id', function (req, res) {
+	var item_id = req.params.id;
+	var college = "Amrita";
+	var logged_user = "sharonjoji99@gmail.com"
+	dbAcc.deleteAddedProduct(item_id,logged_user,college,db).then(()=>{
+		console.log("deleted from db "); 
+		return res.redirect('/shopping'); 
+		});
+		
+	});
+
+app.post('/delFromCart/:id', function (req, res) {
+		var item_id = req.params.id;
+		var college = "Amrita";
+		var logged_user = "sharonjoji99@gmail.com"
+		dbAcc.deleteFromCart(item_id,logged_user,college,db).then(()=>{
+			console.log("deleted from cart "); 
+			});
+			return res.redirect('/shopping'); 
+		});
+
+
+
+
+
 
 //END SHOPPING//
 
@@ -353,7 +393,6 @@ app.post('/delete/:id/:id2', function (req, res) {
 	var user_id = 'sharonjoji99@gmail.com';
 	var ans_id = req.params.id;
 	console.log("here ma" + ans_id);
-
 	//var college = req.body.college;
 	var ques_id = req.params.id2;
 	var current = req.session.id;
@@ -417,11 +456,16 @@ app.post('/lostFound', function (req, res) {
 
 });
 
-app.post('/delLostAndFound', function (req, res) {
-	var item_id = req.body.item_id;
-	var college = req.body.college;
+app.post('/delLostAndFound/:id', function (req, res) {
+	var item_id = req.params.id;
+	var college = 'Amrita';
+	var logged_user='sharonjoji99@gmail.com';
 	console.log("deleting " + item_id);
-	dbAcc.deleteLostAndFound(item_id, college, db).then(() => console.log("deleted from db"));
+	dbAcc.deleteLostAndFound(item_id,logged_user, college, db).then(() => {console.log("deleted from db");
+	return res.redirect('/lostAndFound');
+});
+return res.redirect('/lostAndFound');
+
 });//END LOST AND FOUND//
 
 
