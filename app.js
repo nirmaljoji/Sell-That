@@ -11,7 +11,6 @@ const db = admin.firestore();
 
 
 
-
 const info = [
 	{
 		id: 1,
@@ -115,7 +114,7 @@ app.post('/login', function (req, res) {
 	var password = req.body.password;
 	if (email && password) {
 
-		if (dbAcc.checkLogin(email, password,'Amrita' ,db)) {
+		if (dbAcc.checkLogin(email, password, 'Amrita', db)) {
 			try {
 				db.collection('users').doc('Amrita').collection('users').doc(email).get().then(doc => {
 
@@ -147,34 +146,34 @@ app.post('/login', function (req, res) {
 
 
 //DASHBOARD//
-app.get('/dashboard',  async function (req, res) {
+app.get('/dashboard', async function (req, res) {
 
 	if (req.session.loggedin) {
 		console.log('logged in user =' + req.session.email);
 		console.log('logged in user, college=' + req.session.college);
 		let user_nameDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).get();
-		let user_name =await user_nameDoc_ref.data().name;
+		let user_name = await user_nameDoc_ref.data().name;
 		let requestsDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_requests').get();
 		let requests = [];
-		requestsDoc_ref.forEach(item=>{
+		requestsDoc_ref.forEach(item => {
 			requests.push(item.data());
 		})
-		console.log('dashboard-'+requests[0].req_name);
+		console.log('dashboard-' + requests[0].req_name);
 		productCountDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_ads').get();
-		var productCount =  productCountDoc_ref.size;
+		var productCount = productCountDoc_ref.size;
 		answersCountDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('answers').get();
-		var answersCount =  answersCountDoc_ref.size;
+		var answersCount = answersCountDoc_ref.size;
 
 		let notificationsDoc_ref = await db.collection('notifications').doc(req.session.college).collection('notifications').get();
 		let notifications = [];
-		notificationsDoc_ref.forEach(item=>{
+		notificationsDoc_ref.forEach(item => {
 			notifications.push(item.data());
 		})
 
 
 
 
-		res.render('dashboard',{  user_name: user_name,requests:requests,productCount:productCount,answersCount:answersCount,user_college:req.session.college,ads:notifications});
+		res.render('dashboard', { user_name: user_name, requests: requests, productCount: productCount, answersCount: answersCount, user_college: req.session.college, ads: notifications });
 	} else {
 		res.send('Please login to view this page!');
 	}
@@ -189,12 +188,17 @@ app.get('/shopping', async function (req, res) {
 		let items = await db.collection('buyAndSell').doc('Amrita').collection('products').get();
 		let buys = [];
 
-		let product_ads= await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('product_ads').get();
-		let user_ads=[];
-		let adPromises=[];
+		let product_ads = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('product_ads').get();
+		let user_ads = [];
+		let adPromises = [];
 
+		let your_cartDocRef = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('item_cart').get();
+		let your_cart = [];
 
-		
+		your_cartDocRef.forEach(item => {
+			your_cart.push(item.data());
+		});
+
 		items.forEach(item => {
 			buys.push(item.data());
 		});
@@ -204,7 +208,7 @@ app.get('/shopping', async function (req, res) {
 		});
 
 
-		for(var i=0; i<user_ads.length; i++){
+		for (var i = 0; i < user_ads.length; i++) {
 			adPromises.push(new Promise(async (resolve) => {
 				let item = await db.collection('buyAndSell').doc('Amrita').collection('products').doc(user_ads[i].item_id).get();
 				let final_item = item.data();
@@ -215,7 +219,7 @@ app.get('/shopping', async function (req, res) {
 
 		Promise.all(adPromises).then(result => {
 			console.log('am here');
-			res.render('shopping2', { buys: buys, user_ads: result });
+			res.render('shopping2', { buys: buys, user_ads: result, your_cart: your_cart });
 		})
 
 
@@ -242,12 +246,44 @@ app.post('/sellProduct', function (req, res) {
 
 });
 
-app.post('/addToCart', function (req, res) {
+app.post('/addToCart/:id', function (req, res) {
 	var buyer = 'sharonjoji99@gmail.com';
-	var item_id = req.body.item_place;
-	dbAcc.addItemToCart(item_id,buyer, db).then(() => console.log("inserted  to db"));
-	return res.redirect('/shopping');
+	var college = 'Amrita';
+	var item_id = req.params.id;
+	console.log("params :"+item_id);
+	dbAcc.addItemToCart(item_id,college, db).then(() => { 
+		console.log("inserted  to db"); 
+		return res.redirect('/shopping');
+		 });
+		
+
 });
+
+app.post('/delAddedProduct/:id', function (req, res) {
+	var item_id = req.params.id;
+	var college = "Amrita";
+	var logged_user = "sharonjoji99@gmail.com"
+	dbAcc.deleteAddedProduct(item_id,logged_user,college,db).then(()=>{
+		console.log("deleted from db "); 
+		return res.redirect('/shopping'); 
+		});
+		
+	});
+
+app.post('/delFromCart/:id', function (req, res) {
+		var item_id = req.params.id;
+		var college = "Amrita";
+		var logged_user = "sharonjoji99@gmail.com"
+		dbAcc.deleteFromCart(item_id,logged_user,college,db).then(()=>{
+			console.log("deleted from cart "); 
+			});
+			return res.redirect('/shopping'); 
+		});
+
+
+
+
+
 
 //END SHOPPING//
 
@@ -302,10 +338,10 @@ app.get('/forum', async function (req, res) {
 
 app.post('/question', function (req, res) {
 	//var college = req.session.college;
-	var college='Amrita';
-	var user_id='sharonjoji99@gmail.com';
+	var college = 'Amrita';
+	var user_id = 'sharonjoji99@gmail.com';
 	//var user_id = req.session.email;
-	
+
 	var date = "monday";
 	var desc = req.body.Question;
 	console.log("umm" + desc);
@@ -316,12 +352,12 @@ app.post('/question', function (req, res) {
 });
 
 app.post('/answer/:id', function (req, res) {
-	var college='Amrita';
+	var college = 'Amrita';
 
-	var user_id='sharonjoji99@gmail.com';
+	var user_id = 'sharonjoji99@gmail.com';
 	//var college = req.body.college;
 	//var user_id = req.body.user_id;
-	console.log("thisss ok"+req.params.id);
+	console.log("thisss ok" + req.params.id);
 	var ques_id = req.params.id;
 	var ans_desc = req.body.Answer;
 	var date = 'mondaaay';
@@ -336,11 +372,11 @@ app.post('/EditAns', function (req, res) {
 	dbAcc.editAnswer(ques_id, desc, db).then(() => console.log("inserted  to db"));
 });
 app.post('/delete/:id/:id2', function (req, res) {
-	var college='Amrita';
+	var college = 'Amrita';
 
-	var user_id='sharonjoji99@gmail.com';
+	var user_id = 'sharonjoji99@gmail.com';
 	var ans_id = req.params.id;
-	console.log("here ma"+ans_id);
+	console.log("here ma" + ans_id);
 	//var college = req.body.college;
 	var ques_id = req.params.id2;
 	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("deleting  to db"));
