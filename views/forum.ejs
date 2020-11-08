@@ -163,7 +163,7 @@
                     <!-- Comment Row -->
                     
                     
-                    <% for(let j =0;j <finalAnswers[i].length;j++ ){  %>
+                    <% for(var j =0;j <finalAnswers[i].length;j++ ){  %>
                       
                     <div class="d-flex flex-row comment-row">
                       <div class="p-2">
@@ -172,17 +172,29 @@
                       <div class="comment-text w-150 ">
                         <h4 class="font-medium"><%= finalAnswers[i][j].author %></h4> <span
                           class="m-b-15 d-block"><%= finalAnswers[i][j].title %></span>
-                        <div class="comment-footer"> <span class="text-muted float-right"><%= finalAnswers[i][j].date %></span>
-                          <div id="editing">
-                            <button type="button" class="btn btn-success btn-sm" style="width:100%;"
-                              onclick="Edit_ans()">Edit</button>
+                        <div class="comment-footer"> <span class="text-muted float-right"><%= finalAnswers[i][j].ans_date %></span>
+                          
+                         <% if(cur_user == finalAnswers[i][j].user_id){ %>
+                          <div>
+                            <button id="<%=finalAnswers[i][j].ans_id%>"  type="button" class="btn btn-success btn-sm" style="width:100%;"
+                            
+                              onclick="Edit_ans(this.id,'<%= info[i].doc_id%>')">Edit</button>
                           </div>
+                           
+                              <!-- <p><%= i + "" + j %></p> -->
+                              
+                          
 
 
                           <form action="/delete/<%= finalAnswers[i][j].ans_id %>/<%= info[i].doc_id %>" method="POST">
                             <input type="submit" class="btn btn-danger btn-sm" style="width:100%;"
                               value="Delete"></input>
                           </form>
+                        <%}%>
+
+
+
+
                           <hr>
 
                         </div>
@@ -217,12 +229,18 @@
     </div>
   </main>
   <script>
-    function Edit_ans() {
-
-      document.getElementById("editing").innerHTML = "<form action='/EditAns' method='POST'><textarea  style='width: 100%;' ></textarea><input type='submit' class='btn btn-success btn-sm' onclick='rev()' value='Confirm Edit'></input></form>";
+    $(document).on("mousedown", "#reply_msg", function(e) {
+    e.preventDefault();
+    $(this).hide();
+    $("#reply_message").show().focus();
+});
+    function Edit_ans(a,b) {
+      console.log("----- here ra"+a);
+      document.getElementById(a).outerHTML = "<form action='/EditAns/"+ a+ "/"+b+"'"+ "method='POST'><textarea name='desc' style='width: 100%;resize: none;' id='reply_message' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' value='Confirm Edit'></input></form>" ;
+      // "<form action='/EditAns' method='POST'><textarea name='edit' disabled='false' style='width: 100%;resize: none;' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' onclick='rev()' value='Confirm Edit'></input></form>";
     }
-    function rev() {
-      document.getElementById("editing").innerHTML = "<button type='button' class='btn btn-success btn-sm'  onclick='Edit_ans()'>Edit</button>";
+    function rev(a) {
+      document.getElementById(a).innerHTML = "<button type='button' class='btn btn-success btn-sm'  onclick='Edit_ans()'>Edit</button>";
     }
   </script>
 </body>

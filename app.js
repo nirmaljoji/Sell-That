@@ -7,6 +7,13 @@ const bodyParser = require("body-parser")
 const { admin } = require('./firebaseConfig.js');
 const db = admin.firestore();
 
+<<<<<<< HEAD
+// //storage
+// var storage= admin.storage();
+// var storageRef = storage.ref();
+// var imagesRef = storageRef.child('images');
+=======
+>>>>>>> e0a2ea052d9e55f246f7a2101596231ead32b0a7
 
 
 
@@ -326,9 +333,10 @@ app.get('/forum', async function (req, res) {
 		}
 
 		Promise.all(answerPromises).then(result => {
-
+			var user = req.session.email;
+			//console.log("number 1 :"+user+"\n numer 2: "+result[2][0].user_id );
 			//console.log(posts);
-			res.render('forum', { info: posts, finalAnswers: result });
+			res.render('forum', { info: posts, finalAnswers: result, cur_user: user });
 		})
 	} catch (err) {
 		res.send("Error");
@@ -366,10 +374,18 @@ app.post('/answer/:id', function (req, res) {
 		res.redirect('/forum');
 	});
 });
-app.post('/EditAns', function (req, res) {
-	var ques_id = req.body.ques_id;
+app.post('/EditAns/:id/:id2', function (req, res) {
+	var ques_id = req.params.id2;
+	var ans_id = req.params.id;
 	var desc = req.body.desc;
-	dbAcc.editAnswer(ques_id, desc, db).then(() => console.log("inserted  to db"));
+	var college='Amrita';
+	console.log("question :"+ques_id+"   answer :"+ans_id+"    desc:"+desc);
+	
+	
+	dbAcc.editAnswer(ques_id,ans_id, college,desc, db).then(() => {
+		console.log("modifications done  to db");
+		res.redirect('/forum');
+	});
 });
 app.post('/delete/:id/:id2', function (req, res) {
 	var college = 'Amrita';
@@ -379,8 +395,18 @@ app.post('/delete/:id/:id2', function (req, res) {
 	console.log("here ma" + ans_id);
 	//var college = req.body.college;
 	var ques_id = req.params.id2;
-	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => console.log("deleting  to db"));
-	res.redirect('/forum');
+	var current = req.session.id;
+
+
+	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => {
+		console.log("deleting from db");
+		res.redirect('/forum');
+	});
+
+
+	//res.send("You cannot delete");
+
+
 });//END FORUM//
 
 

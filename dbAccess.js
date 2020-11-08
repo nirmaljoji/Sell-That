@@ -47,12 +47,13 @@ function addQuestion(college, user_id, date, ques_desc, db) {
 
 exports.addQuestion = addQuestion;
 
-function editAnswer(ques_id, desc) {
+function editAnswer(ques_id,ans_id,college, desc,db) {
   return new Promise(resolve => {
-    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id);
+    const docRef = db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc(ans_id);
     docRef.update({
-      desc: desc
+      title: desc
     })
+    resolve();
   })
 }
 exports.editAnswer = editAnswer;
