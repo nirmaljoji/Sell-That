@@ -334,11 +334,15 @@ app.post('/answer/:id', function (req, res) {
 		res.redirect('/forum');
 	});
 });
-app.post('/EditAns/:id', function (req, res) {
-	var ques_id = req.params.id;
+app.post('/EditAns/:id/:id2', function (req, res) {
+	var ques_id = req.params.id2;
+	var ans_id = req.params.id;
 	var desc = req.body.desc;
-	console.log('new desc :'+desc);
-	dbAcc.editAnswer(ques_id, desc, db).then(() => {
+	var college='Amrita';
+	console.log("question :"+ques_id+"   answer :"+ans_id+"    desc:"+desc);
+	
+	
+	dbAcc.editAnswer(ques_id,ans_id, college,desc, db).then(() => {
 		console.log("modifications done  to db");
 		res.redirect('/forum');
 	});
