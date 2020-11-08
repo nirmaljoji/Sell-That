@@ -59,11 +59,12 @@ app.post('/register', function (req, res) {
 app.post('/login', function (req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
+	var college = req.body.college;
 	if (email && password) {
 
-		if (dbAcc.checkLogin(email, password, 'Amrita', db)) {
+		if (dbAcc.checkLogin(email, password, req.session.college, db)) {
 			try {
-				db.collection('users').doc('Amrita').collection('users').doc(email).get().then(doc => {
+				db.collection('users').doc(college).collection('users').doc(email).get().then(doc => {
 
 					req.session.loggedin = true;
 					req.session.email = email;
@@ -99,13 +100,13 @@ app.get('/dashboard', async function (req, res) {
 		console.log('logged in user =' + req.session.email);
 		console.log('logged in user, college=' + req.session.college);
 		let user_nameDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).get();
-		let user_name = await user_nameDoc_ref.data().name;
+		let user_name = await user_nameDoc_ref.data().fullName;
 		let requestsDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_requests').get();
 		let requests = [];
 		requestsDoc_ref.forEach(item => {
 			requests.push(item.data());
 		})
-		console.log('dashboard-' + requests[0].req_name);
+
 		productCountDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_ads').get();
 		var productCount = productCountDoc_ref.size;
 		answersCountDoc_ref = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('answers').get();
@@ -119,7 +120,7 @@ app.get('/dashboard', async function (req, res) {
 
 
 
-
+		console.log('MY NAAAAME ' + user_name);
 		res.render('dashboard', { user_name: user_name, requests: requests, productCount: productCount, answersCount: answersCount, user_college: req.session.college, ads: notifications });
 	} else {
 
@@ -133,32 +134,34 @@ app.get('/dashboard', async function (req, res) {
 app.get('/shopping', async function (req, res) {
 	if (req.session.loggedin) {
 		try {
-			let items = await db.collection('buyAndSell').doc('Amrita').collection('products').get();
+			
+			let items = await db.collection('buyAndSell').doc(req.session.college).collection('products').get();
 			let buys = [];
-
-			let product_ads = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('product_ads').get();
+			
+			let product_ads = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('product_ads').get();
 			let user_ads = [];
 			let adPromises = [];
-
-			let your_cartDocRef = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('item_cart').get();
+			
+			let your_cartDocRef = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('item_cart').get();
 			let your_cart = [];
+		
 
 			your_cartDocRef.forEach(item => {
 				your_cart.push(item.data());
 			});
-
+			
 			items.forEach(item => {
 				buys.push(item.data());
 			});
-
+			
 			product_ads.forEach(item => {
 				user_ads.push(item.data());
 			});
-
-
+			
+			
 			for (var i = 0; i < user_ads.length; i++) {
 				adPromises.push(new Promise(async (resolve) => {
-					let item = await db.collection('buyAndSell').doc('Amrita').collection('products').doc(user_ads[i].item_id).get();
+					let item = await db.collection('buyAndSell').doc(req.session.college).collection('products').doc(user_ads[i].item_id).get();
 					let final_item = item.data();
 					resolve(final_item);
 				}))
@@ -166,7 +169,7 @@ app.get('/shopping', async function (req, res) {
 			}
 
 			Promise.all(adPromises).then(result => {
-				console.log('am here');
+				console.log(result);
 
 				res.render('shopping2', { buys: buys, user_ads: result, your_cart: your_cart });
 			})
@@ -190,8 +193,8 @@ app.post('/sellProduct', function (req, res) {
 	//var seller_id=req.session.email;
 	//var seller_college=req.session.college;
 
-	var seller_id = 'sharonjoji99@gmail.com';
-	var college = 'Amrita';
+	var seller_id = req.session.email;
+	var college = req.session.college;
 
 	dbAcc.addNewProduct(item_name, item_desc, original_price, selling_price, seller_id, college, db).then(() => {
 		console.log("inserted to db");
@@ -202,11 +205,11 @@ app.post('/sellProduct', function (req, res) {
 });
 
 app.post('/addToCart/:id', function (req, res) {
-	var buyer = 'sharonjoji99@gmail.com';
-	var college = 'Amrita';
+	var buyer = req.session.email;
+	var college = req.session.college;
 	var item_id = req.params.id;
 	console.log("params :" + item_id);
-	dbAcc.addItemToCart(item_id, college, db).then(() => {
+	dbAcc.addItemToCart(item_id, buyer,college, db).then(() => {
 		console.log("inserted  to db");
 		return res.redirect('/shopping');
 	});
@@ -216,8 +219,8 @@ app.post('/addToCart/:id', function (req, res) {
 
 app.post('/delAddedProduct/:id', function (req, res) {
 	var item_id = req.params.id;
-	var college = "Amrita";
-	var logged_user = "sharonjoji99@gmail.com"
+	var college = req.session.college;
+	var logged_user = req.session.email;
 	dbAcc.deleteAddedProduct(item_id, logged_user, college, db).then(() => {
 		console.log("deleted from db ");
 		return res.redirect('/shopping');
@@ -227,12 +230,13 @@ app.post('/delAddedProduct/:id', function (req, res) {
 
 app.post('/delFromCart/:id', function (req, res) {
 	var item_id = req.params.id;
-	var college = "Amrita";
-	var logged_user = "sharonjoji99@gmail.com"
+	var college = req.session.college;
+	var logged_user = req.session.email;
 	dbAcc.deleteFromCart(item_id, logged_user, college, db).then(() => {
 		console.log("deleted from cart ");
+		return res.redirect('/shopping');
+
 	});
-	return res.redirect('/shopping');
 });
 
 
@@ -255,7 +259,7 @@ app.get('/forum', async function (req, res) {
 			let doc_id = [];
 
 
-			let questionsRef = await db.collection('Forum').doc('Amrita').collection('Questions').get();
+			let questionsRef = await db.collection('Forum').doc(req.session.college).collection('Questions').get();
 			questionsRef.forEach(question => {
 				posts.push(question.data())
 				doc_id.push(question.id);
@@ -270,7 +274,7 @@ app.get('/forum', async function (req, res) {
 				answerPromises.push(new Promise(async (resolve) => {
 
 					console.log('id-' + posts[i].doc_id);
-					let answers = await db.collection('Forum').doc('Amrita').collection('Questions').doc(posts[i].doc_id).collection('Answers').get();
+					let answers = await db.collection('Forum').doc(req.session.college).collection('Questions').doc(posts[i].doc_id).collection('Answers').get();
 					AnswersForQues = [];
 					answers.forEach(answer => {
 						//console.log("pls so i can sleep"+answer.data().author);
@@ -299,8 +303,8 @@ app.get('/forum', async function (req, res) {
 
 app.post('/question', function (req, res) {
 	//var college = req.session.college;
-	var college = 'Amrita';
-	var user_id = 'sharonjoji99@gmail.com';
+	var college = req.session.college;
+	var user_id = req.session.email;
 	//var user_id = req.session.email;
 
 	var date = "monday";
@@ -313,9 +317,9 @@ app.post('/question', function (req, res) {
 });
 
 app.post('/answer/:id', function (req, res) {
-	var college = 'Amrita';
+	var college = req.session.college;
 
-	var user_id = 'sharonjoji99@gmail.com';
+	var user_id = req.session.email;
 	//var college = req.body.college;
 	//var user_id = req.body.user_id;
 	console.log("thisss ok" + req.params.id);
@@ -331,7 +335,7 @@ app.post('/EditAns/:id/:id2', function (req, res) {
 	var ques_id = req.params.id2;
 	var ans_id = req.params.id;
 	var desc = req.body.desc;
-	var college = 'Amrita';
+	var college = req.session.college;
 	console.log("question :" + ques_id + "   answer :" + ans_id + "    desc:" + desc);
 
 
@@ -341,9 +345,9 @@ app.post('/EditAns/:id/:id2', function (req, res) {
 	});
 });
 app.post('/delete/:id/:id2', function (req, res) {
-	var college = 'Amrita';
+	var college = req.session.college;
 
-	var user_id = 'sharonjoji99@gmail.com';
+	var user_id = req.session.email;
 	var ans_id = req.params.id;
 	console.log("here ma" + ans_id);
 	//var college = req.body.college;
@@ -367,10 +371,10 @@ app.post('/delete/:id/:id2', function (req, res) {
 app.get('/lostAndFound', async function (req, res) {
 	if (req.session.loggedin) {
 		try {
-			let items = await db.collection('lostAndFound').doc('Amrita').collection('items').get();
+			let items = await db.collection('lostAndFound').doc(req.session.college).collection('items').get();
 			let posts = [];
 
-			let fitems = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').get();
+			let fitems = await db.collection('users').doc(req.session.college).collection('users').doc(req.session.email).collection('lost_and_found').get();
 			let foundItems = []
 			let fPostsPromises = [];
 
@@ -385,7 +389,7 @@ app.get('/lostAndFound', async function (req, res) {
 
 			for (var i = 0; i < foundItems.length; i++) {
 				fPostsPromises.push(new Promise(async (resolve) => {
-					let item = await db.collection('lostAndFound').doc('Amrita').collection('items').doc(foundItems[i].item_id).get();
+					let item = await db.collection('lostAndFound').doc(req.session.college).collection('items').doc(foundItems[i].item_id).get();
 					let final_item = item.data();
 					resolve(final_item);
 				}))
@@ -409,7 +413,9 @@ app.post('/lostFound', function (req, res) {
 	var title = req.body.item_place;
 	var body = req.body.item_desc;
 	var upload = req.body.upload;
-	dbAcc.addLostFound(author, title, body, upload, db).then(() => {
+	var college = req.session.college;
+	var user_id = req.session.email;
+	dbAcc.addLostFound(college, user_id, author, title, body, upload, db).then(() => {
 		console.log("inserted  to db");
 		return res.redirect('/lostAndFound');
 	});
@@ -419,8 +425,8 @@ app.post('/lostFound', function (req, res) {
 
 app.post('/delLostAndFound/:id', function (req, res) {
 	var item_id = req.params.id;
-	var college = 'Amrita';
-	var logged_user = 'sharonjoji99@gmail.com';
+	var college = req.session.college;
+	var logged_user = req.session.email;
 	console.log("deleting " + item_id);
 	dbAcc.deleteLostAndFound(item_id, logged_user, college, db).then(() => {
 		console.log("deleted from db");
@@ -430,7 +436,18 @@ app.post('/delLostAndFound/:id', function (req, res) {
 });//END LOST AND FOUND//
 
 
+app.get('/logout', async function (req, res) {
+	req.session.destroy(function(err){  
+        if(err){  
+            console.log(err);  
+        }  
+        else  
+        {  
+            res.redirect('/');  
+        }  
+    });  
 
+});
 app.listen(port, function () {
 	console.log('Our app is running on http://localhost:' + port);
 });

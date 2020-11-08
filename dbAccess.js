@@ -19,23 +19,23 @@ exports.registerUser = registerUser;
 
 function addQuestion(college, user_id, date, ques_desc, db) {
   return new Promise(async (resolve) => {
-    let user_nameDocRef = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').get();
+    let user_nameDocRef = await db.collection('users').doc(college).collection('users').doc(user_id).get();
     user_name = user_nameDocRef.data();
     
 
     console.log(user_name);
-      const docRef =await db.collection('Forum').doc('Amrita').collection('Questions').doc();
+      const docRef =await db.collection('Forum').doc(college).collection('Questions').doc();
       
       docRef.set({
         doc_id:docRef.id ,
-        name: user_name.name,
+        name: user_name.fullName,
         regNo:user_name.regNo,
-        ques_user_id: "sharonjoji99@gmail.com",
+        ques_user_id:user_id,
         date: date,
         question: ques_desc,
       });
       
-      const docRef2 = await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('questions').doc().set({
+      const docRef2 = await db.collection('users').doc(college).collection('users').doc(user_id).collection('questions').doc().set({
         user_id: docRef.id,
       })
       resolve();
@@ -76,7 +76,7 @@ function answerQues(college, user_id, ques_id, ans_desc, date,db) {
     const docRef =await  db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc();
     await docRef.set({
       ans_id:docRef.id,
-      author:user_name.name,
+      author:user_name.fullName,
       title: ans_desc,
       ans_date: date,
       user_id: user_id,
@@ -138,8 +138,8 @@ async function checkLogin(email, password, college ,db) {
 exports.checkLogin = checkLogin;
 
 function addNewProduct(item_name,item_desc,original_price,selling_price,seller_id,college,db) {
-  return new Promise(async (resolve) => {
-    const docRef = await db.collection('buyAndSell').doc('Amrita').collection('products').doc();
+  return new Promise( async (resolve) => {
+    const docRef =  db.collection('buyAndSell').doc(college).collection('products').doc();
     docRef.set({
       item_name: item_name,
       item_desc: item_desc,
@@ -149,10 +149,22 @@ function addNewProduct(item_name,item_desc,original_price,selling_price,seller_i
       item_id: docRef.id
       //add seller_id here pls
     });
+    let user_nameDocRef = await  db.collection('users').doc(college).collection('users').doc(seller_id).get();
+    user_name = user_nameDocRef.data().fullName;
 
-     await db.collection('users').doc(college).collection('users').doc(seller_id).collection('product_ads').doc().set({
+      db.collection('users').doc(college).collection('users').doc(seller_id).collection('product_ads').doc().set({
       item_id:docRef.id
     });
+
+    db.collection('notifications').doc(college).collection('notifications').doc().set({
+      info_noti:selling_price,
+      name : user_name,
+      notiType:'posted an Ad for',
+      product_name: item_name
+    });
+
+
+
     resolve();
   });
 
@@ -161,7 +173,7 @@ function addNewProduct(item_name,item_desc,original_price,selling_price,seller_i
 exports.addNewProduct = addNewProduct;
 
 
-function addItemToCart(item_id,college, db) {
+function addItemToCart(item_id,user_id,college, db) {
   return new Promise(async (resolve) => {
     var  ad_posted_by ;
     var item_name;
@@ -174,13 +186,24 @@ function addItemToCart(item_id,college, db) {
     const phDocRef = await db.collection('users').doc(college).collection('users').doc(ad_posted_by).get();
     const phone_no = phDocRef.data().contactNo;
     
-    const docRef = await db.collection('users').doc(college).collection('users').doc('sharonjoji99@gmail.com').collection('item_cart').doc();
+    const docRef = await db.collection('users').doc(college).collection('users').doc(user_id).collection('item_cart').doc();
     docRef.set({
       item_id: item_id,
       seller_no : phone_no,
       seller_email : ad_posted_by,
       item_name :item_name
     });
+    
+    let user_nameDocRef = await db.collection('users').doc(college).collection('users').doc(user_id).get();
+    user_name = user_nameDocRef.data().fullName;
+    
+    
+    db.collection('users').doc(college).collection('users').doc(ad_posted_by).collection('product_requests').doc().set({
+      req_name : user_name,
+      req_product :item_name
+    });
+    
+
     resolve();
   });
 }
@@ -190,6 +213,15 @@ exports.addItemToCart = addItemToCart;
 function deleteAddedProduct(item_id, logged_user,college,db) {
   console.log("check for item id"+college);
   return new Promise(resolve => {
+  
+    const userDocRef = db.collection('users').doc(college).collection('users').doc(logged_user).collection('product_ads').where('item_id','==',item_id);
+    userDocRef.get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        doc.ref.delete();
+      })
+    })
+
+
     const docRef = db.collection('buyAndSell').doc(college).collection('products').doc(item_id);
     docRef.delete();
     const cartDocRef = db.collection('users').doc(college).collection('users').doc(logged_user).collection('item_cart').where('item_id','==',item_id);
@@ -199,12 +231,7 @@ function deleteAddedProduct(item_id, logged_user,college,db) {
       })
     })
    
-    const userDocRef = db.collection('users').doc(college).collection('users').doc(logged_user).collection('product_ads').where('item_id','==',item_id);
-    userDocRef.get().then(function(querySnapshot){
-      querySnapshot.forEach(function(doc){
-        doc.ref.delete();
-      })
-    })
+    
    resolve();
 
   })
@@ -229,9 +256,9 @@ exports.deleteFromCart = deleteFromCart;
 
 
 
-function addLostFound(item_name, place, desc, upload, db) {
+function addLostFound(college, user_id, item_name, place, desc, upload, db) {
   return new Promise(async (resolve) => {
-    const docRef = await db.collection('lostAndFound').doc('Amrita').collection('items').doc();
+    const docRef = await db.collection('lostAndFound').doc(college).collection('items').doc();
     docRef.set({
       item_name: item_name,
       place: place,
@@ -240,7 +267,7 @@ function addLostFound(item_name, place, desc, upload, db) {
       item_id:docRef.id
     });
 
-     await db.collection('users').doc('Amrita').collection('users').doc('sharonjoji99@gmail.com').collection('lost_and_found').doc().set({
+     await db.collection('users').doc(college).collection('users').doc(user_id).collection('lost_and_found').doc().set({
       item_id:docRef.id
     });
     resolve();
