@@ -178,7 +178,7 @@
                           <div>
                             <button id="<%=finalAnswers[i][j].ans_id%>"  type="button" class="btn btn-success btn-sm" style="width:100%;"
                             
-                              onclick="Edit_ans(this.id)">Edit</button>
+                              onclick="Edit_ans(this.id,'<%= info[i].doc_id%>')">Edit</button>
                           </div>
                            
                               <!-- <p><%= i + "" + j %></p> -->
@@ -234,11 +234,9 @@
     $(this).hide();
     $("#reply_message").show().focus();
 });
-    function Edit_ans(a) {
+    function Edit_ans(a,b) {
       console.log("----- here ra"+a);
-     // var id = getElementsByClassName('.get1')[0].id;
-      //console.log("this ra "+id);
-      document.getElementById(a).outerHTML = "<form action='/EditAns' method='POST'><textarea  style='width: 100%;resize: none;' id='reply_message' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' onclick='rev(a)' value='Confirm Edit'></input></form>" ;
+      document.getElementById(a).outerHTML = "<form action='/EditAns/"+ a+ "/"+b+"'"+ "method='POST'><textarea name='desc' style='width: 100%;resize: none;' id='reply_message' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' value='Confirm Edit'></input></form>" ;
       // "<form action='/EditAns' method='POST'><textarea name='edit' disabled='false' style='width: 100%;resize: none;' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' onclick='rev()' value='Confirm Edit'></input></form>";
     }
     function rev(a) {
