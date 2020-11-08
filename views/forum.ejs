@@ -234,7 +234,7 @@
 });
     function Edit_ans(a) {
       console.log("----- here ra"+a);
-      document.getElementById(a).innerHTML = "<form action='/EditAns' method='POST'><textarea  style='width: 100%;resize: none;' id='reply_message' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' onclick='rev(a)' value='Confirm Edit'></input></form>" ;
+      document.getElementById(a).innerHTML = "<form action='/EditAns/"+ a + " method='POST'><textarea  style='width: 100%;resize: none;' id='reply_message' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' value='Confirm Edit'></input></form>" ;
       // "<form action='/EditAns' method='POST'><textarea name='edit' disabled='false' style='width: 100%;resize: none;' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' onclick='rev()' value='Confirm Edit'></input></form>";
     }
     function rev(a) {
