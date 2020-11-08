@@ -60,7 +60,7 @@ function lostFoundForm() {
 //timer countdown 
 //for now i am hard setting the id, once we have db, we will set id from there
 
-var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+var countDownDate = new Date("Nov 30, 2020 15:37:25").getTime();
 var x = setInterval(function () {
   var now = new Date().getTime();
   var distance = countDownDate - now;
