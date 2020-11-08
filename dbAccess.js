@@ -2,7 +2,7 @@
 
 function registerUser(fullName, regNo, email, password, contactNo, college, db) {
   return new Promise(resolve => {
-    const docRef = db.collection('users').doc(email);
+    const docRef = db.collection('users').doc(college).collection('users').doc(email);
     docRef.set({
       fullName: fullName,
       regNo: regNo,
@@ -62,6 +62,7 @@ function deleteAnswer(ans_id, college, ques_id,db) {
   return new Promise(async(resolve) => {
     const docRef = await db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc(ans_id).delete();
     //docRef.delete();
+    resolve();
   })
 }
 exports.deleteAnswer = deleteAnswer;
