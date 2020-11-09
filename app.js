@@ -322,10 +322,13 @@ app.post('/answer/:id', function (req, res) {
 	var user_id = req.session.email;
 	//var college = req.body.college;
 	//var user_id = req.body.user_id;
+	var finalDate = new Date();
+	var strDate = finalDate.getDate()+", "+finalDate.toLocaleString('default', { month: 'short' })+" "+finalDate.getFullYear();
+	
 	console.log("thisss ok" + req.params.id);
 	var ques_id = req.params.id;
 	var ans_desc = req.body.Answer;
-	var date = 'mondaaay';
+	var date = strDate;
 	dbAcc.answerQues(college, user_id, ques_id, ans_desc, date, db).then(() => {
 		console.log("inserted  to db");
 		res.redirect('/forum');
@@ -355,7 +358,7 @@ app.post('/delete/:id/:id2', function (req, res) {
 	var current = req.session.id;
 
 
-	dbAcc.deleteAnswer(ans_id, college, ques_id, db).then(() => {
+	dbAcc.deleteAnswer(user_id ,ans_id, college, ques_id, db).then(() => {
 		console.log("deleting from db");
 		res.redirect('/forum');
 	});

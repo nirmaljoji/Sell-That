@@ -58,13 +58,17 @@ function editAnswer(ques_id,ans_id,college, desc,db) {
 }
 exports.editAnswer = editAnswer;
 
-function deleteAnswer(ans_id, college, ques_id,db) {
+function deleteAnswer(user_id ,ans_id, college, ques_id,db) {
   return new Promise(async(resolve) => {
     const docRef = await db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc(ans_id).delete();
     //docRef.delete();
     
 
-    await db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc().delete();
+    const docRef2= await db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').where('ans_id','==',ans_id).get();
+    docRef2.forEach(doc=>{
+    doc.ref.delete();
+    })
+    //docRef2.delete();
 
     resolve();
   })
