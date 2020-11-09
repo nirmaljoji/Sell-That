@@ -83,8 +83,7 @@
           </div>
           <div id="bstab1" class="tabcontent">
             <h4>Fill in the details</h4>
-            <h6>Please add the information for other students to view before submitting the item to the Admin
-              Department.</h6>
+            <h6>Please add the information for other students to view before submitting the item to the sell</h6>
             <br>
             <div class="formDiv">
               <form action="/sellProduct" method="POST">
@@ -92,14 +91,14 @@
                 <label for="fname">Item name</label>
                 <input type="text" id="fname" required name="item_name" placeholder="Item name">
 
-                <label for="lname">Desc</label>
+                <label for="lname">Desciption</label>
                 <input type="text" id="lname" required name="item_desc" placeholder="About item">
 
                 <label for="details">Original Price</label>
-                <input type="number" id="details" name="original_price" placeholder="">
+                <input type="number" id="details" name="original_price" placeholder="" required>
 
                 <label for="details">Selling Price</label>
-                <input type="number" id="details" name="selling_price" placeholder="">
+                <input type="number" id="details" name="selling_price" placeholder="" required>
 
                 <hr>
                 <div>
