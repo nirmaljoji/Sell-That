@@ -202,7 +202,7 @@ function addItemToCart(item_id,user_id,college, db) {
     user_name = user_nameDocRef.data().fullName;
     
     
-    db.collection('users').doc(college).collection('users').doc(ad_posted_by).collection('product_requests').doc().set({
+    db.collection('users').doc(college).collection('users').doc(ad_posted_by).collection('product_requests').doc(item_id).set({
       req_name : user_name,
       req_product :item_name
     });
@@ -248,6 +248,12 @@ function deleteFromCart(item_id, logged_user,college,db) {
     
     const userDocRef = db.collection('users').doc(college).collection('users').doc(logged_user).collection('item_cart').where('item_id','==',item_id);
     userDocRef.get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        doc.ref.delete();
+      })
+    })
+    const userDocRef2 = db.collection('users').doc(college).collection('users').doc(logged_user).collection('product_requests').where('item_id','==',item_id);
+    userDocRef2.get().then(function(querySnapshot){
       querySnapshot.forEach(function(doc){
         doc.ref.delete();
       })
