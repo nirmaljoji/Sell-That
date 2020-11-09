@@ -62,6 +62,10 @@ function deleteAnswer(ans_id, college, ques_id,db) {
   return new Promise(async(resolve) => {
     const docRef = await db.collection('Forum').doc(college).collection('Questions').doc(ques_id).collection('Answers').doc(ans_id).delete();
     //docRef.delete();
+    
+
+    await db.collection('users').doc(college).collection('users').doc(user_id).collection('answers').doc().delete();
+
     resolve();
   })
 }
