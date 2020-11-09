@@ -252,8 +252,8 @@ function deleteFromCart(item_id, logged_user,college,db) {
         doc.ref.delete();
       })
     })
-    const userDocRef = db.collection('users').doc(college).collection('users').doc(logged_user).collection('product_ads').where('item_id','==',item_id);
-    userDocRef.get().then(function(querySnapshot){
+    const userDocRef2 = db.collection('users').doc(college).collection('users').doc(logged_user).collection('product_requests').where('item_id','==',item_id);
+    userDocRef2.get().then(function(querySnapshot){
       querySnapshot.forEach(function(doc){
         doc.ref.delete();
       })
